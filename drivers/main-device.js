@@ -1,0 +1,361 @@
+const Homey = require('homey');
+const Amber = require('../lib/amber');
+const { sleep, decrypt, encrypt, splitTime } = require('../lib/helpers');
+
+module.exports = class mainDevice extends Homey.Device {
+    async onInit() {
+        try {
+            const settings = this.getSettings();
+
+            this.homey.app.log('[Device] - init =>', this.getName());
+            this.homey.app.setDevices(this);
+
+            if(!settings.mac || settings.mac.length < 8) {
+                await this.findMacAddress();
+            }
+
+            await this.checkCapabilities();
+
+            await this.setAmberClient();
+
+            this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
+            this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
+            this.registerCapabilityListener('action_update_data', this.onCapability_UPDATE_DATA.bind(this));
+
+            await this.checkOnOffState();
+            await this.setCapabilityValues();
+
+            if(settings.enable_interval) {
+                await this.checkOnOffStateInterval(settings.update_interval);
+                await this.setCapabilityValuesInterval(settings.update_interval);
+            }
+
+            await this.setAvailable();
+        } catch (error) {
+            this.homey.app.log(`[Device] ${this.getName()} - OnInit Error`, error);
+        }
+    }
+
+    async onSettings({ oldSettings, newSettings, changedKeys }) {
+        this.homey.app.log(`[Device] ${this.getName()} - oldSettings`, {...oldSettings, username: 'LOG', password: 'LOG'});
+        this.homey.app.log(`[Device] ${this.getName()} - newSettings`, {...newSettings, username: 'LOG', password: 'LOG'});
+
+        if(this.onPollInterval || this.onOnOffPollInterval) {
+            this.clearIntervals();
+        }
+
+        if(newSettings.password !== oldSettings.password) {
+            await this.setAmberClient({...newSettings, password: encrypt(newSettings.password)});
+        } else {
+            await this.setAmberClient(newSettings);
+        }
+
+        if(newSettings.enable_interval) {
+            await this.checkOnOffStateInterval(newSettings.update_interval);
+            await this.setCapabilityValuesInterval(newSettings.update_interval);
+        }
+
+        if(newSettings.password !== oldSettings.password) {
+            this.savePassword(newSettings, 2000);
+        }
+    }
+
+    async savePassword(settings, delay = 0) {
+        this.homey.app.log(`[Device] ${this.getName()} - savePassword - encrypted`);
+        
+        if(delay > 0) {
+            await sleep(delay);
+        }
+
+        await this.setSettings({...settings, password: encrypt(settings.password)});
+    }
+
+    async setAmberClient(overrideSettings = null) {
+        const settings = overrideSettings ? overrideSettings : this.getSettings();
+        this.config = {...settings, password: decrypt(settings.password)};
+
+        this.homey.app.log(`[Device] - ${this.getName()} => setAmberClient Got config`, {...this.config, username: 'LOG', password: 'LOG'});
+
+        this._amberClient = await new Amber(this.config);
+
+    }
+
+    async checkCapabilities() {
+        const driverManifest = this.driver.manifest;
+        const driverCapabilities = driverManifest.capabilities;
+        
+        const deviceCapabilities = this.getCapabilities();
+
+        this.homey.app.log(`[Device] ${this.getName()} - Found capabilities =>`, deviceCapabilities);
+        this.homey.app.log(`[Device] ${this.getName()} - Driver capabilities =>`, driverCapabilities);
+        
+        if(deviceCapabilities.length !== driverCapabilities.length) {      
+            await this.updateCapabilities(driverCapabilities, deviceCapabilities);
+        }
+
+        return deviceCapabilities;
+    }
+
+    async updateCapabilities(driverCapabilities, deviceCapabilities) {
+        this.homey.app.log(`[Device] ${this.getName()} - Add new capabilities =>`, driverCapabilities);
+        try {
+            deviceCapabilities.forEach(c => {
+                this.removeCapability(c);
+            });
+            await sleep(2000);
+            driverCapabilities.forEach(c => {
+                this.addCapability(c);
+            });
+            await sleep(2000);
+        } catch (error) {
+            this.homey.app.log(error)
+        }
+    }
+
+    async findMacAddress() {
+        try {
+            const discoveryStrategy = this.homey.discovery.getStrategy("amberpro_discovery");
+
+            // Use the discovery results that were already found
+            const initialDiscoveryResults = discoveryStrategy.getDiscoveryResults();
+            for (const discoveryResult of Object.values(initialDiscoveryResults)) {
+                this.homey.app.log(`[Device] ${this.getName()} - findMacAddress =>`, discoveryResult);
+
+                if(discoveryResult.txt && discoveryResult.txt.model && discoveryResult.txt.model.includes('AM')) {
+                    const mac = discoveryResult.txt.macaddr;
+                    const settings = this.getSettings();
+
+                    await this.setSettings({...settings, mac});
+
+                    this.homey.app.log(`[Device] ${this.getName()} - findMacAddress - address =>`, mac);
+                }
+            }
+        } catch (error) {
+            this.homey.app.log(error)
+        }
+    }
+
+    async onCapability_ON_OFF(value) {
+        const settings = this.getSettings();
+
+        try {
+            if(!value && settings && settings.override_onoff) {
+                throw new Error(this.homey.__("amber.override_onoff"));
+            }
+
+            if(value) {
+                this.homey.app.log(`[Device] ${this.getName()} - onoff - wakeUp`);
+                
+                await this._amberClient.wakeUp();
+                throw new Error(this.homey.__("amber.onoff_turn_on"));
+            } else {
+                this.homey.app.log(`[Device] ${this.getName()} - onoff - shutdown`);
+                
+                await this._amberClient.shutdown();
+
+                if(settings.enable_interval) {
+                    await this.setUnavailable(this.homey.__("amber.shutdown"));
+                }
+                
+                await sleep(6000);
+            }
+
+            return Promise.resolve(true);
+        } catch (e) {
+            this.homey.app.error(e);
+            return Promise.reject(e);
+        }
+    }
+
+    async onCapability_REBOOT(value) {
+        try {
+           this.homey.app.log(`[Device] ${this.getName()} - onCapability_REBOOT`, value);
+
+           const state = this.getState();
+
+           if(!state.onoff) {
+                throw new Error(this.homey.__("amber.onoff_turn_on"));
+           }
+
+           this.setStoreValue('rebooting', true);
+           this.setCapabilityValue('action_reboot', false);
+
+           await this._amberClient.reboot();
+           
+           this.setUnavailable(this.homey.__("amber.reboot"));
+
+           await this.clearIntervals();
+           this.checkOnOffStateInterval(10);
+
+            return Promise.resolve(true);
+        } catch (e) {
+            this.homey.app.error(e);
+            return Promise.reject(e);
+        }
+    }
+
+    async onCapability_UPDATE_DATA(value) {
+        try {
+           this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPDATE_DATA`, value);
+
+           this.setCapabilityValue('action_update_data', false);
+
+           this.checkOnOffState();
+           this.setCapabilityValues();
+
+            return Promise.resolve(true);
+        } catch (e) {
+            this.homey.app.error(e);
+            return Promise.reject(e);
+        }
+    }
+
+    async checkOnOffState() {
+        try {  
+            const powerState = await this._amberClient.getPowerState();
+
+            this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState`, powerState);
+
+            if(powerState && powerState.status === 200) {
+                await this.setCapabilityValue('onoff', true);
+                await this.unsetWarning();
+            } else {
+                await this.setCapabilityValue('onoff', false);
+            }
+
+            await this.checkRebootState();
+        } catch (error) {
+            this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState`, error);
+            await this.setCapabilityValue('onoff', false);
+            await this.checkRebootState();
+        }
+    }
+
+    async checkRebootState() {
+        const settings = this.getSettings();
+        const isOn = await this.getCapabilityValue('onoff');
+        
+        if(isOn && this.getStoreValue('rebooting')) {
+            this.homey.app.log(`[Device] ${this.getName()} - checkRebootState - reboot done`);
+            this.setStoreValue('rebooting', false);
+            
+            await this.setAvailable();
+            
+            await this.clearIntervals();
+
+            if(settings.enable_interval) {
+                await this.checkOnOffStateInterval(settings.update_interval);
+                await this.setCapabilityValuesInterval(settings.update_interval);
+            }
+        } else if(!this.getStoreValue('rebooting')) {
+            await this.setAvailable();
+        }
+    }
+
+    async checkOnOffStateInterval(update_interval) {
+        try {  
+            const REFRESH_INTERVAL = 1000 * update_interval;
+
+            this.homey.app.log(`[Device] ${this.getName()} - onOnOffPollInterval =>`, REFRESH_INTERVAL, update_interval);
+            this.onOnOffPollInterval = setInterval(this.checkOnOffState.bind(this), REFRESH_INTERVAL);
+        } catch (error) {
+            this.setUnavailable(error)
+            this.homey.app.log(error);
+        }
+    }
+
+    async setCapabilityValues() {
+        this.homey.app.log(`[Device] ${this.getName()} - setCapabilityValues`);
+
+        try { 
+            const isOn = await this.getCapabilityValue('onoff');
+
+            if(!isOn) {
+                throw new Error(`[Device] ${this.getName()} - setCapabilityValues - device off`)
+            }
+
+            const deviceInfo = await this._amberClient.getInfo();
+
+            if(deviceInfo.error) {
+                throw new Error(`[Device] ${this.getName()} - setCapabilityValues`, deviceInfo.error)
+            }
+
+            const {temperature, uptime_sec} = deviceInfo;
+            const { disk_usage } = await this.setDiskUsage(deviceInfo);
+            const { cpu_load, ram_load } = await this.setLoad(deviceInfo);
+
+            this.homey.app.log(`[Device] ${this.getName()} - deviceInfo =>`, deviceInfo);
+            
+            await this.setCapabilityValue('alarm_heat.cpu', !!temperature.system > 75 );
+            await this.setCapabilityValue('alarm_heat.system', !!temperature.cpu > 95);
+            await this.setCapabilityValue('measure_temperature.system', parseInt(temperature.system));
+            await this.setCapabilityValue('measure_temperature.cpu', parseInt(temperature.cpu));
+            await this.setCapabilityValue('measure_uptime', parseInt(uptime_sec) / 3600);
+            await this.setCapabilityValue('measure_uptime_days', splitTime(uptime_sec, this.homey.__));
+            await this.setCapabilityValue('measure_disk_usage', parseInt(disk_usage));
+            await this.setCapabilityValue('measure_cpu_usage', parseInt(cpu_load));
+            await this.setCapabilityValue('measure_ram_usage', parseInt(ram_load));
+        } catch (error) {
+            this.homey.app.log(error);
+        }
+    }
+
+    async setCapabilityValuesInterval(update_interval) {
+        try {  
+            const REFRESH_INTERVAL = 1000 * update_interval;
+
+            this.homey.app.log(`[Device] ${this.getName()} - onPollInterval =>`, REFRESH_INTERVAL, update_interval);
+            this.onPollInterval = setInterval(this.setCapabilityValues.bind(this), REFRESH_INTERVAL);
+        } catch (error) {
+            this.setUnavailable(error)
+            this.homey.app.log(error);
+        }
+    }
+
+    async setDiskUsage(data) {
+        try {
+            const settings = this.getSettings();
+            let space = data.volume[0].spaceuse;
+            space = space.replace('%', '');
+
+
+            const usage = {disk_usage: space};
+            this.homey.app.log(`[Device] ${this.getName()} - setDiskUsage`, space);
+
+            return usage;
+        } catch (error) {
+            this.setUnavailable(error)
+            this.homey.app.log(error);
+        }
+    }
+
+    async setLoad(data) {
+        try {
+            const settings = this.getSettings();
+            let cpu_load = 0;
+            let ram_load = 0;
+
+            cpu_load = data.cpu.percent
+            ram_load = data.mem.real_usage_percent;
+    
+            const usage = {cpu_load, ram_load};
+            this.homey.app.log(`[Device] ${this.getName()} - setLoad`, usage);
+
+            return usage;
+        } catch (error) {
+            this.setUnavailable(error)
+            this.homey.app.log(error);
+        }
+    }
+
+    async clearIntervals() {
+        this.homey.app.log(`[Device] ${this.getName()} - clearIntervals`);
+
+        await clearInterval(this.onPollInterval);
+        await clearInterval(this.onOnOffPollInterval);
+    }
+
+    onDeleted() {
+        this.clearIntervals();
+    }
+}

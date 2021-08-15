@@ -1,0 +1,14 @@
+{
+  "name": "net.amberpro",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martijnpoppen/net.amberpro"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "qs": "^6.10.1",
+    "wake_on_lan": "^1.0.0"
+  }
+}
