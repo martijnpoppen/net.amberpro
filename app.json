@@ -45,11 +45,11 @@
     }
   },
   "bugs": {
-    "url": "https://community.athom.com/t/app-amberpro/49744"
+    "url": "https://community.athom.com/t/app-amberpro/50486"
   },
   "source": "https://github.com/martijnpoppen/net.amberpro",
-  "homeyCommunityTopicId": 49744,
-  "support": "https://community.athom.com/t/app-amberpro/49744",
+  "homeyCommunityTopicId": 50486,
+  "support": "https://community.athom.com/t/app-amberpro/50486",
   "discovery": {
     "amberpro_discovery": {
       "type": "mdns-sd",
