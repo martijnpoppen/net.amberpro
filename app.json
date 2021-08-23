@@ -74,6 +74,7 @@
         "onoff",
         "action_reboot",
         "action_update_data",
+        "action_upload_file",
         "alarm_heat.cpu",
         "measure_temperature.cpu",
         "alarm_heat.system",
@@ -251,6 +252,7 @@
         "onoff",
         "action_reboot",
         "action_update_data",
+        "action_upload_file",
         "alarm_heat.cpu",
         "measure_temperature.cpu",
         "alarm_heat.system",
@@ -453,6 +455,29 @@
             "type": "device",
             "name": "device",
             "filter": "capabilities=action_update_data"
+          }
+        ]
+      },
+      {
+        "id": "action_upload_file_flow",
+        "title": {
+          "en": "Upload File",
+          "nl": "Bestand uploaden",
+          "de": "Datei hochladen"
+        },
+        "titleFormatted": {
+          "en": "[[device]] [[droptoken]] Upload File",
+          "nl": "[[device]] [[droptoken]] Bestand uploaden"
+        },
+        "droptoken": [
+          "image",
+          "string"
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "capabilities=action_upload_file"
           }
         ]
       }
@@ -669,6 +694,17 @@
       "getable": false,
       "setable": true,
       "uiComponent": "button"
+    },
+    "action_upload_file": {
+      "type": "string",
+      "title": {
+        "en": "Upload File",
+        "nl": "Bestand uploaden",
+        "de": "Datei hochladen"
+      },
+      "getable": false,
+      "setable": true,
+      "uiComponent": null
     }
   }
 }

@@ -14,7 +14,8 @@
     "reboot": "Rebooting",
     "shutdown": "Shutting down",
     "override_onoff": "Amber is always-on",
-    "onoff_turn_on": "Amber can only turned on physically. Use the button on the back of the device"
+    "onoff_turn_on": "Amber can only turned on physically. Use the button on the back of the device",
+    "file_invalid": "Wrong file format"
   },
   "helpers": {
     "days": "d",

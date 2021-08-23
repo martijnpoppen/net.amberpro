@@ -14,7 +14,8 @@
     "reboot": "Herstarten",
     "shutdown": "Afsluiten",
     "override_onoff": "Amber is altijd-aan",
-    "onoff_turn_on": "Amber kan alleen fysiek aangezet worden. Gebruik de knop op de achterkant van Amber"
+    "onoff_turn_on": "Amber kan alleen fysiek aangezet worden. Gebruik de knop op de achterkant van Amber",
+    "file_invalid": "Verkeerd bestandsformaat"
   },
   "helpers": {
     "days": "d",

@@ -1,6 +1,7 @@
 const Homey = require('homey');
 const Amber = require('../lib/amber');
-const { sleep, decrypt, encrypt, splitTime } = require('../lib/helpers');
+const FTP = require('../lib/amber/ftp');
+const { sleep, decrypt, encrypt, splitTime, removeFile, getFileName, getFilePath } = require('../lib/helpers');
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
@@ -77,7 +78,7 @@ module.exports = class mainDevice extends Homey.Device {
         this.homey.app.log(`[Device] - ${this.getName()} => setAmberClient Got config`, {...this.config, username: 'LOG', password: 'LOG'});
 
         this._amberClient = await new Amber(this.config);
-
+        this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/${this.config.username}/homey-amber/`});
     }
 
     async checkCapabilities() {
@@ -202,6 +203,42 @@ module.exports = class mainDevice extends Homey.Device {
 
            this.checkOnOffState();
            this.setCapabilityValues();
+
+            return Promise.resolve(true);
+        } catch (e) {
+            this.homey.app.error(e);
+            return Promise.reject(e);
+        }
+    }
+
+    async onCapability_UPLOAD_FILE(value) {
+        try {
+           let filePath = null;
+           let fileName = null;
+
+           this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE`, value);
+
+            if(!!value.localUrl) {
+                fileName = `${value.id}.jpg`
+                filePath = await getFilePath(value.localUrl, fileName);
+
+                this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE - uploading Image`, value.localUrl, value.id);
+                
+            } else if(typeof value === 'string') {
+                fileName = await getFileName(value);
+                filePath = await getFilePath(value, fileName);
+            
+                this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE - uploading File`, value, fileName);
+            }
+           
+            if(!fileName.includes('.')) {
+                throw new Error(this.homey.__("amber.file_invalid"));
+            }
+
+            await this._ftp.upload(filePath, fileName);
+
+            await sleep(200);
+            await removeFile(filePath);
 
             return Promise.resolve(true);
         } catch (e) {
