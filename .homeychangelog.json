@@ -4,5 +4,8 @@
   },
   "1.0.1": {
     "en": "ADD: set community topic"
+  },
+  "1.1.0": {
+    "en": "NEW: add file upload via FTPS"
   }
 }
