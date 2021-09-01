@@ -7,5 +7,8 @@
   },
   "1.1.0": {
     "en": "NEW: add file upload via FTPS"
+  },
+  "1.1.1": {
+    "en": "FIX: login mechanism"
   }
 }
