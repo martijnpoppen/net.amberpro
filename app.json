@@ -1,6 +1,6 @@
 {
   "id": "net.amberpro",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
@@ -11,6 +11,19 @@
   "description": {
     "en": "Not just Storage. A Safe Way to Share",
     "nl": "Niet alleen opslag. Een slimme manier om te werken."
+  },
+  "tags": {
+    "en": [
+      "NAS",
+      "Storage",
+      "FTP",
+      "Webdav",
+      "Surveillance",
+      "Photo",
+      "Video",
+      "WOL",
+      "Wake on Lan"
+    ]
   },
   "category": [
     "security"

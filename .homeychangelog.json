@@ -10,5 +10,8 @@
   },
   "1.1.1": {
     "en": "FIX: login mechanism"
+  },
+  "1.1.2": {
+    "en": "Add tags to improve Homey Store Search"
   }
 }
