@@ -24,7 +24,7 @@ module.exports = class mainDriver extends Homey.Driver {
                     password: data.password,
                     timeout: 3000
                 };
-                this.homey.app.log(`[Driver] - got config`, this.config);
+                this.homey.app.log(`[Driver] ${this.id} - got config`, this.config);
     
                 this._amberClient = await new Amber(this.config);
                 
@@ -36,12 +36,15 @@ module.exports = class mainDriver extends Homey.Driver {
 
         session.setHandler("list_devices", async () => {
             let results = [];
+            let pairedDriverDevices = [];
 
             if(this.amberData && this.amberData.status !== 200) {
                 throw new Error(this.homey.__('pair.error'));
             } else if(this.amberData && !this.amberData[0].hasOwnProperty('data')) {
                 throw new Error(this.homey.__('pair.error_empty'));
             }
+
+            this.homey.app.log(`[Driver] ${this.id} - this.amberData`, this.amberData);
 
             this.homey.app.getDevices().forEach((device) => {
                 const data = device.getData();
@@ -59,7 +62,7 @@ module.exports = class mainDriver extends Homey.Driver {
                 }
             });
 
-            this.homey.app.log("Found devices - ", results);
+            this.homey.app.log(`[Driver] ${this.id} - Found devices - `, results);
 
             return results;
         });
