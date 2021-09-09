@@ -230,10 +230,6 @@ module.exports = class mainDevice extends Homey.Device {
            this.checkOnOffState();
            this.setCapabilityValues();
 
-           if(this.hasCapability('measure_wan_type') && !!settings.router_password) {
-                this.setRouterCheck();
-           }
-
             return Promise.resolve(true);
         } catch (e) {
             this.homey.app.error(e);
