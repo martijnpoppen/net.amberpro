@@ -13,5 +13,8 @@
   },
   "1.1.2": {
     "en": "Add tags to improve Homey Store Search"
+  },
+  "1.2.0": {
+    "en": "NEW: add Router functionality - connected/disconnected devices"
   }
 }
