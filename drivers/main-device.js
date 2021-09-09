@@ -1,7 +1,8 @@
 const Homey = require('homey');
 const Amber = require('../lib/amber');
+const AmberRouter = require('../lib/amber-router');
 const FTP = require('../lib/amber/ftp');
-const { sleep, decrypt, encrypt, splitTime, removeFile, getFileName, getFilePath } = require('../lib/helpers');
+const { sleep, decrypt, encrypt, splitTime, removeFile, getFileName, getFilePath, mapHTML } = require('../lib/helpers');
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
@@ -17,6 +18,8 @@ module.exports = class mainDevice extends Homey.Device {
 
             await this.checkCapabilities();
 
+            await this.setFlowtriggers();
+
             await this.setAmberClient();
 
             this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
@@ -29,6 +32,11 @@ module.exports = class mainDevice extends Homey.Device {
             if(settings.enable_interval) {
                 await this.checkOnOffStateInterval(settings.update_interval);
                 await this.setCapabilityValuesInterval(settings.update_interval);
+
+                if(this.hasCapability('measure_wan_type') && !!settings.router_password) {
+                    await this.setRouterCheck();
+                    await this.setRouterCheckInterval(settings.update_interval);
+                }
             }
 
             await this.setAvailable();
@@ -41,7 +49,7 @@ module.exports = class mainDevice extends Homey.Device {
         this.homey.app.log(`[Device] ${this.getName()} - oldSettings`, {...oldSettings, username: 'LOG', password: 'LOG'});
         this.homey.app.log(`[Device] ${this.getName()} - newSettings`, {...newSettings, username: 'LOG', password: 'LOG'});
 
-        if(this.onPollInterval || this.onOnOffPollInterval) {
+        if(this.onPollInterval || this.onOnOffPollInterval || this.onRouterPollInterval) {
             this.clearIntervals();
         }
 
@@ -54,6 +62,10 @@ module.exports = class mainDevice extends Homey.Device {
         if(newSettings.enable_interval) {
             await this.checkOnOffStateInterval(newSettings.update_interval);
             await this.setCapabilityValuesInterval(newSettings.update_interval);
+
+            if(this.hasCapability('measure_wan_type') && !!newSettings.router_password) {
+                await this.setRouterCheckInterval(newSettings.update_interval);
+            }
         }
 
         if(newSettings.password !== oldSettings.password) {
@@ -78,6 +90,11 @@ module.exports = class mainDevice extends Homey.Device {
         this.homey.app.log(`[Device] - ${this.getName()} => setAmberClient Got config`, {...this.config, username: 'LOG', password: 'LOG'});
 
         this._amberClient = await new Amber(this.config);
+
+        if(this.hasCapability('measure_wan_type') && !!this.config.router_password) {
+            this._amberRouterClient = await new AmberRouter({ ip: 'latticerouter.local', password: this.config.router_password});
+        }
+
         this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/${this.config.username}/homey-amber/`});
     }
 
@@ -111,6 +128,14 @@ module.exports = class mainDevice extends Homey.Device {
         } catch (error) {
             this.homey.app.log(error)
         }
+    }
+
+    async setFlowtriggers() {
+        this.routerConnectedTrigger = this.homey.flow.getDeviceTriggerCard(`trigger_router_connected`);
+        this.routerDisonnectedTrigger = this.homey.flow.getDeviceTriggerCard(`trigger_router_disconnected`);
+
+        this.routerConnectedTrigger.registerRunListener(async (args, state) =>  args.ip === state.ip || !args.ip);
+        this.routerDisonnectedTrigger.registerRunListener(async (args, state) => args.ip === state.ip || !args.ip);
     }
 
     async findMacAddress() {
@@ -197,12 +222,17 @@ module.exports = class mainDevice extends Homey.Device {
 
     async onCapability_UPDATE_DATA(value) {
         try {
+           const settings = this.getSettings();
            this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPDATE_DATA`, value);
 
            this.setCapabilityValue('action_update_data', false);
 
            this.checkOnOffState();
            this.setCapabilityValues();
+
+           if(this.hasCapability('measure_wan_type') && !!settings.router_password) {
+                this.setRouterCheck();
+           }
 
             return Promise.resolve(true);
         } catch (e) {
@@ -283,6 +313,10 @@ module.exports = class mainDevice extends Homey.Device {
             if(settings.enable_interval) {
                 await this.checkOnOffStateInterval(settings.update_interval);
                 await this.setCapabilityValuesInterval(settings.update_interval);
+
+                if(this.hasCapability('measure_wan_type') && !!settings.router_password) {
+                    await this.setRouterCheckInterval(settings.update_interval);
+                }
             }
         } else if(!this.getStoreValue('rebooting')) {
             await this.setAvailable();
@@ -349,9 +383,73 @@ module.exports = class mainDevice extends Homey.Device {
         }
     }
 
+    async setRouterCheck() {
+        this.homey.app.log(`[Device] ${this.getName()} - setRouterCheck`);
+
+        try { 
+            const isOn = await this.getCapabilityValue('onoff');
+            const wanType = await this._amberRouterClient.getWanType();
+            const connectedDevices = this.getStoreValue('connected_devices');
+
+            this.homey.app.log(`[Device] ${this.getName()} - setRouterCheck => wanType`, wanType);
+
+            if(!isOn) {
+                throw new Error(`[Device] ${this.getName()} - setRouterCheck - device off`)
+            }
+
+            if(wanType.status !== 200) {
+                throw new Error(`[Device] ${this.getName()} - setRouterCheck`, wanType.error)
+            }
+
+            if(wanType.connectionType && wanType.connectionType === 'DHCP') {
+                const clientList = await this._amberRouterClient.getClientList();
+                this.homey.app.log(`[Device] ${this.getName()} - setRouterCheck => clientList`, clientList);
+
+                const connectedDevicesDiff = mapHTML(clientList.data);
+
+                this.setStoreValue('connected_devices', connectedDevicesDiff);
+
+                this.homey.app.log(`[Device] ${this.getName()} - setRouterCheck => connectedDevices`, connectedDevices, connectedDevicesDiff);
+
+                if(connectedDevices.length) {
+                    const disconnnectedDeviceDiff = connectedDevices.filter(e => !connectedDevicesDiff.includes(e));;
+                    const connnectedDeviceDiff = connectedDevicesDiff.filter(e => !connectedDevices.includes(e));;
+                    
+                    connnectedDeviceDiff.forEach(async ip =>  {
+                        await this.routerConnectedTrigger.trigger(this, {ip}, {ip})
+                            .catch( this.error )
+                            .then(this.log(`[setRouterCheck] trigger_router_connected - Triggered: "${ip}"`)); 
+                      });
+
+                      disconnnectedDeviceDiff.forEach(async ip =>  {
+                        await this.routerDisonnectedTrigger.trigger(this, {ip}, {ip})
+                            .catch( this.error )
+                            .then(this.log(`[setRouterCheck] trigger_router_disconnected - Triggered: "${ip}"`)); 
+                      });
+                }
+            }
+        } catch (error) {
+            this.homey.app.log(error);
+        }
+    }
+
+    async setRouterCheckInterval(update_interval, enabled = true) {
+        try {  
+            const REFRESH_INTERVAL = 1000 * update_interval;
+
+            this.homey.app.log(`[Device] ${this.getName()} - onRouterPollInterval =>`, REFRESH_INTERVAL, update_interval);
+            
+            if(enabled) {
+                this.onRouterPollInterval = setInterval(this.setRouterCheck.bind(this), REFRESH_INTERVAL);
+            }
+        } catch (error) {
+            this.setUnavailable(error)
+            this.homey.app.log(error);
+        }
+    }
+
     async setDiskUsage(data) {
         try {
-            const settings = this.getSettings();
             let space = data.volume[0].spaceuse;
             space = space.replace('%', '');
 
@@ -368,7 +466,6 @@ module.exports = class mainDevice extends Homey.Device {
 
     async setLoad(data) {
         try {
-            const settings = this.getSettings();
             let cpu_load = 0;
             let ram_load = 0;
 
@@ -390,6 +487,7 @@ module.exports = class mainDevice extends Homey.Device {
 
         await clearInterval(this.onPollInterval);
         await clearInterval(this.onOnOffPollInterval);
+        await clearInterval(this.onRouterPollInterval);
     }
 
     onDeleted() {

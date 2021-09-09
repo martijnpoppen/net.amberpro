@@ -2,6 +2,7 @@
   "pair": {
     "username": "Username",
     "password": "Password",
+    "router_password": "Router Password (Enable router functionality)",
     "otp": "2FA Code (optional)",
     "ip": "IP Address (local IP - SSL: OFF)",
     "secure": "Use SSL connection",

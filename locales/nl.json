@@ -2,6 +2,7 @@
   "pair": {
     "username": "Gebruikersnaam",
     "password": "Wachtwoord",
+    "router_password": "Router wachtwoord (Router functionaliteit)",
     "otp": "2FA Code (optioneel)",
     "ip": "IP Addres (Lokaal IP - SSL: UIT)",
     "secure": "Gebruik SSL verbinding",

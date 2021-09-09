@@ -60,6 +60,11 @@
     </div>
 
     <div class="hy-tmpl-login_amberpro-row row">
+        <label class="hy-label hy-tmpl-login_amberpro-label" for="router_password" data-i18n="pair.router_password"></label>
+        <input class="hy-input-text" name="router_password" type="password" value="" placeholder="" required>
+    </div>
+
+    <div class="hy-tmpl-login_amberpro-row row">
         <input class="hy-button hy-button-primary hy-button-fill hy-tmpl-login_amberpro-submit button" type="submit"
             value="">
     </div>
@@ -70,6 +75,7 @@
         r = e.querySelector(".hy-tmpl-login_amberpro-logo"),
         l = e.querySelector('input[name="username"]'),
         n = e.querySelector('input[name="password"]'),
+        np = e.querySelector('input[name="router_password"]'),
         p = e.querySelector('input[name="ipAddress"]'),
         s = e.querySelector('input[name="secure"]'),
         pp = e.querySelector('input[name="port"]'),
@@ -83,11 +89,12 @@
                 Homey.showLoadingOverlay(Homey.__("$tmpl.login_credentials.loading")); 
                 var z = l.value, 
                 r = n.value,
+                rp = np.value,
                 q = p.value,
                 qq = pp.value,
                 t = s.checked; 
 
-                return Homey.emit("login", { username: z, password: r, ip: q, port: qq, secure: t }, function (e, o) { 
+                return Homey.emit("login", { username: z, password: r, router_password: rp, ip: q, port: qq, secure: t }, function (e, o) { 
                     if(e) {
                         Homey.error(e)
                     } else if(z) {
