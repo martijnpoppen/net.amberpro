@@ -401,6 +401,8 @@ module.exports = class mainDevice extends Homey.Device {
                 throw new Error(`[Device] ${this.getName()} - setRouterCheck`, wanType.error)
             }
 
+            this.setCapabilityValue('measure_wan_type', wanType.connectionType)
+
             if(wanType.connectionType && wanType.connectionType === 'DHCP') {
                 const clientList = await this._amberRouterClient.getClientList();
                 this.homey.app.log(`[Device] ${this.getName()} - setRouterCheck => clientList`, clientList);
