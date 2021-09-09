@@ -16,5 +16,8 @@
   },
   "1.2.0": {
     "en": "NEW: add Router functionality - connected/disconnected devices"
+  },
+  "1.2.1": {
+    "en": "NEW: add Router functionality - connected/disconnected devices"
   }
 }
