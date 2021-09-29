@@ -1,12 +1,12 @@
 {
   "id": "net.amberpro",
-  "version": "1.2.1",
+  "version": "1.3.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#000000",
   "name": {
-    "en": "Amber Pro",
-    "nl": "Amber Pro"
+    "en": "Amber",
+    "nl": "Amber"
   },
   "description": {
     "en": "Not just Storage. A Safe Way to Share",
@@ -436,6 +436,184 @@
               "label": {
                 "en": "Router Password",
                 "nl": "Router Wachtwoord"
+              },
+              "value": ""
+            },
+            {
+              "id": "debug",
+              "type": "checkbox",
+              "label": {
+                "en": "Debug Logs",
+                "nl": "Debug Logs"
+              },
+              "value": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "AmberX",
+      "class": "homealarm",
+      "connectivity": [
+        "lan",
+        "cloud"
+      ],
+      "capabilities": [
+        "onoff",
+        "action_reboot",
+        "action_update_data",
+        "action_upload_file",
+        "alarm_heat.cpu",
+        "measure_temperature.cpu",
+        "alarm_heat.system",
+        "measure_temperature.system",
+        "measure_uptime",
+        "measure_uptime_days",
+        "measure_cpu_usage",
+        "measure_ram_usage",
+        "measure_disk_usage"
+      ],
+      "capabilitiesOptions": {
+        "measure_temperature.cpu": {
+          "title": {
+            "nl": "CPU Temperature",
+            "en": "CPU Temperatuur"
+          }
+        },
+        "measure_temperature.system": {
+          "title": {
+            "nl": "Systeem Temperature",
+            "en": "System Temperatuur"
+          }
+        },
+        "alarm_heat.cpu": {
+          "title": {
+            "en": "CPU Heat alarm",
+            "nl": "CPU Hittealarm"
+          }
+        },
+        "alarm_heat.system": {
+          "title": {
+            "en": "System Heat alarm",
+            "nl": "Systeem Hittealarm"
+          }
+        }
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
+        }
+      },
+      "name": {
+        "en": "Amber X",
+        "nl": "Amber X"
+      },
+      "images": {
+        "large": "drivers/AmberX/assets/images/large.png",
+        "small": "drivers/AmberX/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "login_amberpro"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "login_amberpro",
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings",
+            "nl": "Algemene instellingen"
+          },
+          "children": [
+            {
+              "id": "override_onoff",
+              "type": "checkbox",
+              "label": {
+                "en": "Always on",
+                "nl": "Altijd aan"
+              },
+              "value": true
+            },
+            {
+              "id": "update_interval",
+              "type": "number",
+              "label": {
+                "en": "Update interval",
+                "nl": "Update interval"
+              },
+              "min": 10,
+              "max": 3600,
+              "units": {
+                "en": "seconds",
+                "nl": "seconden"
+              },
+              "value": 10
+            },
+            {
+              "id": "enable_interval",
+              "type": "checkbox",
+              "label": {
+                "en": "Enable automatic data",
+                "nl": "Automatische gegevens ophalen"
+              },
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Login settings",
+            "nl": "Login instellingen"
+          },
+          "children": [
+            {
+              "id": "mac",
+              "type": "text",
+              "label": {
+                "en": "MAC Addres",
+                "nl": "MAC Adres"
+              },
+              "value": ""
+            },
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "IP Address",
+                "nl": "IP Adres"
+              },
+              "value": ""
+            },
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "User",
+                "nl": "Gebruiker"
+              },
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
               },
               "value": ""
             },
