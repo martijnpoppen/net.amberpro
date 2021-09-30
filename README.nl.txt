@@ -1,14 +1,7 @@
-Voegt ondersteuning toe voor Amber Pro
+Voegt ondersteuning toe voor Amber Pro en Amber X
 
-Haal informatie op van uw Amber Pro - NAS.
+Haal informatie op van uw Amber - NAS.
 Ontvang een melding wanneer een waarde is gewijzigd.
-
-Ondersteund:
-- Amber One
-- Amber Plus
-
-To Do:
-- Router functionaliteit
 
 Installatie:
 - Installeer deze app op je Homey.

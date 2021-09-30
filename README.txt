@@ -1,14 +1,7 @@
-Adds support for Amber Pro
+Adds support for Amber Pro and Amber X
 
-Retrieve information from your Amber Pro. 
+Retrieve information from your Amber. 
 Get notification when a value has changed.
-
-Support: 
-- Amber One
-- Amber Plus
-
-To Do:
-- Implement router functionality
 
 How to use:
 - Install this app on your Homey.

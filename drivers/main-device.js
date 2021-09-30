@@ -17,12 +17,11 @@ module.exports = class mainDevice extends Homey.Device {
             }
 
             await this.checkCapabilities();
-
-            await this.setFlowtriggers();
-
+        
             await this.setAmberClient();
 
             this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
+            this.registerCapabilityListener('dim', this.onCapability_DIM.bind(this));
             this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
             this.registerCapabilityListener('action_update_data', this.onCapability_UPDATE_DATA.bind(this));
 
@@ -32,9 +31,13 @@ module.exports = class mainDevice extends Homey.Device {
             if(settings.enable_interval) {
                 await this.checkOnOffStateInterval(settings.update_interval);
                 await this.setCapabilityValuesInterval(settings.update_interval);
+            } 
+            
+            if(this.hasCapability('measure_wan_type') && !!settings.router_password) {
+                await this.setFlowtriggers();
+                await this.setRouterCheck();
 
-                if(this.hasCapability('measure_wan_type') && !!settings.router_password) {
-                    await this.setRouterCheck();
+                if(settings.enable_interval) {
                     await this.setRouterCheckInterval(settings.update_interval);
                 }
             }
@@ -95,6 +98,7 @@ module.exports = class mainDevice extends Homey.Device {
             this._amberRouterClient = await new AmberRouter({ ip: 'latticerouter.local', password: this.config.router_password});
         }
 
+        await this._amberClient.setFtp();
         this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/${this.config.username}/homey-amber/`});
     }
 
@@ -185,6 +189,17 @@ module.exports = class mainDevice extends Homey.Device {
                 
                 await sleep(6000);
             }
+
+            return Promise.resolve(true);
+        } catch (e) {
+            this.homey.app.error(e);
+            return Promise.reject(e);
+        }
+    }
+
+    async onCapability_DIM(value) {
+        try {
+            await this._amberClient.setBrightness(value);
 
             return Promise.resolve(true);
         } catch (e) {
