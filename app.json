@@ -1,8 +1,11 @@
 {
   "id": "net.amberpro",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "compatibility": ">=5.0.0",
   "sdk": 3,
+  "platforms": [
+    "local"
+  ],
   "brandColor": "#000000",
   "name": {
     "en": "Amber",
@@ -33,14 +36,14 @@
     "small": "/assets/images/small.jpg"
   },
   "author": {
-    "name": "Martijn Poppen",
-    "email": "amberpro@martijnpoppen.nl"
+    "name": "Latticework B.V.",
+    "email": "homey@latticework.eu"
   },
   "contributors": {
     "developers": [
       {
         "name": "Martijn Poppen",
-        "email": "amberpro@martijnpoppen.nl"
+        "email": "amber@martijnpoppen.nl"
       }
     ],
     "translators": [
@@ -82,6 +85,9 @@
       "connectivity": [
         "lan",
         "cloud"
+      ],
+      "platforms": [
+        "local"
       ],
       "capabilities": [
         "onoff",
@@ -278,6 +284,9 @@
         "lan",
         "cloud"
       ],
+      "platforms": [
+        "local"
+      ],
       "capabilities": [
         "onoff",
         "dim",
@@ -472,6 +481,9 @@
       "connectivity": [
         "lan",
         "cloud"
+      ],
+      "platforms": [
+        "local"
       ],
       "capabilities": [
         "onoff",
