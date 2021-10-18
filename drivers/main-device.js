@@ -17,13 +17,13 @@ module.exports = class mainDevice extends Homey.Device {
             }
 
             await this.checkCapabilities();
-        
-            await this.setAmberClient();
 
             this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
             this.registerCapabilityListener('dim', this.onCapability_DIM.bind(this));
             this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
             this.registerCapabilityListener('action_update_data', this.onCapability_UPDATE_DATA.bind(this));
+
+            await this.setAmberClient();
 
             await this.checkOnOffState();
             await this.setCapabilityValues();
