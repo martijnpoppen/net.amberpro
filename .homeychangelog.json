@@ -43,5 +43,8 @@
   },
   "1.3.7": {
     "en": "FIX: capabilitiy listeners"
+  },
+  "1.4.0": {
+    "en": "NEW: Amber branding + Verified fixes"
   }
 }

@@ -1,6 +1,6 @@
 {
   "id": "net.amberpro",
-  "version": "1.3.7",
+  "version": "1.4.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -291,17 +291,18 @@
         "measure_wan_type"
       ],
       "capabilitiesOptions": {
-          "onoff": {
-        "$flow": {
+        "onoff": {
+          "$flow": {
             "actions": [
-                {
-                    "id": "off",
-                    "hint": {
-                        "en": "hello"
-                                    }
-                  } 
+              {
+                "id": "off",
+                "hint": {
+                  "en": "hello"
+                }
+              }
             ]
-          }},
+          }
+        },
         "dim": {
           "title": {
             "nl": "LED Dim",
@@ -309,17 +310,17 @@
           }
         },
         "measure_temperature.cpu": {
-            "title": {
-              "en": "CPU Temperature",
-              "nl": "CPU Temperatuur"
-            }
-          },
-          "measure_temperature.system": {
-            "title": {
-              "en": "Systeem Temperature",
-              "nl": "System Temperatuur"
-            }
+          "title": {
+            "en": "CPU Temperature",
+            "nl": "CPU Temperatuur"
           }
+        },
+        "measure_temperature.system": {
+          "title": {
+            "en": "Systeem Temperature",
+            "nl": "System Temperatuur"
+          }
+        }
       },
       "energy": {
         "approximation": {
@@ -811,8 +812,8 @@
               {
                 "name": "measure_uptime",
                 "title": {
-                    "en": "Up-Time in hours",
-                    "nl": "Online tijd in uren"
+                  "en": "Up-Time in hours",
+                  "nl": "Online tijd in uren"
                 },
                 "type": "number",
                 "example": 99
@@ -848,8 +849,8 @@
               {
                 "name": "measure_uptime_days",
                 "title": {
-                    "en": "Up-Time in Days",
-                    "nl": "Online tijd in Dagen"
+                  "en": "Up-Time in Days",
+                  "nl": "Online tijd in Dagen"
                 },
                 "type": "string",
                 "example": ""
