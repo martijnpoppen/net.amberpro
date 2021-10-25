@@ -368,8 +368,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.homey.app.log(`[Device] ${this.getName()} - deviceInfo =>`, deviceInfo);
             
-            await this.setCapabilityValue('alarm_heat.cpu', !!temperature.system > 75 );
-            await this.setCapabilityValue('alarm_heat.system', !!temperature.cpu > 95);
+            await this.setCapabilityValue('alarm_heat', !!temperature.system > 75 || !!temperature.cpu > 95);
             await this.setCapabilityValue('measure_temperature.system', parseInt(temperature.system));
             await this.setCapabilityValue('measure_temperature.cpu', parseInt(temperature.cpu));
             await this.setCapabilityValue('measure_uptime', parseInt(uptime_sec) / 3600);

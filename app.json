@@ -95,9 +95,8 @@
         "action_reboot",
         "action_update_data",
         "action_upload_file",
-        "alarm_heat.cpu",
+        "alarm_heat",
         "measure_temperature.cpu",
-        "alarm_heat.system",
         "measure_temperature.system",
         "measure_uptime",
         "measure_uptime_days",
@@ -115,26 +114,14 @@
         },
         "measure_temperature.cpu": {
           "title": {
-            "nl": "CPU Temperature",
-            "en": "CPU Temperatuur"
+            "en": "CPU Temperature",
+            "nl": "CPU Temperatuur"
           }
         },
         "measure_temperature.system": {
           "title": {
-            "nl": "Systeem Temperature",
-            "en": "System Temperatuur"
-          }
-        },
-        "alarm_heat.cpu": {
-          "title": {
-            "en": "CPU Heat alarm",
-            "nl": "CPU Hittealarm"
-          }
-        },
-        "alarm_heat.system": {
-          "title": {
-            "en": "System Heat alarm",
-            "nl": "Systeem Hittealarm"
+            "en": "Systeem Temperature",
+            "nl": "System Temperatuur"
           }
         }
       },
@@ -293,9 +280,8 @@
         "action_reboot",
         "action_update_data",
         "action_upload_file",
-        "alarm_heat.cpu",
+        "alarm_heat",
         "measure_temperature.cpu",
-        "alarm_heat.system",
         "measure_temperature.system",
         "measure_uptime",
         "measure_uptime_days",
@@ -305,6 +291,17 @@
         "measure_wan_type"
       ],
       "capabilitiesOptions": {
+          "onoff": {
+        "$flow": {
+            "actions": [
+                {
+                    "id": "off",
+                    "hint": {
+                        "en": "hello"
+                                    }
+                  } 
+            ]
+          }},
         "dim": {
           "title": {
             "nl": "LED Dim",
@@ -312,29 +309,17 @@
           }
         },
         "measure_temperature.cpu": {
-          "title": {
-            "nl": "CPU Temperature",
-            "en": "CPU Temperatuur"
+            "title": {
+              "en": "CPU Temperature",
+              "nl": "CPU Temperatuur"
+            }
+          },
+          "measure_temperature.system": {
+            "title": {
+              "en": "Systeem Temperature",
+              "nl": "System Temperatuur"
+            }
           }
-        },
-        "measure_temperature.system": {
-          "title": {
-            "nl": "Systeem Temperature",
-            "en": "System Temperatuur"
-          }
-        },
-        "alarm_heat.cpu": {
-          "title": {
-            "en": "CPU Heat alarm",
-            "nl": "CPU Hittealarm"
-          }
-        },
-        "alarm_heat.system": {
-          "title": {
-            "en": "System Heat alarm",
-            "nl": "Systeem Hittealarm"
-          }
-        }
       },
       "energy": {
         "approximation": {
@@ -491,9 +476,8 @@
         "action_reboot",
         "action_update_data",
         "action_upload_file",
-        "alarm_heat.cpu",
+        "alarm_heat",
         "measure_temperature.cpu",
-        "alarm_heat.system",
         "measure_temperature.system",
         "measure_uptime",
         "measure_uptime_days",
@@ -510,26 +494,14 @@
         },
         "measure_temperature.cpu": {
           "title": {
-            "nl": "CPU Temperature",
-            "en": "CPU Temperatuur"
+            "en": "CPU Temperature",
+            "nl": "CPU Temperatuur"
           }
         },
         "measure_temperature.system": {
           "title": {
-            "nl": "Systeem Temperature",
-            "en": "System Temperatuur"
-          }
-        },
-        "alarm_heat.cpu": {
-          "title": {
-            "en": "CPU Heat alarm",
-            "nl": "CPU Hittealarm"
-          }
-        },
-        "alarm_heat.system": {
-          "title": {
-            "en": "System Heat alarm",
-            "nl": "Systeem Hittealarm"
+            "en": "Systeem Temperature",
+            "nl": "System Temperatuur"
           }
         }
       },
@@ -809,8 +781,8 @@
     "measure_uptime": {
       "type": "number",
       "title": {
-        "en": "Up-Time",
-        "nl": "Online tijd"
+        "en": "Up-Time in hours",
+        "nl": "Online tijd in uren"
       },
       "units": {
         "en": "Hours",
@@ -832,15 +804,15 @@
           {
             "id": "measure_uptime_changed",
             "title": {
-              "en": "The uptime has changed",
-              "nl": "De online tijd is veranderd"
+              "en": "The uptime in hours has changed",
+              "nl": "De online tijd in uren is veranderd"
             },
             "tokens": [
               {
                 "name": "measure_uptime",
                 "title": {
-                  "en": "Up-Time",
-                  "nl": "Online tijd"
+                    "en": "Up-Time in hours",
+                    "nl": "Online tijd in uren"
                 },
                 "type": "number",
                 "example": 99
@@ -853,17 +825,39 @@
     "measure_uptime_days": {
       "type": "string",
       "title": {
-        "en": "Up-Time",
-        "nl": "Online tijd"
+        "en": "Up-Time in Days",
+        "nl": "Online tijd in Dagen"
       },
       "units": {
-        "en": "Hours",
-        "nl": "Uur"
+        "en": "Days",
+        "nl": "Dagen"
       },
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "assets/icons/stopwatch.svg"
+      "icon": "assets/icons/stopwatch.svg",
+      "$flow": {
+        "triggers": [
+          {
+            "id": "measure_uptime_days_changed",
+            "title": {
+              "en": "The uptime in days has changed",
+              "nl": "De online tijd in dagen is veranderd"
+            },
+            "tokens": [
+              {
+                "name": "measure_uptime_days",
+                "title": {
+                    "en": "Up-Time in Days",
+                    "nl": "Online tijd in Dagen"
+                },
+                "type": "string",
+                "example": ""
+              }
+            ]
+          }
+        ]
+      }
     },
     "measure_disk_usage": {
       "type": "number",
