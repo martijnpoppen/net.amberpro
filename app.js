@@ -20,15 +20,6 @@ class App extends Homey.App {
 
     await flowActions.init(this.homey);
   }
-
-  // ---------------------------- GETTERS/SETTERS ----------------------------------
-  setDevices(device) {
-    _devices.push(device);
-  }
-
-  getDevices() {
-      return _devices;
-  }
 }
 
 module.exports = App;

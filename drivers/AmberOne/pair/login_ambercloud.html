@@ -35,34 +35,15 @@
 
 <form class="hy-tmpl-login_amberpro-form" action="/" method="post">
     <div class="hy-tmpl-login_amberpro-logo" style="background-image: url('amberpro.svg');"></div>
-    <span data-i18n="pair.instructions"></span><br>
-    <div class="hy-tmpl-login_amberpro-row row hidden">
+    <span data-i18n="pair.instructions"></span><br><br>
+    <div class="hy-tmpl-login_amberpro-row row">
         <label class="hy-label hy-tmpl-login_amberpro-label" for="username" data-i18n="pair.username"></label>
-        <input class="hy-input-text" name="username" type="text" value="admin" placeholder="username" disabled>
+        <input class="hy-input-text" name="username" type="text" value="" placeholder="">
     </div>
+
     <div class="hy-tmpl-login_amberpro-row row">
         <label class="hy-label hy-tmpl-login_amberpro-label" for="password" data-i18n="pair.password"></label>
         <input class="hy-input-text" name="password" type="password" value="" placeholder="" required>
-    </div>
-
-    <div class="hy-tmpl-login_amberpro-row row">
-        <label class="hy-label hy-tmpl-login_amberpro-label" for="ipAddress" data-i18n="pair.ip"></label>
-        <input class="hy-input-text" name="ipAddress" type="text" value="">
-    </div>
-    
-    <div class="hy-tmpl-login_amberpro-row row hidden">
-        <input class="hy-input-checkbox" name="secure" type="checkbox">
-        <label class="hy-label hy-tmpl-login_amberpro-label" for="secure" data-i18n="pair.secure"></label>
-    </div>
-
-    <div class="hy-tmpl-login_amberpro-row row hidden">
-        <label class="hy-label hy-tmpl-login_amberpro-label" for="port" data-i18n="pair.port"></label>
-        <input class="hy-input-text" name="port" type="number" value="" placeholder="5000">
-    </div>
-
-    <div class="hy-tmpl-login_amberpro-row row">
-        <label class="hy-label hy-tmpl-login_amberpro-label" for="router_password" data-i18n="pair.router_password"></label>
-        <input class="hy-input-text" name="router_password" type="password" value="" placeholder="" required>
     </div>
 
     <div class="hy-tmpl-login_amberpro-row row">
@@ -76,10 +57,6 @@
         r = e.querySelector(".hy-tmpl-login_amberpro-logo"),
         l = e.querySelector('input[name="username"]'),
         n = e.querySelector('input[name="password"]'),
-        np = e.querySelector('input[name="router_password"]'),
-        p = e.querySelector('input[name="ipAddress"]'),
-        s = e.querySelector('input[name="secure"]'),
-        pp = e.querySelector('input[name="port"]'),
         lgn = e.querySelector('input[type="submit"]'),
         m = !1; 
         Homey.setTitle(Homey.__("$tmpl.login_credentials.title")),
@@ -89,13 +66,9 @@
                 m = !0, 
                 Homey.showLoadingOverlay(Homey.__("$tmpl.login_credentials.loading")); 
                 var z = l.value, 
-                r = n.value,
-                rp = np.value,
-                q = p.value,
-                qq = pp.value,
-                t = s.checked; 
+                r = n.value; 
 
-                return Homey.emit("login", { username: z, password: r, router_password: rp, ip: q, port: qq, secure: t }, function (e, o) { 
+                return Homey.emit("login", { username: z, password: r }, function (e, o) { 
                     if(e) {
                         Homey.error(e)
                     } else if(z) {

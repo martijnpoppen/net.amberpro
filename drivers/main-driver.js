@@ -1,6 +1,7 @@
 const Homey = require('homey');
+const AmberCloud = require('../lib/amber-cloud');
 const Amber = require('../lib/amber');
-const { encrypt } = require('../lib/helpers');
+const { encrypt, mapName, sleep } = require('../lib/helpers');
 
 module.exports = class mainDriver extends Homey.Driver {
     onInit() {
@@ -18,53 +19,55 @@ module.exports = class mainDriver extends Homey.Driver {
                 this.config = {
                     debug: false,
                     mac: null,
-                    secure: data.secure || false,
-                    ip: data.ip || 'latticenode.local',
+                    secure: false,
                     username: data.username,
-                    password: data.password,
-                    timeout: 3000
+                    password: data.password
                 };
+
                 this.homey.app.log(`[Driver] ${this.id} - got config`, this.config);
     
-                this._amberClient = await new Amber(this.config);
+                this._amberCloudClient = await new AmberCloud(this.config);
                 
-                this.amberData = await this._amberClient.getPairing();
+                this.amberCloudData = await this._amberCloudClient.getNodes();
+
+
+                if(this.amberCloudData && this.amberCloudData.status !== 200) {
+                    throw new Error(this.homey.__('pair.error'));
+                } else if(this.amberCloudData && !this.amberCloudData.hasOwnProperty('items')) {
+                    throw new Error(this.homey.__('pair.error_empty'));
+                }
             } catch (error) {
                 throw new Error(this.homey.__('pair.error'));
             }
         });
 
         session.setHandler("list_devices", async () => {
-            let results = [];
-            let pairedDriverDevices = [];
+            this.results = [];
+            this.homey.app.log(`[Driver] ${this.id} - this.amberCloudData`, this.amberCloudData);
 
-            if(this.amberData && this.amberData.status !== 200) {
-                throw new Error(this.homey.__('pair.error'));
-            } else if(this.amberData && !this.amberData[0].hasOwnProperty('data')) {
-                throw new Error(this.homey.__('pair.error_empty'));
-            }
 
-            this.homey.app.log(`[Driver] ${this.id} - this.amberData`, this.amberData);
-
-            this.homey.app.getDevices().forEach((device) => {
-                const data = device.getData();
-                pairedDriverDevices.push(data.id);
-            });
-
-            results.push({
-                name: `${this.amberData[0].data} - ${this.amberData[1].data}`,
-                data: {
-                    id: `${this.id}-${this.amberData[2].data}`,
-                },
-                settings: {
-                    ...this.config,
-                    password: encrypt(this.config.password)
+            this.amberCloudData.items.forEach(node => {
+                if(node.extra.data.model === this.deviceType()) {
+                    this.results.push({
+                        name: node.name,
+                        data: {
+                            id: `${node.id}`,
+                        },
+                        settings: {
+                            ...this.config,
+                            mac: node.extra.data.macaddr.eth0,
+                            ip: `${mapName(node.name)}.local`,
+                            username: this.config.username,
+                            password: encrypt(this.config.password),
+                            sso: node.extra.data.sso
+                        }
+                    });
                 }
             });
 
-            this.homey.app.log(`[Driver] ${this.id} - Found devices - `, results);
+            this.homey.app.log(`[Driver] ${this.id} - Found devices - `, this.results);
 
-            return results;
+            return this.results;
         });
     }
 }

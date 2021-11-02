@@ -141,13 +141,13 @@
       },
       "pair": [
         {
-          "id": "login_amberpro"
+          "id": "login_ambercloud"
         },
         {
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "prev": "login_amberpro",
+            "prev": "login_ambercloud",
             "next": "add_devices"
           }
         },
@@ -186,7 +186,7 @@
                 "en": "seconds",
                 "nl": "seconden"
               },
-              "value": 10
+              "value": 120
             },
             {
               "id": "enable_interval",
@@ -207,29 +207,11 @@
           },
           "children": [
             {
-              "id": "mac",
-              "type": "text",
-              "label": {
-                "en": "MAC Addres",
-                "nl": "MAC Adres"
-              },
-              "value": ""
-            },
-            {
-              "id": "ip",
-              "type": "text",
-              "label": {
-                "en": "IP Address",
-                "nl": "IP Adres"
-              },
-              "value": ""
-            },
-            {
               "id": "username",
               "type": "text",
               "label": {
-                "en": "User",
-                "nl": "Gebruiker"
+                "en": "Login",
+                "nl": "Login"
               },
               "value": ""
             },
@@ -250,18 +232,26 @@
                 "nl": "Router Wachtwoord"
               },
               "value": ""
-            },
-            {
-              "id": "debug",
-              "type": "checkbox",
-              "label": {
-                "en": "Debug Logs",
-                "nl": "Debug Logs"
-              },
-              "value": false
             }
           ]
-        }
+        },
+        {
+            "type": "group",
+            "label": {
+              "en": "Cloud account",
+              "nl": "Cloud account"
+            },
+            "children": [
+                {
+                    "id": "username",
+                    "type": "label",
+                    "label": {
+                      "en": "Amber Cloud E-mail",
+                      "nl": "Amber Cloud E-mail"
+                    }
+                  }
+              ]
+          }
       ]
     },
     {
@@ -326,13 +316,13 @@
       },
       "pair": [
         {
-          "id": "login_amberpro"
+          "id": "login_ambercloud"
         },
         {
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "prev": "login_amberpro",
+            "prev": "login_ambercloud",
             "next": "add_devices"
           }
         },
@@ -371,7 +361,7 @@
                 "en": "seconds",
                 "nl": "seconden"
               },
-              "value": 10
+              "value": 120
             },
             {
               "id": "enable_interval",
@@ -392,41 +382,23 @@
           },
           "children": [
             {
-              "id": "mac",
-              "type": "text",
-              "label": {
-                "en": "MAC Addres",
-                "nl": "MAC Adres"
+                "id": "username",
+                "type": "text",
+                "label": {
+                  "en": "Login",
+                  "nl": "Login"
+                },
+                "value": ""
               },
-              "value": ""
-            },
-            {
-              "id": "ip",
-              "type": "text",
-              "label": {
-                "en": "IP Address",
-                "nl": "IP Adres"
+              {
+                "id": "password",
+                "type": "password",
+                "label": {
+                  "en": "Password",
+                  "nl": "Wachtwoord"
+                },
+                "value": ""
               },
-              "value": ""
-            },
-            {
-              "id": "username",
-              "type": "text",
-              "label": {
-                "en": "User",
-                "nl": "Gebruiker"
-              },
-              "value": ""
-            },
-            {
-              "id": "password",
-              "type": "password",
-              "label": {
-                "en": "Password",
-                "nl": "Wachtwoord"
-              },
-              "value": ""
-            },
             {
               "id": "router_password",
               "type": "password",
@@ -435,29 +407,37 @@
                 "nl": "Router Wachtwoord"
               },
               "value": ""
-            },
-            {
-              "id": "debug",
-              "type": "checkbox",
-              "label": {
-                "en": "Debug Logs",
-                "nl": "Debug Logs"
-              },
-              "value": false
             }
           ]
-        }
+        },
+        {
+            "type": "group",
+            "label": {
+              "en": "Cloud account",
+              "nl": "Cloud account"
+            },
+            "children": [
+              {
+                  "id": "username",
+                  "type": "label",
+                  "label": {
+                    "en": "Amber Cloud E-mail",
+                    "nl": "Amber Cloud E-mail"
+                  }
+                }
+            ]
+          }
       ]
     },
     {
       "id": "AmberX",
       "class": "homealarm",
       "connectivity": [
-        "lan",
         "cloud"
       ],
       "platforms": [
-        "local"
+        "local",
+        "cloud"
       ],
       "capabilities": [
         "onoff",
@@ -510,13 +490,13 @@
       },
       "pair": [
         {
-          "id": "login_amberpro"
+          "id": "login_ambercloud"
         },
         {
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "prev": "login_amberpro",
+            "prev": "login_ambercloud",
             "next": "add_devices"
           }
         },
@@ -555,7 +535,7 @@
                 "en": "seconds",
                 "nl": "seconden"
               },
-              "value": 10
+              "value": 120
             },
             {
               "id": "enable_interval",
@@ -576,52 +556,42 @@
           },
           "children": [
             {
-              "id": "mac",
-              "type": "text",
-              "label": {
-                "en": "MAC Addres",
-                "nl": "MAC Adres"
+                "id": "username",
+                "type": "text",
+                "label": {
+                  "en": "Login",
+                  "nl": "Login"
+                },
+                "value": ""
               },
-              "value": ""
-            },
-            {
-              "id": "ip",
-              "type": "text",
-              "label": {
-                "en": "IP Address",
-                "nl": "IP Adres"
-              },
-              "value": ""
-            },
-            {
-              "id": "username",
-              "type": "text",
-              "label": {
-                "en": "User",
-                "nl": "Gebruiker"
-              },
-              "value": ""
-            },
-            {
-              "id": "password",
-              "type": "password",
-              "label": {
-                "en": "Password",
-                "nl": "Wachtwoord"
-              },
-              "value": ""
-            },
-            {
-              "id": "debug",
-              "type": "checkbox",
-              "label": {
-                "en": "Debug Logs",
-                "nl": "Debug Logs"
-              },
-              "value": false
-            }
+              {
+                "id": "password",
+                "type": "password",
+                "label": {
+                  "en": "Password",
+                  "nl": "Wachtwoord"
+                },
+                "value": ""
+              }
           ]
-        }
+        },
+        {
+            "type": "group",
+            "label": {
+              "en": "Cloud account",
+              "nl": "Cloud account"
+            },
+            "children": [
+                {
+                    "id": "username",
+                    "type": "label",
+                    "label": {
+                      "en": "Amber Cloud E-mail",
+                      "nl": "Amber Cloud E-mail"
+                    }
+                  }
+              ]
+          }
       ]
     }
   ],

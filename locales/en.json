@@ -1,7 +1,7 @@
 {
   "pair": {
-    "instructions": "Fill in the password of the local admin account. After that fill in the IP of Amber. Preference is device name + .local (eg: amberplus.local)",
-    "username": "Username",
+    "instructions": "Login with your Amber Cloud account",
+    "username": "Email",
     "password": "Password",
     "router_password": "Router Password (Enable router functionality)",
     "otp": "2FA Code (optional)",
@@ -16,6 +16,7 @@
     "reboot": "Rebooting",
     "shutdown": "Shutting down",
     "override_onoff": "Amber is always-on",
+    "need_admin": "For this device the Amber Admin password is needed. Please enter the admin password in the device settings.",
     "onoff_turn_on": "Amber can only turned on physically. Use the button on the back of the device",
     "file_invalid": "Wrong file format"
   },

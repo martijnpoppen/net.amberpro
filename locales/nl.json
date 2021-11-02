@@ -1,7 +1,7 @@
 {
   "pair": {
-    "instructions": "Vul het wachtwoord in van het admin account. Vul vervolgens het IP adres van Amber in. Voorkeur is apparaat naam + .local (bijv: amberplus.local)",
-    "username": "Gebruikersnaam",
+    "instructions": "Login met je Amber Cloud account",
+    "username": "Email",
     "password": "Wachtwoord",
     "router_password": "Router wachtwoord (Router functionaliteit)",
     "otp": "2FA Code (optioneel)",
@@ -16,6 +16,7 @@
     "reboot": "Herstarten",
     "shutdown": "Afsluiten",
     "override_onoff": "Amber is altijd-aan",
+    "need_admin": "Voor dit apparaat is het Amber Admin wachtwoord vereist. Voer deze in in de apparaat instellingen.",
     "onoff_turn_on": "Amber kan alleen fysiek aangezet worden. Gebruik de knop op de achterkant van Amber",
     "file_invalid": "Verkeerd bestandsformaat"
   },

@@ -10,39 +10,33 @@ module.exports = class mainDevice extends Homey.Device {
             const settings = this.getSettings();
 
             this.homey.app.log('[Device] - init =>', this.getName());
-            this.homey.app.setDevices(this);
-
-            if(!settings.mac || settings.mac.length < 8) {
-                await this.findMacAddress();
-            }
 
             await this.checkCapabilities();
-
-            this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
-            this.registerCapabilityListener('dim', this.onCapability_DIM.bind(this));
-            this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
-            this.registerCapabilityListener('action_update_data', this.onCapability_UPDATE_DATA.bind(this));
-
+            await this.setCapabilityListeners();            
             await this.setAmberClient();
 
-            await this.checkOnOffState();
-            await this.setCapabilityValues();
-
-            if(settings.enable_interval) {
-                await this.checkOnOffStateInterval(settings.update_interval);
-                await this.setCapabilityValuesInterval(settings.update_interval);
-            } 
-            
-            if(this.hasCapability('measure_wan_type') && !!settings.router_password) {
-                await this.setFlowtriggers();
-                await this.setRouterCheck();
-
+            if(this.getAvailable()) {
+                await this.checkOnOffState();
+                await sleep(3000);
+                await this.setCapabilityValues();
+    
                 if(settings.enable_interval) {
-                    await this.setRouterCheckInterval(settings.update_interval);
+                    await this.checkOnOffStateInterval(settings.update_interval);
+                    
+                    await sleep(3000);
+    
+                    await this.setCapabilityValuesInterval(settings.update_interval);
+                } 
+                
+                if(this.hasCapability('measure_wan_type') && !!settings.router_password) {
+                    await this.setFlowtriggers();
+                    await this.setRouterCheck();
+    
+                    if(settings.enable_interval) {
+                        await this.setRouterCheckInterval(settings.update_interval);
+                    }
                 }
             }
-
-            await this.setAvailable();
         } catch (error) {
             this.homey.app.log(`[Device] ${this.getName()} - OnInit Error`, error);
         }
@@ -88,18 +82,43 @@ module.exports = class mainDevice extends Homey.Device {
 
     async setAmberClient(overrideSettings = null) {
         const settings = overrideSettings ? overrideSettings : this.getSettings();
-        this.config = {...settings, password: decrypt(settings.password)};
 
-        this.homey.app.log(`[Device] - ${this.getName()} => setAmberClient Got config`, {...this.config, username: 'LOG', password: 'LOG'});
+        try {
+            this.config = {...settings, password: decrypt(settings.password), debug: false};
 
-        this._amberClient = await new Amber(this.config);
+            this.homey.app.log(`[Device] - ${this.getName()} => setAmberClient Got config`, {...this.config, username: 'LOG', password: 'LOG'});
 
-        if(this.hasCapability('measure_wan_type') && !!this.config.router_password) {
-            this._amberRouterClient = await new AmberRouter({ ip: 'latticerouter.local', password: this.config.router_password});
+            
+            
+            if(settings.sso === false) {
+                this._amberClient = await new Amber({...this.config, username: 'admin'});
+            } else {
+                this._amberClient = await new Amber(this.config);
+            }
+
+            if(this.hasCapability('measure_wan_type') && !!this.config.router_password) {
+                this._amberRouterClient = await new AmberRouter({ ip: 'latticerouter.local', password: this.config.router_password});
+            }
+
+            await this._amberClient.setFtp();
+            this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/admin/homey-amber/`});
+
+            await this.setAvailable();
+        } catch (error) {
+            this.homey.app.log(`[Device] ${this.getName()} - setAmberClient - error =>`, error);
+
+            if(settings.sso === false) {
+                this.homey.app.log(`[Device] ${this.getName()} - setAmberClient - need_admin`);
+                await this.setUnavailable(this.homey.__("amber.need_admin"));
+            }
         }
+    }
 
-        await this._amberClient.setFtp();
-        this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/${this.config.username}/homey-amber/`});
+    async setCapabilityListeners() {
+        await this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
+        await this.registerCapabilityListener('dim', this.onCapability_DIM.bind(this));
+        await this.registerCapabilityListener('action_reboot', this.onCapability_REBOOT.bind(this));
+        await this.registerCapabilityListener('action_update_data', this.onCapability_UPDATE_DATA.bind(this));
     }
 
     async checkCapabilities() {
@@ -140,29 +159,6 @@ module.exports = class mainDevice extends Homey.Device {
 
         this.routerConnectedTrigger.registerRunListener(async (args, state) =>  args.ip === state.ip || !args.ip);
         this.routerDisonnectedTrigger.registerRunListener(async (args, state) => args.ip === state.ip || !args.ip);
-    }
-
-    async findMacAddress() {
-        try {
-            const discoveryStrategy = this.homey.discovery.getStrategy("amberpro_discovery");
-
-            // Use the discovery results that were already found
-            const initialDiscoveryResults = discoveryStrategy.getDiscoveryResults();
-            for (const discoveryResult of Object.values(initialDiscoveryResults)) {
-                this.homey.app.log(`[Device] ${this.getName()} - findMacAddress =>`, discoveryResult);
-
-                if(discoveryResult.txt && discoveryResult.txt.model && discoveryResult.txt.model.includes('AM')) {
-                    const mac = discoveryResult.txt.macaddr;
-                    const settings = this.getSettings();
-
-                    await this.setSettings({...settings, mac});
-
-                    this.homey.app.log(`[Device] ${this.getName()} - findMacAddress - address =>`, mac);
-                }
-            }
-        } catch (error) {
-            this.homey.app.log(error)
-        }
     }
 
     async onCapability_ON_OFF(value) {
@@ -242,8 +238,8 @@ module.exports = class mainDevice extends Homey.Device {
 
            this.setCapabilityValue('action_update_data', false);
 
-           this.checkOnOffState();
-           this.setCapabilityValues();
+           await this.checkOnOffState();
+           await this.setCapabilityValues();
 
             return Promise.resolve(true);
         } catch (e) {
@@ -322,7 +318,7 @@ module.exports = class mainDevice extends Homey.Device {
             await this.clearIntervals();
 
             if(settings.enable_interval) {
-                await this.checkOnOffStateInterval(settings.update_interval);
+                await this.checkOnOffStateInterval(settings.update_interval-10);
                 await this.setCapabilityValuesInterval(settings.update_interval);
 
                 if(this.hasCapability('measure_wan_type') && !!settings.router_password) {
@@ -353,7 +349,7 @@ module.exports = class mainDevice extends Homey.Device {
             const isOn = await this.getCapabilityValue('onoff');
 
             if(!isOn) {
-                throw new Error(`[Device] ${this.getName()} - setCapabilityValues - device off`)
+                throw new Error(`[Device] ${this.getName()} - setCapabilityValues - Device is off`)
             }
 
             const deviceInfo = await this._amberClient.getInfo();
