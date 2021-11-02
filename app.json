@@ -1,6 +1,6 @@
 {
   "id": "net.amberpro",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -236,22 +236,22 @@
           ]
         },
         {
-            "type": "group",
-            "label": {
-              "en": "Cloud account",
-              "nl": "Cloud account"
-            },
-            "children": [
-                {
-                    "id": "username",
-                    "type": "label",
-                    "label": {
-                      "en": "Amber Cloud E-mail",
-                      "nl": "Amber Cloud E-mail"
-                    }
-                  }
-              ]
-          }
+          "type": "group",
+          "label": {
+            "en": "Cloud account",
+            "nl": "Cloud account"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "label",
+              "label": {
+                "en": "Amber Cloud E-mail",
+                "nl": "Amber Cloud E-mail"
+              }
+            }
+          ]
+        }
       ]
     },
     {
@@ -382,23 +382,23 @@
           },
           "children": [
             {
-                "id": "username",
-                "type": "text",
-                "label": {
-                  "en": "Login",
-                  "nl": "Login"
-                },
-                "value": ""
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Login",
+                "nl": "Login"
               },
-              {
-                "id": "password",
-                "type": "password",
-                "label": {
-                  "en": "Password",
-                  "nl": "Wachtwoord"
-                },
-                "value": ""
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
               },
+              "value": ""
+            },
             {
               "id": "router_password",
               "type": "password",
@@ -411,22 +411,22 @@
           ]
         },
         {
-            "type": "group",
-            "label": {
-              "en": "Cloud account",
-              "nl": "Cloud account"
-            },
-            "children": [
-              {
-                  "id": "username",
-                  "type": "label",
-                  "label": {
-                    "en": "Amber Cloud E-mail",
-                    "nl": "Amber Cloud E-mail"
-                  }
-                }
-            ]
-          }
+          "type": "group",
+          "label": {
+            "en": "Cloud account",
+            "nl": "Cloud account"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "label",
+              "label": {
+                "en": "Amber Cloud E-mail",
+                "nl": "Amber Cloud E-mail"
+              }
+            }
+          ]
+        }
       ]
     },
     {
@@ -436,8 +436,7 @@
         "cloud"
       ],
       "platforms": [
-        "local",
-        "cloud"
+        "local"
       ],
       "capabilities": [
         "onoff",
@@ -556,42 +555,42 @@
           },
           "children": [
             {
-                "id": "username",
-                "type": "text",
-                "label": {
-                  "en": "Login",
-                  "nl": "Login"
-                },
-                "value": ""
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Login",
+                "nl": "Login"
               },
-              {
-                "id": "password",
-                "type": "password",
-                "label": {
-                  "en": "Password",
-                  "nl": "Wachtwoord"
-                },
-                "value": ""
-              }
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": ""
+            }
           ]
         },
         {
-            "type": "group",
-            "label": {
-              "en": "Cloud account",
-              "nl": "Cloud account"
-            },
-            "children": [
-                {
-                    "id": "username",
-                    "type": "label",
-                    "label": {
-                      "en": "Amber Cloud E-mail",
-                      "nl": "Amber Cloud E-mail"
-                    }
-                  }
-              ]
-          }
+          "type": "group",
+          "label": {
+            "en": "Cloud account",
+            "nl": "Cloud account"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "label",
+              "label": {
+                "en": "Amber Cloud E-mail",
+                "nl": "Amber Cloud E-mail"
+              }
+            }
+          ]
+        }
       ]
     }
   ],
