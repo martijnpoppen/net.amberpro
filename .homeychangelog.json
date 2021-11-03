@@ -55,5 +55,8 @@
   },
   "1.5.1": {
     "en": "FIX: admin_password "
+  },
+  "1.5.2": {
+    "en": "FIX: locale"
   }
 }
