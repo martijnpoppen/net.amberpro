@@ -1,9 +1,11 @@
 {
   "id": "net.amberpro",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
-  "platforms": ["local"],
+  "platforms": [
+    "local"
+  ],
   "brandColor": "#000000",
   "name": {
     "en": "Amber",
@@ -26,7 +28,9 @@
       "Wake on Lan"
     ]
   },
-  "category": ["security"],
+  "category": [
+    "security"
+  ],
   "images": {
     "large": "/assets/images/large.jpg",
     "small": "/assets/images/small.jpg"
@@ -78,8 +82,13 @@
     {
       "id": "AmberOne",
       "class": "homealarm",
-      "connectivity": ["lan", "cloud"],
-      "platforms": ["local"],
+      "connectivity": [
+        "lan",
+        "cloud"
+      ],
+      "platforms": [
+        "local"
+      ],
       "capabilities": [
         "onoff",
         "dim",
@@ -198,14 +207,14 @@
           },
           "children": [
             {
-                "id": "admin_username",
-                "type": "label",
-                "label": {
-                  "en": "Amber admin account",
-                  "nl": "Amber admin account"
-                },
-                "value": "admin"
+              "id": "admin_username",
+              "type": "label",
+              "label": {
+                "en": "Amber admin account",
+                "nl": "Amber admin account"
               },
+              "value": "admin"
+            },
             {
               "id": "admin_password",
               "type": "password",
@@ -242,23 +251,23 @@
               }
             },
             {
-                "id": "username",
-                "type": "text",
-                "label": {
-                  "en": "Login",
-                  "nl": "Login"
-                },
-                "value": ""
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Login",
+                "nl": "Login"
               },
-              {
-                "id": "password",
-                "type": "password",
-                "label": {
-                  "en": "Password",
-                  "nl": "Wachtwoord"
-                },
-                "value": ""
-              }
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": ""
+            }
           ]
         }
       ]
@@ -266,8 +275,13 @@
     {
       "id": "AmberPlus",
       "class": "homealarm",
-      "connectivity": ["lan", "cloud"],
-      "platforms": ["local"],
+      "connectivity": [
+        "lan",
+        "cloud"
+      ],
+      "platforms": [
+        "local"
+      ],
       "capabilities": [
         "onoff",
         "dim",
@@ -386,14 +400,14 @@
           },
           "children": [
             {
-                "id": "admin_username",
-                "type": "label",
-                "label": {
-                  "en": "Amber admin account",
-                  "nl": "Amber admin account"
-                },
-                "value": "admin"
+              "id": "admin_username",
+              "type": "label",
+              "label": {
+                "en": "Amber admin account",
+                "nl": "Amber admin account"
               },
+              "value": "admin"
+            },
             {
               "id": "admin_password",
               "type": "password",
@@ -430,23 +444,23 @@
               }
             },
             {
-                "id": "username",
-                "type": "text",
-                "label": {
-                  "en": "Login",
-                  "nl": "Login"
-                },
-                "value": ""
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Login",
+                "nl": "Login"
               },
-              {
-                "id": "password",
-                "type": "password",
-                "label": {
-                  "en": "Password",
-                  "nl": "Wachtwoord"
-                },
-                "value": ""
-              }
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": ""
+            }
           ]
         }
       ]
@@ -454,8 +468,12 @@
     {
       "id": "AmberX",
       "class": "homealarm",
-      "connectivity": ["cloud"],
-      "platforms": ["local"],
+      "connectivity": [
+        "cloud"
+      ],
+      "platforms": [
+        "local"
+      ],
       "capabilities": [
         "onoff",
         "dim",
@@ -739,7 +757,10 @@
           "en": "[[device]] [[droptoken]] Upload File",
           "nl": "[[device]] [[droptoken]] Bestand uploaden"
         },
-        "droptoken": ["image", "string"],
+        "droptoken": [
+          "image",
+          "string"
+        ],
         "args": [
           {
             "type": "device",

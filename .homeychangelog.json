@@ -52,5 +52,8 @@
   },
   "1.5.0": {
     "en": "NEW: Amber Cloud login for driver pairing"
+  },
+  "1.5.1": {
+    "en": "FIX: admin_password "
   }
 }
