@@ -58,5 +58,8 @@
   },
   "1.5.2": {
     "en": "FIX: locale"
+  },
+  "1.6.0": {
+    "en": "NEW: add cloud support"
   }
 }

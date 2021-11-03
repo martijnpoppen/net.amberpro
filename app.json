@@ -1,10 +1,11 @@
 {
   "id": "net.amberpro",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
-    "local"
+    "local",
+    "cloud"
   ],
   "brandColor": "#000000",
   "name": {
@@ -472,7 +473,8 @@
         "cloud"
       ],
       "platforms": [
-        "local"
+        "local",
+        "cloud"
       ],
       "capabilities": [
         "onoff",
@@ -639,8 +641,8 @@
           "nl": "Een apparaat kreeg connectie met de router"
         },
         "titleFormatted": {
-          "en": "[[ip]] [[device]] (A device) connected to the Router",
-          "nl": "[[ip]] [[device]] (Een apparaat) kreeg connectie met de router"
+          "en": "[[ip]] (A device) connected to the Router",
+          "nl": "[[ip]] (Een apparaat) kreeg connectie met de router"
         },
         "tokens": [
           {
@@ -665,9 +667,16 @@
           },
           {
             "name": "device",
+            "placeholder": {
+              "en": "Select device",
+              "nl": "Selecteer apparaat"
+            },
             "type": "device",
-            "filter": "capabilities=measure_wan_type"
+            "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=measure_wan_type"
           }
+        ],
+        "platforms": [
+          "local"
         ]
       },
       {
@@ -677,8 +686,8 @@
           "nl": "Een apparaat verloor connectie met de router"
         },
         "titleFormatted": {
-          "en": "[[ip]] [[device]] (A device) disconnected from the Router",
-          "nl": "[[ip]] [[device]] (Een apparaat) verloor connectie met de router"
+          "en": "[[ip]] (A device) disconnected from the Router",
+          "nl": "[[ip]] (Een apparaat) verloor connectie met de router"
         },
         "tokens": [
           {
@@ -703,9 +712,16 @@
           },
           {
             "name": "device",
+            "placeholder": {
+              "en": "Select device",
+              "nl": "Selecteer apparaat"
+            },
             "type": "device",
-            "filter": "capabilities=measure_wan_type"
+            "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=measure_wan_type"
           }
+        ],
+        "platforms": [
+          "local"
         ]
       }
     ],
@@ -717,15 +733,23 @@
           "nl": "Herstarten"
         },
         "titleFormatted": {
-          "en": "[[device]] Reboot",
-          "nl": "[[device]] Herstarten"
+          "en": "Reboot",
+          "nl": "Herstarten"
         },
         "args": [
           {
             "type": "device",
             "name": "device",
-            "filter": "capabilities=action_reboot"
+            "placeholder": {
+              "en": "Select device",
+              "nl": "Selecteer apparaat"
+            },
+            "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_reboot"
           }
+        ],
+        "platforms": [
+          "local",
+          "cloud"
         ]
       },
       {
@@ -735,15 +759,23 @@
           "nl": "Data updaten"
         },
         "titleFormatted": {
-          "en": "[[device]] Update data",
-          "nl": "[[device]] Data updaten"
+          "en": "Update data",
+          "nl": "Data updaten"
         },
         "args": [
           {
             "type": "device",
             "name": "device",
-            "filter": "capabilities=action_update_data"
+            "placeholder": {
+              "en": "Select device",
+              "nl": "Selecteer apparaat"
+            },
+            "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_update_data"
           }
+        ],
+        "platforms": [
+          "local",
+          "cloud"
         ]
       },
       {
@@ -754,8 +786,8 @@
           "de": "Datei hochladen"
         },
         "titleFormatted": {
-          "en": "[[device]] [[droptoken]] Upload File",
-          "nl": "[[device]] [[droptoken]] Bestand uploaden"
+          "en": "[[droptoken]] Upload File",
+          "nl": "[[droptoken]] Bestand uploaden"
         },
         "droptoken": [
           "image",
@@ -765,8 +797,16 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "capabilities=action_upload_file"
+            "placeholder": {
+              "en": "Select device",
+              "nl": "Selecteer apparaat"
+            },
+            "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_upload_file"
           }
+        ],
+        "platforms": [
+          "local",
+          "cloud"
         ]
       }
     ]
@@ -1024,7 +1064,7 @@
         "en": "Reboot",
         "nl": "Herstarten"
       },
-      "getable": false,
+      "getable": true,
       "setable": true,
       "uiComponent": "button"
     },
@@ -1034,7 +1074,7 @@
         "en": "Update data",
         "nl": "Data updaten"
       },
-      "getable": false,
+      "getable": true,
       "setable": true,
       "uiComponent": "button"
     },
