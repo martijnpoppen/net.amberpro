@@ -87,11 +87,9 @@ module.exports = class mainDevice extends Homey.Device {
             this.config = {...settings, password: decrypt(settings.password), debug: false};
 
             this.homey.app.log(`[Device] - ${this.getName()} => setAmberClient Got config`, {...this.config, username: 'LOG', password: 'LOG'});
-
-            
             
             if(settings.sso === false) {
-                this._amberClient = await new Amber({...this.config, username: 'admin'});
+                this._amberClient = await new Amber({...this.config, username: 'admin', password: this.config.admin_password});
             } else {
                 this._amberClient = await new Amber(this.config);
             }
