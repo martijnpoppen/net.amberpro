@@ -16,7 +16,7 @@
     "reboot": "Herstarten",
     "shutdown": "Afsluiten",
     "override_onoff": "Amber is altijd-aan",
-    "need_admin": "Voor dit apparaat is het Amber Admin wachtwoord vereist. Voer deze in in de apparaat instellingen.",
+    "need_admin": "Voor dit apparaat is het 'Amber Admin' wachtwoord vereist. Dit is het wachtwoord waarmee je inlogt op het Amber webportal. Voer dit admin wachtwoord in in de apparaat instellingen.",
     "onoff_turn_on": "Amber kan alleen fysiek aangezet worden. Gebruik de knop op de achterkant van Amber",
     "file_invalid": "Verkeerd bestandsformaat"
   },

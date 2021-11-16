@@ -2,7 +2,6 @@
 
 const Homey = require("homey");
 const flowActions = require('./lib/flows/actions');
-let _devices = [];
 
 class App extends Homey.App {
   log() {

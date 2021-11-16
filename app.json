@@ -84,11 +84,11 @@
       "id": "AmberOne",
       "class": "homealarm",
       "connectivity": [
-        "lan",
         "cloud"
       ],
       "platforms": [
-        "local"
+        "local",
+        "cloud"
       ],
       "capabilities": [
         "onoff",
@@ -277,11 +277,11 @@
       "id": "AmberPlus",
       "class": "homealarm",
       "connectivity": [
-        "lan",
         "cloud"
       ],
       "platforms": [
-        "local"
+        "local",
+        "cloud"
       ],
       "capabilities": [
         "onoff",
@@ -411,7 +411,7 @@
             },
             {
               "id": "admin_password",
-              "type": "password",
+              "type": "text",
               "label": {
                 "en": "Admin Password",
                 "nl": "Admin Wachtwoord"
@@ -420,7 +420,7 @@
             },
             {
               "id": "router_password",
-              "type": "password",
+              "type": "text",
               "label": {
                 "en": "Router Password",
                 "nl": "Router Wachtwoord"
@@ -473,8 +473,7 @@
         "cloud"
       ],
       "platforms": [
-        "local",
-        "cloud"
+        "local"
       ],
       "capabilities": [
         "onoff",
@@ -676,7 +675,8 @@
           }
         ],
         "platforms": [
-          "local"
+          "local",
+          "cloud"
         ]
       },
       {
@@ -721,7 +721,8 @@
           }
         ],
         "platforms": [
-          "local"
+          "local",
+          "cloud"
         ]
       }
     ],
@@ -782,8 +783,7 @@
         "id": "action_upload_file_flow",
         "title": {
           "en": "Upload File",
-          "nl": "Bestand uploaden",
-          "de": "Datei hochladen"
+          "nl": "Bestand uploaden"
         },
         "titleFormatted": {
           "en": "[[droptoken]] Upload File",
@@ -1082,8 +1082,7 @@
       "type": "string",
       "title": {
         "en": "Upload File",
-        "nl": "Bestand uploaden",
-        "de": "Datei hochladen"
+        "nl": "Bestand uploaden"
       },
       "getable": false,
       "setable": true,
