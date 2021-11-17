@@ -8,12 +8,15 @@ module.exports = class mainDevice extends Homey.Device {
     async onInit() {
         try {
             this.homey.app.log('[Device] - init =>', this.getName());
+            this.setUnavailable(`Initializing ${this.getName()}`);
 
             this.flowTriggersRegistered = false;
 
             await this.checkCapabilities();
             await this.setCapabilityListeners();            
             await this.setAmberClient();
+
+            await this.setAvailable();
         } catch (error) {
             this.homey.app.log(`[Device] ${this.getName()} - OnInit Error`, error);
         }
@@ -68,11 +71,12 @@ module.exports = class mainDevice extends Homey.Device {
                 this._amberRouterClient = await new AmberRouter({ ip: 'latticerouter.local', password: this.config.router_password});
             }
 
+            await sleep(500);
+
             await this._amberClient.setFtp();
             this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/admin/homey-amber/`});
 
             await this.setInitialData();
-            await this.setAvailable();
             await this.setIntervalsAndFlows(settings);
         } catch (error) {
             this.homey.app.log(`[Device] ${this.getName()} - setAmberClient - error =>`, error);
@@ -88,6 +92,8 @@ module.exports = class mainDevice extends Homey.Device {
         await this.checkOnOffState();
         await sleep(3000);
         await this.setCapabilityValues();
+
+        await this.setAvailable();
     }
 
     async setIntervalsAndFlows(settings) {
