@@ -1,6 +1,6 @@
 {
   "id": "net.amberpro",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -670,7 +670,7 @@
               "nl": "Selecteer apparaat"
             },
             "type": "device",
-            "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=measure_wan_type"
+            "filter": "driver_id=AmberOne|AmberPlus&capabilities=measure_wan_type"
           }
         ],
         "platforms": [
@@ -715,7 +715,7 @@
               "nl": "Selecteer apparaat"
             },
             "type": "device",
-            "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=measure_wan_type"
+            "filter": "driver_id=AmberOne|AmberPlus&capabilities=measure_wan_type"
           }
         ],
         "platforms": [
