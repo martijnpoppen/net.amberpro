@@ -411,7 +411,7 @@
             },
             {
               "id": "admin_password",
-              "type": "password",
+              "type": "text",
               "label": {
                 "en": "Admin Password",
                 "nl": "Admin Wachtwoord"
@@ -420,7 +420,7 @@
             },
             {
               "id": "router_password",
-              "type": "password",
+              "type": "text",
               "label": {
                 "en": "Router Password",
                 "nl": "Router Wachtwoord"
@@ -782,8 +782,7 @@
         "id": "action_upload_file_flow",
         "title": {
           "en": "Upload File",
-          "nl": "Bestand uploaden",
-          "de": "Datei hochladen"
+          "nl": "Bestand uploaden"
         },
         "titleFormatted": {
           "en": "[[droptoken]] Upload File",
@@ -1082,8 +1081,7 @@
       "type": "string",
       "title": {
         "en": "Upload File",
-        "nl": "Bestand uploaden",
-        "de": "Datei hochladen"
+        "nl": "Bestand uploaden"
       },
       "getable": false,
       "setable": true,
