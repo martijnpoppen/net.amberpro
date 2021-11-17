@@ -4,8 +4,7 @@
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
-    "local",
-    "cloud"
+    "local"
   ],
   "brandColor": "#000000",
   "name": {
@@ -473,8 +472,7 @@
         "cloud"
       ],
       "platforms": [
-        "local",
-        "cloud"
+        "local"
       ],
       "capabilities": [
         "onoff",
@@ -774,8 +772,7 @@
           }
         ],
         "platforms": [
-          "local",
-          "cloud"
+          "local"
         ]
       },
       {
@@ -804,8 +801,7 @@
           }
         ],
         "platforms": [
-          "local",
-          "cloud"
+          "local"
         ]
       }
     ]
