@@ -66,8 +66,9 @@ module.exports = class mainDevice extends Homey.Device {
                 this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/admin/homey-amber/`});
             }
 
+            await sleep(500);
+            await this._amberClient.getPowerState();
             await this.setInitialData();
-            await this.setAvailable();
             await this.setIntervalsAndFlows(settings);
         } catch (error) {
             this.homey.app.log(`[Device] ${this.getName()} - setAmberClient - error =>`, error);
@@ -80,9 +81,14 @@ module.exports = class mainDevice extends Homey.Device {
     }
 
     async setInitialData() {
-        await this.checkOnOffState();
-        await sleep(3000);
-        await this.setCapabilityValues();
+        try {
+            await this.checkOnOffState();
+            await sleep(3000);
+            await this.setCapabilityValues();
+            await this.setAvailable();
+        } catch (error) {
+            this.homey.app.log(`[Device] ${this.getName()} - setInitialData - error =>`, error);
+        }
     }
 
     async setIntervalsAndFlows(settings) {
@@ -232,7 +238,6 @@ module.exports = class mainDevice extends Homey.Device {
 
     async onCapability_UPDATE_DATA(value) {
         try {
-           const settings = this.getSettings();
            this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPDATE_DATA`, value);
 
            await this.checkOnOffState();
@@ -268,10 +273,7 @@ module.exports = class mainDevice extends Homey.Device {
                 throw new Error(this.homey.__("amber.file_invalid"));
             }
 
-            // await this._amberClient.upload(filePath, fileName);
-
             await sleep(200);
-            // await removeFile(filePath);
 
             return Promise.resolve(true);
         } catch (e) {
