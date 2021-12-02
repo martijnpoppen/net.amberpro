@@ -5,7 +5,10 @@ Get notification when a value has changed.
 
 How to use:
 - Install this app on your Homey.
-- Go to new devices - Fill in IP - Username - Password - (2FA optional)
+- Go to new devices
+- Login with Amber Cloud account
+- Device will be added
+- In case of Amber One/Plus add your 'Amber Admin' password inside the device settings
 - Data will be fetched.
 - Check statuses or create flows.
 

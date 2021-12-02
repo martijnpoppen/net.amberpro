@@ -5,7 +5,10 @@ Ontvang een melding wanneer een waarde is gewijzigd.
 
 Installatie:
 - Installeer deze app op je Homey.
-- Ga naar apparaat toevoegen - Vul IP in - Gebruikersnaam - Wachtwoord
+- Ga naar apparaat toevoegen
+- Login met Amber Cloud account
+- Apparaat wordt toegevoegd
+- Indien Amber One/Plus vul 'Amber Admin' wachtwoord in in apparaat instellingen
 - Gegevens worden opgehaald.
 - Controleer status of creëer flows.
 
