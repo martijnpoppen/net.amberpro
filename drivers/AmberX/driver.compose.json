@@ -1,0 +1,7 @@
+{
+  "$extends": ["generic", "capabilities", "defaults"],
+  "name": {
+    "en": "Amber X",
+    "nl": "Amber X"
+  }
+}

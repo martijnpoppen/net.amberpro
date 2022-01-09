@@ -1,0 +1,26 @@
+{
+  "id": "action_reboot_flow",
+  "title": {
+    "en": "Reboot",
+    "nl": "Herstarten"
+  },
+  "titleFormatted": {
+    "en": "Reboot",
+    "nl": "Herstarten"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "placeholder": {
+        "en": "Select device",
+        "nl": "Selecteer apparaat"
+      },
+      "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_reboot"
+    }
+  ],
+  "platforms": [
+    "local",
+    "cloud"
+  ]
+}

@@ -1,8 +1,7 @@
 const Homey = require('homey');
 const Amber = require('../lib/amber');
-const AmberRouter = require('../lib/amber-router');
-const FTP = require('../lib/amber/ftp');
-const { sleep, decrypt, encrypt, splitTime, removeFile, getFileName, getFilePath, mapHTML } = require('../lib/helpers');
+const AmberPro = require('../lib/amber-pro');
+const { sleep, decrypt, encrypt, splitTime, getFileName, mapHTML } = require('../lib/helpers');
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
@@ -61,30 +60,22 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.homey.app.log(`[Device] - ${this.getName()} => setAmberClient Got config`, {...this.config, username: 'LOG', password: 'LOG'});
             
-            if(settings.sso === false) {
-                this._amberClient = await new Amber({...this.config, username: 'admin', password: this.config.admin_password});
-            } else {
-                this._amberClient = await new Amber(this.config);
+            if(!settings.sso) {
+                this.config = {...this.config, router_password: this.config.router_password};
             }
 
-            if(this.hasCapability('measure_wan_type') && !!this.config.router_password) {
-                this._amberRouterClient = await new AmberRouter({ ip: 'latticerouter.local', password: this.config.router_password});
+            if(settings.cloud) {
+                this._amberClient = await new AmberPro(this.config);
+            } else {
+                this._amberClient = await new Amber(this.config);
+                await this._amberClient.setFtp();
             }
 
             await sleep(500);
-
-            await this._amberClient.setFtp();
-            this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/admin/homey-amber/`});
-
             await this.setInitialData();
             await this.setIntervalsAndFlows(settings);
         } catch (error) {
             this.homey.app.log(`[Device] ${this.getName()} - setAmberClient - error =>`, error);
-
-            if(settings.sso === false) {
-                this.homey.app.log(`[Device] ${this.getName()} - setAmberClient - need_admin`);
-                await this.setUnavailable(this.homey.__("amber.need_admin"));
-            }
         }
     }
 
@@ -168,9 +159,9 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.routerConnectedTrigger.registerRunListener(async (args, state) =>  args.ip === state.ip || !args.ip);
             this.routerDisonnectedTrigger.registerRunListener(async (args, state) => args.ip === state.ip || !args.ip);
-        }
 
-        this.flowTriggersRegistered = true;
+            this.flowTriggersRegistered = true;
+        }
     }
 
     async onCapability_ON_OFF(value) {
@@ -245,7 +236,6 @@ module.exports = class mainDevice extends Homey.Device {
 
     async onCapability_UPDATE_DATA(value) {
         try {
-           const settings = this.getSettings();
            this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPDATE_DATA`, value);
 
            await this.checkOnOffState();
@@ -260,20 +250,19 @@ module.exports = class mainDevice extends Homey.Device {
 
     async onCapability_UPLOAD_FILE(value) {
         try {
-           let filePath = null;
            let fileName = null;
+           let filePath = null;
 
            this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE`, value);
 
             if(!!value.localUrl) {
                 fileName = `${value.id}.jpg`
-                filePath = await getFilePath(value.localUrl, fileName);
+                filePath = value.localUrl;
 
                 this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE - uploading Image`, value.localUrl, value.id);
-                
             } else if(typeof value === 'string') {
                 fileName = await getFileName(value);
-                filePath = await getFilePath(value, fileName);
+                filePath = value;
             
                 this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE - uploading File`, value, fileName);
             }
@@ -282,10 +271,7 @@ module.exports = class mainDevice extends Homey.Device {
                 throw new Error(this.homey.__("amber.file_invalid"));
             }
 
-            await this._ftp.upload(filePath, fileName);
-
-            await sleep(200);
-            await removeFile(filePath);
+            await this._amberClient.upload(filePath, fileName);
 
             return Promise.resolve(true);
         } catch (e) {
@@ -309,7 +295,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             await this.checkRebootState();
         } catch (error) {
-            this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState`, error);
+            this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState - err`, error);
             await this.setCapabilityValue('onoff', false);
             await this.checkRebootState();
         }
@@ -405,7 +391,7 @@ module.exports = class mainDevice extends Homey.Device {
 
         try { 
             const isOn = await this.getCapabilityValue('onoff');
-            const wanType = await this._amberRouterClient.getWanType();
+            const wanType = await this._amberClient.getWanType();
             const connectedDevices = this.getStoreValue('connected_devices');
 
             this.homey.app.log(`[Device] ${this.getName()} - setRouterCheck => wanType`, wanType);
@@ -421,7 +407,7 @@ module.exports = class mainDevice extends Homey.Device {
             this.setCapabilityValue('measure_wan_type', wanType.connectionType)
 
             if(wanType.connectionType && wanType.connectionType === 'DHCP') {
-                const clientList = await this._amberRouterClient.getClientList();
+                const clientList = await this._amberClient.getClientList();
                 this.homey.app.log(`[Device] ${this.getName()} - setRouterCheck => clientList`, clientList);
 
                 const connectedDevicesDiff = mapHTML(clientList.data);

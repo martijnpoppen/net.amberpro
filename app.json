@@ -1,10 +1,12 @@
 {
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "net.amberpro",
-  "version": "1.7.1",
+  "version": "2.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
-    "local"
+    "local",
+    "cloud"
   ],
   "brandColor": "#000000",
   "name": {
@@ -68,568 +70,6 @@
   "source": "https://github.com/martijnpoppen/net.amberpro",
   "homeyCommunityTopicId": 50486,
   "support": "https://community.athom.com/t/app-amberpro/50486",
-  "discovery": {
-    "amberpro_discovery": {
-      "type": "mdns-sd",
-      "mdns-sd": {
-        "protocol": "tcp",
-        "name": "_lwfinder"
-      },
-      "id": "{{txt.id}}"
-    }
-  },
-  "drivers": [
-    {
-      "id": "AmberOne",
-      "class": "homealarm",
-      "connectivity": [
-        "lan",
-        "cloud"
-      ],
-      "platforms": [
-        "local"
-      ],
-      "capabilities": [
-        "onoff",
-        "dim",
-        "action_reboot",
-        "action_update_data",
-        "action_upload_file",
-        "alarm_heat",
-        "measure_temperature.cpu",
-        "measure_temperature.system",
-        "measure_uptime",
-        "measure_uptime_days",
-        "measure_cpu_usage",
-        "measure_ram_usage",
-        "measure_disk_usage",
-        "measure_wan_type"
-      ],
-      "capabilitiesOptions": {
-        "dim": {
-          "title": {
-            "nl": "LED Dim",
-            "en": "LED Dim"
-          }
-        },
-        "measure_temperature.cpu": {
-          "title": {
-            "en": "CPU Temperature",
-            "nl": "CPU Temperatuur"
-          }
-        },
-        "measure_temperature.system": {
-          "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
-          }
-        }
-      },
-      "energy": {
-        "approximation": {
-          "usageOn": 30,
-          "usageOff": 1
-        }
-      },
-      "name": {
-        "en": "Amber One",
-        "nl": "Amber One"
-      },
-      "images": {
-        "large": "drivers/AmberOne/assets/images/large.png",
-        "small": "drivers/AmberOne/assets/images/small.png"
-      },
-      "pair": [
-        {
-          "id": "login_ambercloud"
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "prev": "login_ambercloud",
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "General settings",
-            "nl": "Algemene instellingen"
-          },
-          "children": [
-            {
-              "id": "override_onoff",
-              "type": "checkbox",
-              "label": {
-                "en": "Always on",
-                "nl": "Altijd aan"
-              },
-              "value": true
-            },
-            {
-              "id": "update_interval",
-              "type": "number",
-              "label": {
-                "en": "Update interval",
-                "nl": "Update interval"
-              },
-              "min": 10,
-              "max": 3600,
-              "units": {
-                "en": "seconds",
-                "nl": "seconden"
-              },
-              "value": 120
-            },
-            {
-              "id": "enable_interval",
-              "type": "checkbox",
-              "label": {
-                "en": "Enable automatic data",
-                "nl": "Automatische gegevens ophalen"
-              },
-              "value": true
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Login settings",
-            "nl": "Login instellingen"
-          },
-          "children": [
-            {
-              "id": "admin_username",
-              "type": "label",
-              "label": {
-                "en": "Amber admin account",
-                "nl": "Amber admin account"
-              },
-              "value": "admin"
-            },
-            {
-              "id": "admin_password",
-              "type": "password",
-              "label": {
-                "en": "Admin Password",
-                "nl": "Admin Wachtwoord"
-              },
-              "value": ""
-            },
-            {
-              "id": "router_password",
-              "type": "password",
-              "label": {
-                "en": "Router Password",
-                "nl": "Router Wachtwoord"
-              },
-              "value": ""
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Cloud account",
-            "nl": "Cloud account"
-          },
-          "children": [
-            {
-              "id": "username",
-              "type": "label",
-              "label": {
-                "en": "Amber Cloud E-mail",
-                "nl": "Amber Cloud E-mail"
-              }
-            },
-            {
-              "id": "username",
-              "type": "text",
-              "label": {
-                "en": "Login",
-                "nl": "Login"
-              },
-              "value": ""
-            },
-            {
-              "id": "password",
-              "type": "password",
-              "label": {
-                "en": "Password",
-                "nl": "Wachtwoord"
-              },
-              "value": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "AmberPlus",
-      "class": "homealarm",
-      "connectivity": [
-        "lan",
-        "cloud"
-      ],
-      "platforms": [
-        "local"
-      ],
-      "capabilities": [
-        "onoff",
-        "dim",
-        "action_reboot",
-        "action_update_data",
-        "action_upload_file",
-        "alarm_heat",
-        "measure_temperature.cpu",
-        "measure_temperature.system",
-        "measure_uptime",
-        "measure_uptime_days",
-        "measure_cpu_usage",
-        "measure_ram_usage",
-        "measure_disk_usage",
-        "measure_wan_type"
-      ],
-      "capabilitiesOptions": {
-        "dim": {
-          "title": {
-            "nl": "LED Dim",
-            "en": "LED Dim"
-          }
-        },
-        "measure_temperature.cpu": {
-          "title": {
-            "en": "CPU Temperature",
-            "nl": "CPU Temperatuur"
-          }
-        },
-        "measure_temperature.system": {
-          "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
-          }
-        }
-      },
-      "energy": {
-        "approximation": {
-          "usageOn": 30,
-          "usageOff": 1
-        }
-      },
-      "name": {
-        "en": "Amber Plus",
-        "nl": "Amber Plus"
-      },
-      "images": {
-        "large": "drivers/AmberPlus/assets/images/large.png",
-        "small": "drivers/AmberPlus/assets/images/small.png"
-      },
-      "pair": [
-        {
-          "id": "login_ambercloud"
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "prev": "login_ambercloud",
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "General settings",
-            "nl": "Algemene instellingen"
-          },
-          "children": [
-            {
-              "id": "override_onoff",
-              "type": "checkbox",
-              "label": {
-                "en": "Always on",
-                "nl": "Altijd aan"
-              },
-              "value": true
-            },
-            {
-              "id": "update_interval",
-              "type": "number",
-              "label": {
-                "en": "Update interval",
-                "nl": "Update interval"
-              },
-              "min": 10,
-              "max": 3600,
-              "units": {
-                "en": "seconds",
-                "nl": "seconden"
-              },
-              "value": 120
-            },
-            {
-              "id": "enable_interval",
-              "type": "checkbox",
-              "label": {
-                "en": "Enable automatic data",
-                "nl": "Automatische gegevens ophalen"
-              },
-              "value": true
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Login settings",
-            "nl": "Login instellingen"
-          },
-          "children": [
-            {
-              "id": "admin_username",
-              "type": "label",
-              "label": {
-                "en": "Amber admin account",
-                "nl": "Amber admin account"
-              },
-              "value": "admin"
-            },
-            {
-              "id": "admin_password",
-              "type": "text",
-              "label": {
-                "en": "Admin Password",
-                "nl": "Admin Wachtwoord"
-              },
-              "value": ""
-            },
-            {
-              "id": "router_password",
-              "type": "text",
-              "label": {
-                "en": "Router Password",
-                "nl": "Router Wachtwoord"
-              },
-              "value": ""
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Cloud account",
-            "nl": "Cloud account"
-          },
-          "children": [
-            {
-              "id": "username",
-              "type": "label",
-              "label": {
-                "en": "Amber Cloud E-mail",
-                "nl": "Amber Cloud E-mail"
-              }
-            },
-            {
-              "id": "username",
-              "type": "text",
-              "label": {
-                "en": "Login",
-                "nl": "Login"
-              },
-              "value": ""
-            },
-            {
-              "id": "password",
-              "type": "password",
-              "label": {
-                "en": "Password",
-                "nl": "Wachtwoord"
-              },
-              "value": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "AmberX",
-      "class": "homealarm",
-      "connectivity": [
-        "cloud"
-      ],
-      "platforms": [
-        "local"
-      ],
-      "capabilities": [
-        "onoff",
-        "dim",
-        "action_reboot",
-        "action_update_data",
-        "action_upload_file",
-        "alarm_heat",
-        "measure_temperature.cpu",
-        "measure_temperature.system",
-        "measure_uptime",
-        "measure_uptime_days",
-        "measure_cpu_usage",
-        "measure_ram_usage",
-        "measure_disk_usage"
-      ],
-      "capabilitiesOptions": {
-        "dim": {
-          "title": {
-            "nl": "LED Dim",
-            "en": "LED Dim"
-          }
-        },
-        "measure_temperature.cpu": {
-          "title": {
-            "en": "CPU Temperature",
-            "nl": "CPU Temperatuur"
-          }
-        },
-        "measure_temperature.system": {
-          "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
-          }
-        }
-      },
-      "energy": {
-        "approximation": {
-          "usageOn": 30,
-          "usageOff": 1
-        }
-      },
-      "name": {
-        "en": "Amber X",
-        "nl": "Amber X"
-      },
-      "images": {
-        "large": "drivers/AmberX/assets/images/large.png",
-        "small": "drivers/AmberX/assets/images/small.png"
-      },
-      "pair": [
-        {
-          "id": "login_ambercloud"
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "prev": "login_ambercloud",
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "General settings",
-            "nl": "Algemene instellingen"
-          },
-          "children": [
-            {
-              "id": "override_onoff",
-              "type": "checkbox",
-              "label": {
-                "en": "Always on",
-                "nl": "Altijd aan"
-              },
-              "value": true
-            },
-            {
-              "id": "update_interval",
-              "type": "number",
-              "label": {
-                "en": "Update interval",
-                "nl": "Update interval"
-              },
-              "min": 10,
-              "max": 3600,
-              "units": {
-                "en": "seconds",
-                "nl": "seconden"
-              },
-              "value": 120
-            },
-            {
-              "id": "enable_interval",
-              "type": "checkbox",
-              "label": {
-                "en": "Enable automatic data",
-                "nl": "Automatische gegevens ophalen"
-              },
-              "value": true
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Login settings",
-            "nl": "Login instellingen"
-          },
-          "children": [
-            {
-              "id": "username",
-              "type": "text",
-              "label": {
-                "en": "Login",
-                "nl": "Login"
-              },
-              "value": ""
-            },
-            {
-              "id": "password",
-              "type": "password",
-              "label": {
-                "en": "Password",
-                "nl": "Wachtwoord"
-              },
-              "value": ""
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Cloud account",
-            "nl": "Cloud account"
-          },
-          "children": [
-            {
-              "id": "username",
-              "type": "label",
-              "label": {
-                "en": "Amber Cloud E-mail",
-                "nl": "Amber Cloud E-mail"
-              }
-            }
-          ]
-        }
-      ]
-    }
-  ],
   "flow": {
     "triggers": [
       {
@@ -674,7 +114,8 @@
           }
         ],
         "platforms": [
-          "local"
+          "local",
+          "cloud"
         ]
       },
       {
@@ -719,7 +160,8 @@
           }
         ],
         "platforms": [
-          "local"
+          "local",
+          "cloud"
         ]
       }
     ],
@@ -806,253 +248,1120 @@
       }
     ]
   },
+  "drivers": [
+    {
+      "class": "homealarm",
+      "icon": "/drivers/AmberOne/assets/icon.svg",
+      "images": {
+        "large": "/drivers/AmberOne/assets/images/large.png",
+        "small": "/drivers/AmberOne/assets/images/small.png"
+      },
+      "capabilitiesOptions": {
+        "dim": {
+          "title": {
+            "nl": "LED Dim",
+            "en": "LED Dim"
+          }
+        },
+        "measure_temperature.cpu": {
+          "title": {
+            "en": "CPU Temperature",
+            "nl": "CPU Temperatuur"
+          }
+        },
+        "measure_temperature.system": {
+          "title": {
+            "en": "Systeem Temperature",
+            "nl": "System Temperatuur"
+          }
+        }
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
+        }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings",
+            "nl": "Algemene instellingen"
+          },
+          "children": [
+            {
+              "id": "override_onoff",
+              "type": "checkbox",
+              "label": {
+                "en": "Always on",
+                "nl": "Altijd aan"
+              },
+              "value": true
+            },
+            {
+              "id": "update_interval",
+              "type": "number",
+              "label": {
+                "en": "Update interval",
+                "nl": "Update interval"
+              },
+              "min": 10,
+              "max": 3600,
+              "units": {
+                "en": "seconds",
+                "nl": "seconden"
+              },
+              "value": 120
+            },
+            {
+              "id": "enable_interval",
+              "type": "checkbox",
+              "label": {
+                "en": "Enable automatic data",
+                "nl": "Automatische gegevens ophalen"
+              },
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Login settings",
+            "nl": "Login instellingen"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Login",
+                "nl": "Login"
+              },
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": ""
+            },
+            {
+              "id": "router_password",
+              "type": "password",
+              "label": {
+                "en": "Router Password",
+                "nl": "Router Wachtwoord"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "capabilities": [
+        "onoff",
+        "dim",
+        "action_reboot",
+        "action_update_data",
+        "action_upload_file",
+        "alarm_heat",
+        "measure_temperature.cpu",
+        "measure_temperature.system",
+        "measure_uptime",
+        "measure_uptime_days",
+        "measure_cpu_usage",
+        "measure_ram_usage",
+        "measure_disk_usage",
+        "measure_wan_type"
+      ],
+      "discovery": "amber_discovery",
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": true
+          },
+          "navigation": {
+            "next": "get_device"
+          }
+        },
+        {
+          "id": "get_device"
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Username",
+              "nl": "Gebruikersnaam"
+            },
+            "usernamePlaceholder": {
+              "en": "example: admin",
+              "nl": "bijvoorbeeld: admin"
+            },
+            "usernameValue": {
+              "en": "admin",
+              "nl": "admin"
+            },
+            "passwordLabel": {
+              "en": "Password",
+              "nl": "Wachtwoord"
+            },
+            "passwordPlaceholder": {
+              "en": "Password",
+              "nl": "Wachtwoord"
+            },
+            "logo": "../../../assets/icon.svg"
+          }
+        },
+        {
+          "id": "add_device"
+        }
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "name": {
+        "en": "Amber One",
+        "nl": "Amber One"
+      },
+      "id": "AmberOne"
+    },
+    {
+      "class": "homealarm",
+      "icon": "/drivers/AmberPlus/assets/icon.svg",
+      "images": {
+        "large": "/drivers/AmberPlus/assets/images/large.png",
+        "small": "/drivers/AmberPlus/assets/images/small.png"
+      },
+      "capabilitiesOptions": {
+        "dim": {
+          "title": {
+            "nl": "LED Dim",
+            "en": "LED Dim"
+          }
+        },
+        "measure_temperature.cpu": {
+          "title": {
+            "en": "CPU Temperature",
+            "nl": "CPU Temperatuur"
+          }
+        },
+        "measure_temperature.system": {
+          "title": {
+            "en": "Systeem Temperature",
+            "nl": "System Temperatuur"
+          }
+        }
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
+        }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings",
+            "nl": "Algemene instellingen"
+          },
+          "children": [
+            {
+              "id": "override_onoff",
+              "type": "checkbox",
+              "label": {
+                "en": "Always on",
+                "nl": "Altijd aan"
+              },
+              "value": true
+            },
+            {
+              "id": "update_interval",
+              "type": "number",
+              "label": {
+                "en": "Update interval",
+                "nl": "Update interval"
+              },
+              "min": 10,
+              "max": 3600,
+              "units": {
+                "en": "seconds",
+                "nl": "seconden"
+              },
+              "value": 120
+            },
+            {
+              "id": "enable_interval",
+              "type": "checkbox",
+              "label": {
+                "en": "Enable automatic data",
+                "nl": "Automatische gegevens ophalen"
+              },
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Login settings",
+            "nl": "Login instellingen"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Login",
+                "nl": "Login"
+              },
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": ""
+            },
+            {
+              "id": "router_password",
+              "type": "password",
+              "label": {
+                "en": "Router Password",
+                "nl": "Router Wachtwoord"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "capabilities": [
+        "onoff",
+        "dim",
+        "action_reboot",
+        "action_update_data",
+        "action_upload_file",
+        "alarm_heat",
+        "measure_temperature.cpu",
+        "measure_temperature.system",
+        "measure_uptime",
+        "measure_uptime_days",
+        "measure_cpu_usage",
+        "measure_ram_usage",
+        "measure_disk_usage",
+        "measure_wan_type"
+      ],
+      "discovery": "amber_discovery",
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": true
+          },
+          "navigation": {
+            "next": "get_device"
+          }
+        },
+        {
+          "id": "get_device"
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Username",
+              "nl": "Gebruikersnaam"
+            },
+            "usernamePlaceholder": {
+              "en": "example: admin",
+              "nl": "bijvoorbeeld: admin"
+            },
+            "usernameValue": {
+              "en": "admin",
+              "nl": "admin"
+            },
+            "passwordLabel": {
+              "en": "Password",
+              "nl": "Wachtwoord"
+            },
+            "passwordPlaceholder": {
+              "en": "Password",
+              "nl": "Wachtwoord"
+            },
+            "logo": "../../../assets/icon.svg"
+          }
+        },
+        {
+          "id": "add_device"
+        }
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "name": {
+        "en": "Amber Plus",
+        "nl": "Amber Plus"
+      },
+      "id": "AmberPlus"
+    },
+    {
+      "class": "homealarm",
+      "icon": "/drivers/AmberX/assets/icon.svg",
+      "images": {
+        "large": "/drivers/AmberX/assets/images/large.png",
+        "small": "/drivers/AmberX/assets/images/small.png"
+      },
+      "capabilitiesOptions": {
+        "dim": {
+          "title": {
+            "nl": "LED Dim",
+            "en": "LED Dim"
+          }
+        },
+        "measure_temperature.cpu": {
+          "title": {
+            "en": "CPU Temperature",
+            "nl": "CPU Temperatuur"
+          }
+        },
+        "measure_temperature.system": {
+          "title": {
+            "en": "Systeem Temperature",
+            "nl": "System Temperatuur"
+          }
+        }
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
+        }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings",
+            "nl": "Algemene instellingen"
+          },
+          "children": [
+            {
+              "id": "override_onoff",
+              "type": "checkbox",
+              "label": {
+                "en": "Always on",
+                "nl": "Altijd aan"
+              },
+              "value": true
+            },
+            {
+              "id": "update_interval",
+              "type": "number",
+              "label": {
+                "en": "Update interval",
+                "nl": "Update interval"
+              },
+              "min": 10,
+              "max": 3600,
+              "units": {
+                "en": "seconds",
+                "nl": "seconden"
+              },
+              "value": 120
+            },
+            {
+              "id": "enable_interval",
+              "type": "checkbox",
+              "label": {
+                "en": "Enable automatic data",
+                "nl": "Automatische gegevens ophalen"
+              },
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Login settings",
+            "nl": "Login instellingen"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Login",
+                "nl": "Login"
+              },
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": ""
+            },
+            {
+              "id": "router_password",
+              "type": "password",
+              "label": {
+                "en": "Router Password",
+                "nl": "Router Wachtwoord"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "capabilities": [
+        "onoff",
+        "dim",
+        "action_reboot",
+        "action_update_data",
+        "action_upload_file",
+        "alarm_heat",
+        "measure_temperature.cpu",
+        "measure_temperature.system",
+        "measure_uptime",
+        "measure_uptime_days",
+        "measure_cpu_usage",
+        "measure_ram_usage",
+        "measure_disk_usage"
+      ],
+      "discovery": "amber_discovery",
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": true
+          },
+          "navigation": {
+            "next": "get_device"
+          }
+        },
+        {
+          "id": "get_device"
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Username",
+              "nl": "Gebruikersnaam"
+            },
+            "usernamePlaceholder": {
+              "en": "example: admin",
+              "nl": "bijvoorbeeld: admin"
+            },
+            "usernameValue": {
+              "en": "admin",
+              "nl": "admin"
+            },
+            "passwordLabel": {
+              "en": "Password",
+              "nl": "Wachtwoord"
+            },
+            "passwordPlaceholder": {
+              "en": "Password",
+              "nl": "Wachtwoord"
+            },
+            "logo": "../../../assets/icon.svg"
+          }
+        },
+        {
+          "id": "add_device"
+        }
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "name": {
+        "en": "Amber X",
+        "nl": "Amber X"
+      },
+      "id": "AmberX"
+    },
+    {
+      "class": "homealarm",
+      "icon": "/drivers/cloud_AmberOne/assets/icon.svg",
+      "images": {
+        "large": "/drivers/cloud_AmberOne/assets/images/large.png",
+        "small": "/drivers/cloud_AmberOne/assets/images/small.png"
+      },
+      "capabilitiesOptions": {
+        "dim": {
+          "title": {
+            "nl": "LED Dim",
+            "en": "LED Dim"
+          }
+        },
+        "measure_temperature.cpu": {
+          "title": {
+            "en": "CPU Temperature",
+            "nl": "CPU Temperatuur"
+          }
+        },
+        "measure_temperature.system": {
+          "title": {
+            "en": "Systeem Temperature",
+            "nl": "System Temperatuur"
+          }
+        }
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
+        }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings",
+            "nl": "Algemene instellingen"
+          },
+          "children": [
+            {
+              "id": "override_onoff",
+              "type": "checkbox",
+              "label": {
+                "en": "Always on",
+                "nl": "Altijd aan"
+              },
+              "value": true
+            },
+            {
+              "id": "update_interval",
+              "type": "number",
+              "label": {
+                "en": "Update interval",
+                "nl": "Update interval"
+              },
+              "min": 10,
+              "max": 3600,
+              "units": {
+                "en": "seconds",
+                "nl": "seconden"
+              },
+              "value": 120
+            },
+            {
+              "id": "enable_interval",
+              "type": "checkbox",
+              "label": {
+                "en": "Enable automatic data",
+                "nl": "Automatische gegevens ophalen"
+              },
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Login settings",
+            "nl": "Login instellingen"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Login",
+                "nl": "Login"
+              },
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": ""
+            },
+            {
+              "id": "router_password",
+              "type": "password",
+              "label": {
+                "en": "Router Password",
+                "nl": "Router Wachtwoord"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "capabilities": [
+        "onoff",
+        "dim",
+        "action_reboot",
+        "action_update_data",
+        "action_upload_file",
+        "alarm_heat",
+        "measure_temperature.cpu",
+        "measure_temperature.system",
+        "measure_uptime",
+        "measure_uptime_days",
+        "measure_cpu_usage",
+        "measure_ram_usage",
+        "measure_disk_usage",
+        "measure_wan_type"
+      ],
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Amber anywhere url",
+              "nl": "Amber anywhere url"
+            },
+            "usernamePlaceholder": {
+              "en": "https://homey-a123.eu.onambercloud.com",
+              "nl": "https://homey-a123.eu.onambercloud.com"
+            },
+            "usernameValue": {
+              "en": "admin",
+              "nl": "admin"
+            },
+            "passwordLabel": {
+              "en": "Admin Password",
+              "nl": "Admin Wachtwoord"
+            },
+            "passwordPlaceholder": {
+              "en": "Admin Password",
+              "nl": "Admin Wachtwoord"
+            },
+            "logo": "../../../assets/icon.svg"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": true
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "platforms": [
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "name": {
+        "en": "Amber One",
+        "nl": "Amber One"
+      },
+      "id": "cloud_AmberOne"
+    },
+    {
+      "class": "homealarm",
+      "icon": "/drivers/cloud_AmberPlus/assets/icon.svg",
+      "images": {
+        "large": "/drivers/cloud_AmberPlus/assets/images/large.png",
+        "small": "/drivers/cloud_AmberPlus/assets/images/small.png"
+      },
+      "capabilitiesOptions": {
+        "dim": {
+          "title": {
+            "nl": "LED Dim",
+            "en": "LED Dim"
+          }
+        },
+        "measure_temperature.cpu": {
+          "title": {
+            "en": "CPU Temperature",
+            "nl": "CPU Temperatuur"
+          }
+        },
+        "measure_temperature.system": {
+          "title": {
+            "en": "Systeem Temperature",
+            "nl": "System Temperatuur"
+          }
+        }
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
+        }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings",
+            "nl": "Algemene instellingen"
+          },
+          "children": [
+            {
+              "id": "override_onoff",
+              "type": "checkbox",
+              "label": {
+                "en": "Always on",
+                "nl": "Altijd aan"
+              },
+              "value": true
+            },
+            {
+              "id": "update_interval",
+              "type": "number",
+              "label": {
+                "en": "Update interval",
+                "nl": "Update interval"
+              },
+              "min": 10,
+              "max": 3600,
+              "units": {
+                "en": "seconds",
+                "nl": "seconden"
+              },
+              "value": 120
+            },
+            {
+              "id": "enable_interval",
+              "type": "checkbox",
+              "label": {
+                "en": "Enable automatic data",
+                "nl": "Automatische gegevens ophalen"
+              },
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Login settings",
+            "nl": "Login instellingen"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Login",
+                "nl": "Login"
+              },
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": ""
+            },
+            {
+              "id": "router_password",
+              "type": "password",
+              "label": {
+                "en": "Router Password",
+                "nl": "Router Wachtwoord"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "capabilities": [
+        "onoff",
+        "dim",
+        "action_reboot",
+        "action_update_data",
+        "action_upload_file",
+        "alarm_heat",
+        "measure_temperature.cpu",
+        "measure_temperature.system",
+        "measure_uptime",
+        "measure_uptime_days",
+        "measure_cpu_usage",
+        "measure_ram_usage",
+        "measure_disk_usage",
+        "measure_wan_type"
+      ],
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Amber anywhere url",
+              "nl": "Amber anywhere url"
+            },
+            "usernamePlaceholder": {
+              "en": "https://homey-a123.eu.onambercloud.com",
+              "nl": "https://homey-a123.eu.onambercloud.com"
+            },
+            "usernameValue": {
+              "en": "admin",
+              "nl": "admin"
+            },
+            "passwordLabel": {
+              "en": "Admin Password",
+              "nl": "Admin Wachtwoord"
+            },
+            "passwordPlaceholder": {
+              "en": "Admin Password",
+              "nl": "Admin Wachtwoord"
+            },
+            "logo": "../../../assets/icon.svg"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": true
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "platforms": [
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "name": {
+        "en": "Amber Plus",
+        "nl": "Amber Plus"
+      },
+      "id": "cloud_AmberPlus"
+    },
+    {
+      "class": "homealarm",
+      "icon": "/drivers/cloud_AmberX/assets/icon.svg",
+      "images": {
+        "large": "/drivers/cloud_AmberX/assets/images/large.png",
+        "small": "/drivers/cloud_AmberX/assets/images/small.png"
+      },
+      "capabilitiesOptions": {
+        "dim": {
+          "title": {
+            "nl": "LED Dim",
+            "en": "LED Dim"
+          }
+        },
+        "measure_temperature.cpu": {
+          "title": {
+            "en": "CPU Temperature",
+            "nl": "CPU Temperatuur"
+          }
+        },
+        "measure_temperature.system": {
+          "title": {
+            "en": "Systeem Temperature",
+            "nl": "System Temperatuur"
+          }
+        }
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
+        }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "General settings",
+            "nl": "Algemene instellingen"
+          },
+          "children": [
+            {
+              "id": "override_onoff",
+              "type": "checkbox",
+              "label": {
+                "en": "Always on",
+                "nl": "Altijd aan"
+              },
+              "value": true
+            },
+            {
+              "id": "update_interval",
+              "type": "number",
+              "label": {
+                "en": "Update interval",
+                "nl": "Update interval"
+              },
+              "min": 10,
+              "max": 3600,
+              "units": {
+                "en": "seconds",
+                "nl": "seconden"
+              },
+              "value": 120
+            },
+            {
+              "id": "enable_interval",
+              "type": "checkbox",
+              "label": {
+                "en": "Enable automatic data",
+                "nl": "Automatische gegevens ophalen"
+              },
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Login settings",
+            "nl": "Login instellingen"
+          },
+          "children": [
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "Login",
+                "nl": "Login"
+              },
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": ""
+            },
+            {
+              "id": "router_password",
+              "type": "password",
+              "label": {
+                "en": "Router Password",
+                "nl": "Router Wachtwoord"
+              },
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "capabilities": [
+        "onoff",
+        "dim",
+        "action_reboot",
+        "action_update_data",
+        "action_upload_file",
+        "alarm_heat",
+        "measure_temperature.cpu",
+        "measure_temperature.system",
+        "measure_uptime",
+        "measure_uptime_days",
+        "measure_cpu_usage",
+        "measure_ram_usage",
+        "measure_disk_usage"
+      ],
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Amber anywhere url",
+              "nl": "Amber anywhere url"
+            },
+            "usernamePlaceholder": {
+              "en": "https://homey-a123.eu.onambercloud.com",
+              "nl": "https://homey-a123.eu.onambercloud.com"
+            },
+            "usernameValue": {
+              "en": "admin",
+              "nl": "admin"
+            },
+            "passwordLabel": {
+              "en": "Admin Password",
+              "nl": "Admin Wachtwoord"
+            },
+            "passwordPlaceholder": {
+              "en": "Admin Password",
+              "nl": "Admin Wachtwoord"
+            },
+            "logo": "../../../assets/icon.svg"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "options": {
+            "singular": true
+          },
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "platforms": [
+        "cloud"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "name": {
+        "en": "Amber X",
+        "nl": "Amber X"
+      },
+      "id": "cloud_AmberX"
+    }
+  ],
   "capabilities": {
-    "measure_uptime": {
-      "type": "number",
-      "title": {
-        "en": "Up-Time in hours",
-        "nl": "Online tijd in uren"
-      },
-      "units": {
-        "en": "Hours",
-        "nl": "Uur"
-      },
-      "insights": true,
-      "desc": {
-        "en": "Up-Time in hours",
-        "nl": "Online tijd in uren"
-      },
-      "chartType": "spline",
-      "decimals": 2,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "assets/icons/stopwatch.svg",
-      "$flow": {
-        "triggers": [
-          {
-            "id": "measure_uptime_changed",
-            "title": {
-              "en": "The uptime in hours has changed",
-              "nl": "De online tijd in uren is veranderd"
-            },
-            "tokens": [
-              {
-                "name": "measure_uptime",
-                "title": {
-                  "en": "Up-Time in hours",
-                  "nl": "Online tijd in uren"
-                },
-                "type": "number",
-                "example": 99
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "measure_uptime_days": {
-      "type": "string",
-      "title": {
-        "en": "Up-Time in Days",
-        "nl": "Online tijd in Dagen"
-      },
-      "units": {
-        "en": "Days",
-        "nl": "Dagen"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "assets/icons/stopwatch.svg",
-      "$flow": {
-        "triggers": [
-          {
-            "id": "measure_uptime_days_changed",
-            "title": {
-              "en": "The uptime in days has changed",
-              "nl": "De online tijd in dagen is veranderd"
-            },
-            "tokens": [
-              {
-                "name": "measure_uptime_days",
-                "title": {
-                  "en": "Up-Time in Days",
-                  "nl": "Online tijd in Dagen"
-                },
-                "type": "string",
-                "example": ""
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "measure_disk_usage": {
-      "type": "number",
-      "title": {
-        "en": "Disk Usage",
-        "nl": "Schijf gebruik"
-      },
-      "units": {
-        "en": "%",
-        "nl": "%"
-      },
-      "insights": true,
-      "desc": {
-        "en": "Disk Usage in %",
-        "nl": "Schijf gebruik in %"
-      },
-      "chartType": "spline",
-      "decimals": 2,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "assets/icons/disc-fill.svg",
-      "$flow": {
-        "triggers": [
-          {
-            "id": "measure_disk_usage_changed",
-            "title": {
-              "en": "Disk Usage has changed",
-              "nl": "Schijf gebruik is veranderd"
-            },
-            "tokens": [
-              {
-                "name": "measure_disk_usage",
-                "title": {
-                  "en": "Disk Usage",
-                  "nl": "Schijf gebruik"
-                },
-                "type": "number",
-                "example": 99
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "measure_cpu_usage": {
-      "type": "number",
-      "title": {
-        "en": "CPU Usage",
-        "nl": "CPU gebruik"
-      },
-      "units": {
-        "en": "%",
-        "nl": "%"
-      },
-      "insights": true,
-      "desc": {
-        "en": "CPU Usage in %",
-        "nl": "CPU gebruik in %"
-      },
-      "chartType": "spline",
-      "decimals": 2,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "assets/icons/cpu-fill.svg",
-      "$flow": {
-        "triggers": [
-          {
-            "id": "measure_CPU_usage_changed",
-            "title": {
-              "en": "CPU Usage has changed",
-              "nl": "CPU gebruik is veranderd"
-            },
-            "tokens": [
-              {
-                "name": "measure_cpu_usage",
-                "title": {
-                  "en": "CPU Usage",
-                  "nl": "CPU gebruik"
-                },
-                "type": "number",
-                "example": 99
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "measure_ram_usage": {
-      "type": "number",
-      "title": {
-        "en": "RAM Usage",
-        "nl": "RAM gebruik"
-      },
-      "units": {
-        "en": "%",
-        "nl": "%"
-      },
-      "insights": true,
-      "desc": {
-        "en": "RAM Usage in %",
-        "nl": "RAM gebruik in %"
-      },
-      "chartType": "spline",
-      "decimals": 2,
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "assets/icons/lightning-charge.svg",
-      "$flow": {
-        "triggers": [
-          {
-            "id": "measure_ram_usage_changed",
-            "title": {
-              "en": "RAM Usage has changed",
-              "nl": "RAM gebruik is veranderd"
-            },
-            "tokens": [
-              {
-                "name": "measure_ram_usage",
-                "title": {
-                  "en": "RAM Usage",
-                  "nl": "RAM gebruik"
-                },
-                "type": "number",
-                "example": 99
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "measure_wan_type": {
-      "type": "string",
-      "title": {
-        "en": "Router Protocol",
-        "nl": "Router Protocol"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "assets/icons/wifi.svg",
-      "$flow": {
-        "triggers": [
-          {
-            "id": "measure_wan_type_changed",
-            "title": {
-              "en": "Router Protocol has changed",
-              "nl": "Router Protocol is veranderd"
-            },
-            "tokens": [
-              {
-                "name": "measure_wan_type",
-                "title": {
-                  "en": "Router Protocol",
-                  "nl": "Router Protocol"
-                },
-                "type": "text",
-                "example": "BRIDGE"
-              }
-            ]
-          }
-        ]
-      }
-    },
     "action_reboot": {
       "type": "boolean",
       "title": {
@@ -1082,6 +1391,130 @@
       "getable": false,
       "setable": true,
       "uiComponent": null
+    },
+    "measure_cpu_usage": {
+      "type": "number",
+      "title": {
+        "en": "CPU Usage",
+        "nl": "CPU gebruik"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "CPU Usage in %",
+        "nl": "CPU gebruik in %"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/cpu-fill.svg"
+    },
+    "measure_disk_usage": {
+      "type": "number",
+      "title": {
+        "en": "Disk Usage",
+        "nl": "Schijf gebruik"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Disk Usage in %",
+        "nl": "Schijf gebruik in %"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/disc-fill.svg"
+    },
+    "measure_ram_usage": {
+      "type": "number",
+      "title": {
+        "en": "RAM Usage",
+        "nl": "RAM gebruik"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%"
+      },
+      "insights": true,
+      "desc": {
+        "en": "RAM Usage in %",
+        "nl": "RAM gebruik in %"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/lightning-charge.svg"
+    },
+    "measure_uptime": {
+      "type": "number",
+      "title": {
+        "en": "Up-Time in hours",
+        "nl": "Online tijd in uren"
+      },
+      "units": {
+        "en": "Hours",
+        "nl": "Uur"
+      },
+      "insights": true,
+      "desc": {
+        "en": "Up-Time in hours",
+        "nl": "Online tijd in uren"
+      },
+      "chartType": "spline",
+      "decimals": 2,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/stopwatch.svg"
+    },
+    "measure_uptime_days": {
+      "type": "string",
+      "title": {
+        "en": "Up-Time in Days",
+        "nl": "Online tijd in Dagen"
+      },
+      "units": {
+        "en": "Days",
+        "nl": "Dagen"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/stopwatch.svg"
+    },
+    "measure_wan_type": {
+      "type": "string",
+      "title": {
+        "en": "Router Protocol",
+        "nl": "Router Protocol"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "assets/icons/wifi.svg"
+    }
+  },
+  "discovery": {
+    "amber_discovery": {
+      "type": "mdns-sd",
+      "mdns-sd": {
+        "protocol": "tcp",
+        "name": "_lwfinder"
+      },
+      "id": "{{txt.id}}"
     }
   }
 }

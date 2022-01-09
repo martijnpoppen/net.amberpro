@@ -1,0 +1,7 @@
+{
+  "$extends": ["generic", "capabilities_router", "defaults"],
+  "name": {
+    "en": "Amber One",
+    "nl": "Amber One"
+  }
+}

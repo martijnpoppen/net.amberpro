@@ -1,0 +1,47 @@
+{
+  "pair": [
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "usernameLabel": {
+          "en": "Amber anywhere url",
+          "nl": "Amber anywhere url"
+        },
+        "usernamePlaceholder": {
+          "en": "https://homey-a123.eu.onambercloud.com",
+          "nl": "https://homey-a123.eu.onambercloud.com"
+        },
+        "usernameValue": {
+          "en": "admin",
+          "nl": "admin"
+        },
+        "passwordLabel": {
+          "en": "Admin Password",
+          "nl": "Admin Wachtwoord"
+        },
+        "passwordPlaceholder": {
+          "en": "Admin Password",
+          "nl": "Admin Wachtwoord"
+        },
+        "logo": "../../../assets/icon.svg"
+      }
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "options": {
+        "singular": true
+      },
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "platforms": ["cloud"],
+  "connectivity": ["cloud"]
+}

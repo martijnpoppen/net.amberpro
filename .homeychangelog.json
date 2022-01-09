@@ -67,5 +67,8 @@
   },
   "1.7.1": {
     "en": "App page improvements"
+  },
+  "2.0.0": {
+    "en": "NEW: Homey integration (no bridge needed) - NEW: improved paring for Homey Pro"
   }
 }

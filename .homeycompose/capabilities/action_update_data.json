@@ -1,0 +1,10 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Update data",
+    "nl": "Data updaten"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "button"
+}

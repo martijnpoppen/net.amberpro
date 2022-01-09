@@ -1,0 +1,114 @@
+{
+  "class": "homealarm",
+  "icon": "{{driverAssetsPath}}/icon.svg",
+  "images": {
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "small": "{{driverAssetsPath}}/images/small.png"
+  },
+  "capabilitiesOptions": {
+    "dim": {
+      "title": {
+        "nl": "LED Dim",
+        "en": "LED Dim"
+      }
+    },
+    "measure_temperature.cpu": {
+      "title": {
+        "en": "CPU Temperature",
+        "nl": "CPU Temperatuur"
+      }
+    },
+    "measure_temperature.system": {
+      "title": {
+        "en": "Systeem Temperature",
+        "nl": "System Temperatuur"
+      }
+    }
+  },
+  "energy": {
+    "approximation": {
+      "usageOn": 30,
+      "usageOff": 1
+    }
+  },
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "General settings",
+        "nl": "Algemene instellingen"
+      },
+      "children": [
+        {
+          "id": "override_onoff",
+          "type": "checkbox",
+          "label": {
+            "en": "Always on",
+            "nl": "Altijd aan"
+          },
+          "value": true
+        },
+        {
+          "id": "update_interval",
+          "type": "number",
+          "label": {
+            "en": "Update interval",
+            "nl": "Update interval"
+          },
+          "min": 10,
+          "max": 3600,
+          "units": {
+            "en": "seconds",
+            "nl": "seconden"
+          },
+          "value": 120
+        },
+        {
+          "id": "enable_interval",
+          "type": "checkbox",
+          "label": {
+            "en": "Enable automatic data",
+            "nl": "Automatische gegevens ophalen"
+          },
+          "value": true
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "Login settings",
+        "nl": "Login instellingen"
+      },
+      "children": [
+        {
+          "id": "username",
+          "type": "text",
+          "label": {
+            "en": "Login",
+            "nl": "Login"
+          },
+          "value": ""
+        },
+        {
+          "id": "password",
+          "type": "password",
+          "label": {
+            "en": "Password",
+            "nl": "Wachtwoord"
+          },
+          "value": ""
+        },
+        {
+          "id": "router_password",
+          "type": "password",
+          "label": {
+            "en": "Router Password",
+            "nl": "Router Wachtwoord"
+          },
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

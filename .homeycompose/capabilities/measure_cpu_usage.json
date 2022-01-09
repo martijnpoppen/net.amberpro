@@ -1,0 +1,44 @@
+{
+  "type": "number",
+  "title": {
+    "en": "CPU Usage",
+    "nl": "CPU gebruik"
+  },
+  "units": {
+    "en": "%",
+    "nl": "%"
+  },
+  "insights": true,
+  "desc": {
+    "en": "CPU Usage in %",
+    "nl": "CPU gebruik in %"
+  },
+  "chartType": "spline",
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/cpu-fill.svg",
+  "$flow": {
+    "triggers": [
+      {
+        "id": "measure_CPU_usage_changed",
+        "title": {
+          "en": "CPU Usage has changed",
+          "nl": "CPU gebruik is veranderd"
+        },
+        "tokens": [
+          {
+            "name": "measure_cpu_usage",
+            "title": {
+              "en": "CPU Usage",
+              "nl": "CPU gebruik"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ]
+      }
+    ]
+  }
+}

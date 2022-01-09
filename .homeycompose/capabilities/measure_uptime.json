@@ -1,0 +1,44 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Up-Time in hours",
+    "nl": "Online tijd in uren"
+  },
+  "units": {
+    "en": "Hours",
+    "nl": "Uur"
+  },
+  "insights": true,
+  "desc": {
+    "en": "Up-Time in hours",
+    "nl": "Online tijd in uren"
+  },
+  "chartType": "spline",
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/stopwatch.svg",
+  "$flow": {
+    "triggers": [
+      {
+        "id": "measure_uptime_changed",
+        "title": {
+          "en": "The uptime in hours has changed",
+          "nl": "De online tijd in uren is veranderd"
+        },
+        "tokens": [
+          {
+            "name": "measure_uptime",
+            "title": {
+              "en": "Up-Time in hours",
+              "nl": "Online tijd in uren"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ]
+      }
+    ]
+  }
+}

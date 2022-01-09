@@ -1,0 +1,37 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Up-Time in Days",
+    "nl": "Online tijd in Dagen"
+  },
+  "units": {
+    "en": "Days",
+    "nl": "Dagen"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/stopwatch.svg",
+  "$flow": {
+    "triggers": [
+      {
+        "id": "measure_uptime_days_changed",
+        "title": {
+          "en": "The uptime in days has changed",
+          "nl": "De online tijd in dagen is veranderd"
+        },
+        "tokens": [
+          {
+            "name": "measure_uptime_days",
+            "title": {
+              "en": "Up-Time in Days",
+              "nl": "Online tijd in Dagen"
+            },
+            "type": "string",
+            "example": ""
+          }
+        ]
+      }
+    ]
+  }
+}
