@@ -70,5 +70,8 @@
   },
   "2.0.0": {
     "en": "NEW: Homey integration (no bridge needed) - NEW: improved paring for Homey Pro"
+  },
+  "2.0.1": {
+    "en": "FIX: remove AmberX from cloud"
   }
 }
