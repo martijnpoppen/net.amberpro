@@ -1,8 +1,7 @@
 const Homey = require('homey');
 const Amber = require('../lib/amber');
 const AmberPro = require('../lib/amber-pro');
-const FTP = require('../lib/amber/ftp');
-const { sleep, decrypt, encrypt, splitTime, removeFile, getFileName, getFilePath, mapHTML } = require('../lib/helpers');
+const { sleep, decrypt, encrypt, splitTime, getFileName, mapHTML } = require('../lib/helpers');
 
 module.exports = class mainDevice extends Homey.Device {
     async onInit() {
@@ -61,31 +60,32 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.homey.app.log(`[Device] - ${this.getName()} => setAmberClient Got config`, {...this.config, username: 'LOG', password: 'LOG'});
             
-            if(settings.sso === false) {
-                this._amberClient = await new AmberPro({...this.config, username: 'admin', password: this.config.admin_password, router_password: this.config.router_password});
+            if(!settings.sso) {
+                this.config = {...this.config, username: 'admin', password: this.config.admin_password, router_password: this.config.router_password};
+            }
+
+            if(settings.cloud) {
+                this._amberClient = await new AmberPro(this.config);
             } else {
                 this._amberClient = await new Amber(this.config);
                 await this._amberClient.setFtp();
-                this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/admin/homey-amber/`});
             }
+            await this.setUnavailable(this.homey.__("amber.need_admin"));
 
-            if(this.hasCapability('measure_wan_type') && !!this.config.router_password) {
-                this._amberRouterClient = await new AmberRouter({ ip: 'latticerouter.local', password: this.config.router_password});
-            }
+            await this._amberClient.getPowerState();
 
             await sleep(500);
-
-            await this._amberClient.setFtp();
-            this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/admin/homey-amber/`});
-
             await this.setInitialData();
             await this.setIntervalsAndFlows(settings);
         } catch (error) {
+
             this.homey.app.log(`[Device] ${this.getName()} - setAmberClient - error =>`, error);
 
-            if(settings.sso === false) {
+            if(!settings.sso) {
                 this.homey.app.log(`[Device] ${this.getName()} - setAmberClient - need_admin`);
-                await this.setUnavailable(this.homey.__("amber.need_admin"));
+                const msg = this.homey.__("amber.need_admin");
+                await sleep(2000);
+                this.setUnavailable(msg);
             }
         }
     }
@@ -170,9 +170,9 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.routerConnectedTrigger.registerRunListener(async (args, state) =>  args.ip === state.ip || !args.ip);
             this.routerDisonnectedTrigger.registerRunListener(async (args, state) => args.ip === state.ip || !args.ip);
-        }
 
-        this.flowTriggersRegistered = true;
+            this.flowTriggersRegistered = true;
+        }
     }
 
     async onCapability_ON_OFF(value) {
@@ -262,18 +262,18 @@ module.exports = class mainDevice extends Homey.Device {
     async onCapability_UPLOAD_FILE(value) {
         try {
            let fileName = null;
+           let filePath = null;
 
            this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE`, value);
 
             if(!!value.localUrl) {
                 fileName = `${value.id}.jpg`
+                filePath = value.localUrl;
 
                 this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE - uploading Image`, value.localUrl, value.id);
-                await this._amberClient.upload(value.localUrl, fileName);
-
             } else if(typeof value === 'string') {
                 fileName = await getFileName(value);
-                await this._amberClient.upload(value, fileName);
+                filePath = value;
             
                 this.homey.app.log(`[Device] ${this.getName()} - onCapability_UPLOAD_FILE - uploading File`, value, fileName);
             }
@@ -282,7 +282,7 @@ module.exports = class mainDevice extends Homey.Device {
                 throw new Error(this.homey.__("amber.file_invalid"));
             }
 
-            await sleep(200);
+            await this._amberClient.upload(filePath, fileName);
 
             return Promise.resolve(true);
         } catch (e) {
@@ -306,7 +306,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             await this.checkRebootState();
         } catch (error) {
-            this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState`, error);
+            this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState - err`, error);
             await this.setCapabilityValue('onoff', false);
             await this.checkRebootState();
         }

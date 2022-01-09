@@ -16,7 +16,7 @@
     "reboot": "Rebooting",
     "shutdown": "Shutting down",
     "override_onoff": "Amber is always-on",
-    "need_admin": "For this device the 'Amber Admin' password is needed. This is the password you normally use to login to the webportal. Please enter the admin password in the device settings.",
+    "need_admin": "For this device the Amber Admin password is needed. This is the password you normally use to login to the webportal. Please enter the admin password in the device settings.",
     "onoff_turn_on": "Amber can only turned on physically. Use the button on the back of the device",
     "file_invalid": "Wrong file format"
   },
