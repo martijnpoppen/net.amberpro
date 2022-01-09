@@ -8,12 +8,15 @@ module.exports = class mainDevice extends Homey.Device {
     async onInit() {
         try {
             this.homey.app.log('[Device] - init =>', this.getName());
+            this.setUnavailable(`Initializing ${this.getName()}`);
 
             this.flowTriggersRegistered = false;
 
             await this.checkCapabilities();
             await this.setCapabilityListeners();            
             await this.setAmberClient();
+
+            await this.setAvailable();
         } catch (error) {
             this.homey.app.log(`[Device] ${this.getName()} - OnInit Error`, error);
         }
@@ -66,8 +69,15 @@ module.exports = class mainDevice extends Homey.Device {
                 this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/admin/homey-amber/`});
             }
 
+            if(this.hasCapability('measure_wan_type') && !!this.config.router_password) {
+                this._amberRouterClient = await new AmberRouter({ ip: 'latticerouter.local', password: this.config.router_password});
+            }
+
             await sleep(500);
-            await this._amberClient.getPowerState();
+
+            await this._amberClient.setFtp();
+            this._ftp = await new FTP({...this.config, port: 21, path_prefix: `/home/admin/homey-amber/`});
+
             await this.setInitialData();
             await this.setIntervalsAndFlows(settings);
         } catch (error) {
@@ -81,14 +91,11 @@ module.exports = class mainDevice extends Homey.Device {
     }
 
     async setInitialData() {
-        try {
-            await this.checkOnOffState();
-            await sleep(3000);
-            await this.setCapabilityValues();
-            await this.setAvailable();
-        } catch (error) {
-            this.homey.app.log(`[Device] ${this.getName()} - setInitialData - error =>`, error);
-        }
+        await this.checkOnOffState();
+        await sleep(3000);
+        await this.setCapabilityValues();
+
+        await this.setAvailable();
     }
 
     async setIntervalsAndFlows(settings) {
@@ -115,6 +122,7 @@ module.exports = class mainDevice extends Homey.Device {
             this.homey.app.log(`[Device] ${this.getName()} - OnInit Error`, error);
         }
     }
+
 
     async setCapabilityListeners() {
         await this.registerCapabilityListener('onoff', this.onCapability_ON_OFF.bind(this));
@@ -163,6 +171,7 @@ module.exports = class mainDevice extends Homey.Device {
             this.routerConnectedTrigger.registerRunListener(async (args, state) =>  args.ip === state.ip || !args.ip);
             this.routerDisonnectedTrigger.registerRunListener(async (args, state) => args.ip === state.ip || !args.ip);
         }
+
         this.flowTriggersRegistered = true;
     }
 
