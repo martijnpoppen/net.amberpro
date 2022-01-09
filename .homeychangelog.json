@@ -73,5 +73,8 @@
   },
   "2.0.1": {
     "en": "FIX: remove AmberX from cloud"
+  },
+  "2.0.2": {
+    "en": "FIX: logging"
   }
 }
