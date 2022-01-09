@@ -61,7 +61,7 @@ module.exports = class mainDevice extends Homey.Device {
             this.homey.app.log(`[Device] - ${this.getName()} => setAmberClient Got config`, {...this.config, username: 'LOG', password: 'LOG'});
             
             if(!settings.sso) {
-                this.config = {...this.config, username: 'admin', password: this.config.admin_password, router_password: this.config.router_password};
+                this.config = {...this.config, router_password: this.config.router_password};
             }
 
             if(settings.cloud) {
@@ -70,23 +70,12 @@ module.exports = class mainDevice extends Homey.Device {
                 this._amberClient = await new Amber(this.config);
                 await this._amberClient.setFtp();
             }
-            await this.setUnavailable(this.homey.__("amber.need_admin"));
-
-            await this._amberClient.getPowerState();
 
             await sleep(500);
             await this.setInitialData();
             await this.setIntervalsAndFlows(settings);
         } catch (error) {
-
             this.homey.app.log(`[Device] ${this.getName()} - setAmberClient - error =>`, error);
-
-            if(!settings.sso) {
-                this.homey.app.log(`[Device] ${this.getName()} - setAmberClient - need_admin`);
-                const msg = this.homey.__("amber.need_admin");
-                await sleep(2000);
-                this.setUnavailable(msg);
-            }
         }
     }
 

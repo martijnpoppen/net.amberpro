@@ -3,10 +3,7 @@
   "version": "1.7.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
-  "platforms": [
-    "local",
-    "cloud"
-  ],
+  "platforms": ["local", "cloud"],
   "brandColor": "#000000",
   "name": {
     "en": "Amber",
@@ -29,9 +26,7 @@
       "Wake on Lan"
     ]
   },
-  "category": [
-    "security"
-  ],
+  "category": ["security"],
   "images": {
     "large": "/assets/images/large.jpg",
     "small": "/assets/images/small.jpg"
@@ -70,7 +65,7 @@
   "homeyCommunityTopicId": 50486,
   "support": "https://community.athom.com/t/app-amberpro/50486",
   "discovery": {
-    "amberpro_discovery": {
+    "amber_discovery": {
       "type": "mdns-sd",
       "mdns-sd": {
         "protocol": "tcp",
@@ -83,13 +78,8 @@
     {
       "id": "AmberOne",
       "class": "homealarm",
-      "connectivity": [
-        "cloud"
-      ],
-      "platforms": [
-        "local",
-        "cloud"
-      ],
+      "connectivity": ["cloud"],
+      "platforms": ["local", "cloud"],
       "capabilities": [
         "onoff",
         "dim",
@@ -140,21 +130,35 @@
         "large": "drivers/AmberOne/assets/images/large.png",
         "small": "drivers/AmberOne/assets/images/small.png"
       },
+      "discovery": "amber_discovery",
       "pair": [
-        {
-          "id": "login_ambercloud"
-        },
         {
           "id": "list_devices",
           "template": "list_devices",
+          "options": {
+            "singular": true
+          },
           "navigation": {
-            "prev": "login_ambercloud",
-            "next": "add_devices"
+            "next": "get_device"
           }
         },
         {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "get_device"
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": { "en": "Username", "nl": "Gebruikersnaam" },
+            "usernamePlaceholder": { "en": "example: admin", "nl": "bijvoorbeeld: admin" },
+            "usernameValue": { "en": "admin", "nl": "admin" },
+            "passwordLabel": { "en": "Password", "nl": "Wachtwoord" },
+            "passwordPlaceholder": { "en": "Password", "nl": "Wachtwoord" },
+            "logo": "../../../assets/icon.svg"
+          }
+        },
+        {
+          "id": "add_device"
         }
       ],
       "settings": [
@@ -208,23 +212,23 @@
           },
           "children": [
             {
-              "id": "admin_username",
-              "type": "label",
-              "label": {
-                "en": "Amber admin account",
-                "nl": "Amber admin account"
+                "id": "username",
+                "type": "text",
+                "label": {
+                  "en": "Login",
+                  "nl": "Login"
+                },
+                "value": ""
               },
-              "value": "admin"
-            },
-            {
-              "id": "admin_password",
-              "type": "password",
-              "label": {
-                "en": "Admin Password",
-                "nl": "Admin Wachtwoord"
+              {
+                "id": "password",
+                "type": "password",
+                "label": {
+                  "en": "Password",
+                  "nl": "Wachtwoord"
+                },
+                "value": ""
               },
-              "value": ""
-            },
             {
               "id": "router_password",
               "type": "password",
@@ -235,54 +239,14 @@
               "value": ""
             }
           ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Cloud account",
-            "nl": "Cloud account"
-          },
-          "children": [
-            {
-              "id": "username",
-              "type": "label",
-              "label": {
-                "en": "Amber Cloud E-mail",
-                "nl": "Amber Cloud E-mail"
-              }
-            },
-            {
-              "id": "username",
-              "type": "text",
-              "label": {
-                "en": "Login",
-                "nl": "Login"
-              },
-              "value": ""
-            },
-            {
-              "id": "password",
-              "type": "password",
-              "label": {
-                "en": "Password",
-                "nl": "Wachtwoord"
-              },
-              "value": ""
-            }
-          ]
         }
       ]
     },
     {
       "id": "AmberPlus",
       "class": "homealarm",
-      "connectivity": [
-        "cloud"
-      ],
-      "platforms": [
-        "local",
-        "cloud"
-      ],
+      "connectivity": ["cloud"],
+      "platforms": ["local", "cloud"],
       "capabilities": [
         "onoff",
         "dim",
@@ -469,12 +433,8 @@
     {
       "id": "AmberX",
       "class": "homealarm",
-      "connectivity": [
-        "cloud"
-      ],
-      "platforms": [
-        "local"
-      ],
+      "connectivity": ["cloud"],
+      "platforms": ["local"],
       "capabilities": [
         "onoff",
         "dim",
@@ -674,10 +634,7 @@
             "filter": "driver_id=AmberOne|AmberPlus&capabilities=measure_wan_type"
           }
         ],
-        "platforms": [
-          "local",
-          "cloud"
-        ]
+        "platforms": ["local", "cloud"]
       },
       {
         "id": "trigger_router_disconnected",
@@ -720,10 +677,7 @@
             "filter": "driver_id=AmberOne|AmberPlus&capabilities=measure_wan_type"
           }
         ],
-        "platforms": [
-          "local",
-          "cloud"
-        ]
+        "platforms": ["local", "cloud"]
       }
     ],
     "actions": [
@@ -748,10 +702,7 @@
             "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_reboot"
           }
         ],
-        "platforms": [
-          "local",
-          "cloud"
-        ]
+        "platforms": ["local", "cloud"]
       },
       {
         "id": "action_update_data_flow",
@@ -774,9 +725,7 @@
             "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_update_data"
           }
         ],
-        "platforms": [
-          "local"
-        ]
+        "platforms": ["local"]
       },
       {
         "id": "action_upload_file_flow",
@@ -788,10 +737,7 @@
           "en": "[[droptoken]] Upload File",
           "nl": "[[droptoken]] Bestand uploaden"
         },
-        "droptoken": [
-          "image",
-          "string"
-        ],
+        "droptoken": ["image", "string"],
         "args": [
           {
             "type": "device",
@@ -803,9 +749,7 @@
             "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_upload_file"
           }
         ],
-        "platforms": [
-          "local"
-        ]
+        "platforms": ["local"]
       }
     ]
   },

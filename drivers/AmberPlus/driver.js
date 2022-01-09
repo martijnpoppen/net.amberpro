@@ -4,4 +4,8 @@ module.exports = class driver_AmberPlus extends mainDriver {
     deviceType() {
         return 'Amber';
     }
+
+    sso() {
+        return false;
+    }
 }

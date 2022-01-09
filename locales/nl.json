@@ -1,14 +1,7 @@
 {
   "pair": {
     "instructions": "Login met je Amber Cloud account",
-    "username": "Email",
-    "password": "Wachtwoord",
     "router_password": "Router wachtwoord (Router functionaliteit)",
-    "otp": "2FA Code (optioneel)",
-    "ip": "IP adres",
-    "secure": "Gebruik SSL verbinding",
-    "port": "Poort (optioneel - standaard: 5000 / SSL: 5001)",
-    "login": "Inloggen",
     "error": "Er is iets mis gegaan. Controleer je login",
     "error_empty": "Geen Amber gevonden."
   },
