@@ -17,7 +17,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             await this.setAvailable();
         } catch (error) {
-            this.homey.app.log(`[Device] ${this.getName()} - OnInit Error`, error);
+            this.homey.app.error(`[Device] ${this.getName()} - OnInit Error`, error);
         }
     }
 
@@ -75,7 +75,7 @@ module.exports = class mainDevice extends Homey.Device {
             await this.setInitialData();
             await this.setIntervalsAndFlows(settings);
         } catch (error) {
-            this.homey.app.log(`[Device] ${this.getName()} - setAmberClient - error =>`, error);
+            this.homey.app.error(`[Device] ${this.getName()} - setAmberClient - error =>`, error);
         }
     }
 
@@ -108,7 +108,7 @@ module.exports = class mainDevice extends Homey.Device {
                 }
             }
         } catch (error) {
-            this.homey.app.log(`[Device] ${this.getName()} - OnInit Error`, error);
+            this.homey.app.error(`[Device] ${this.getName()} - OnInit Error`, error);
         }
     }
 
@@ -148,7 +148,7 @@ module.exports = class mainDevice extends Homey.Device {
             });
             await sleep(2000);
         } catch (error) {
-            this.homey.app.log(error)
+            this.homey.app.error(error)
         }
     }
 
@@ -295,7 +295,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             await this.checkRebootState();
         } catch (error) {
-            this.homey.app.log(`[Device] ${this.getName()} - checkOnOffState - err`, error);
+            this.homey.app.error(`[Device] ${this.getName()} - checkOnOffState - err`, error);
             await this.setCapabilityValue('onoff', false);
             await this.checkRebootState();
         }
@@ -333,8 +333,7 @@ module.exports = class mainDevice extends Homey.Device {
             this.homey.app.log(`[Device] ${this.getName()} - onOnOffPollInterval =>`, REFRESH_INTERVAL, update_interval);
             this.onOnOffPollInterval = setInterval(this.checkOnOffState.bind(this), REFRESH_INTERVAL);
         } catch (error) {
-            this.setUnavailable(error)
-            this.homey.app.log(error);
+            this.homey.app.error(error);
         }
     }
 
@@ -370,7 +369,7 @@ module.exports = class mainDevice extends Homey.Device {
             await this.setCapabilityValue('measure_ram_usage', parseInt(ram_load));
             await this.setCapabilityValue('action_update_data', false);
         } catch (error) {
-            this.homey.app.log(error);
+            this.homey.app.error(error);
         }
     }
 
@@ -381,8 +380,7 @@ module.exports = class mainDevice extends Homey.Device {
             this.homey.app.log(`[Device] ${this.getName()} - onPollInterval =>`, REFRESH_INTERVAL, update_interval);
             this.onPollInterval = setInterval(this.setCapabilityValues.bind(this), REFRESH_INTERVAL);
         } catch (error) {
-            this.setUnavailable(error)
-            this.homey.app.log(error);
+            this.homey.app.error(error);
         }
     }
 
@@ -434,7 +432,7 @@ module.exports = class mainDevice extends Homey.Device {
                 }
             }
         } catch (error) {
-            this.homey.app.log(error);
+            this.homey.app.error(error);
         }
     }
 
@@ -448,8 +446,7 @@ module.exports = class mainDevice extends Homey.Device {
                 this.onRouterPollInterval = setInterval(this.setRouterCheck.bind(this), REFRESH_INTERVAL);
             }
         } catch (error) {
-            this.setUnavailable(error)
-            this.homey.app.log(error);
+            this.homey.app.error(error);
         }
     }
 
@@ -464,8 +461,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             return usage;
         } catch (error) {
-            this.setUnavailable(error)
-            this.homey.app.log(error);
+            this.homey.app.error(error);
         }
     }
 
@@ -482,8 +478,7 @@ module.exports = class mainDevice extends Homey.Device {
 
             return usage;
         } catch (error) {
-            this.setUnavailable(error)
-            this.homey.app.log(error);
+            this.homey.app.error(error);
         }
     }
 

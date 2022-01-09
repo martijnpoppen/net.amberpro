@@ -20,6 +20,7 @@
     }
   ],
   "platforms": [
-    "local"
+    "local",
+    "cloud"
   ]
 }

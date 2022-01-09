@@ -942,6 +942,22 @@
       ],
       "pair": [
         {
+          "id": "instructions",
+          "navigation": {
+            "next": "login_credentials"
+          },
+          "options": {
+            "title": {
+              "en": "Instructions",
+              "nl": "Instelhulp"
+            },
+            "text": {
+              "en": "<h1>How to setup:</h1><p>1 Go to your Amber webpanel and login</p><hr><p>2 Click Amber Pro</p><hr><p>3 Click subscription</p><hr><p>4 Enable Amber Anywhere</p><hr><p>5 Click on APP store</p><hr><p>6 Install the Homey package</p><hr><p>7 Go back to subscription</p><hr><p>8 Get the Amber Anywhere url</p><hr><br><br>",
+              "nl": "<h1>Instelhulp:</h1><p>1 Ga naar het Amber webpaneel en log in</p><hr><p>2 Klik op Amber Pro</p><hr><p>3 Klik op Subscription (abonnement)</p><hr><p>4 Activeer Amber Anywhere</p><hr><p>5 Klik op APP store</p><hr><p>6 Installeer Homey</p><hr><p>7 Ga terug naar subscription (abonnement)</p><hr><p>8 Verkrijg de Amber Anywhere url</p><hr><br><br>"
+            }
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
@@ -966,6 +982,9 @@
               "nl": "Admin Wachtwoord"
             },
             "logo": "../../../assets/icon.svg"
+          },
+          "navigation": {
+            "back": "instructions"
           }
         },
         {
@@ -1126,6 +1145,22 @@
       ],
       "pair": [
         {
+          "id": "instructions",
+          "navigation": {
+            "next": "login_credentials"
+          },
+          "options": {
+            "title": {
+              "en": "Instructions",
+              "nl": "Instelhulp"
+            },
+            "text": {
+              "en": "<h1>How to setup:</h1><p>1 Go to your Amber webpanel and login</p><hr><p>2 Click Amber Pro</p><hr><p>3 Click subscription</p><hr><p>4 Enable Amber Anywhere</p><hr><p>5 Click on APP store</p><hr><p>6 Install the Homey package</p><hr><p>7 Go back to subscription</p><hr><p>8 Get the Amber Anywhere url</p><hr><br><br>",
+              "nl": "<h1>Instelhulp:</h1><p>1 Ga naar het Amber webpaneel en log in</p><hr><p>2 Klik op Amber Pro</p><hr><p>3 Klik op Subscription (abonnement)</p><hr><p>4 Activeer Amber Anywhere</p><hr><p>5 Klik op APP store</p><hr><p>6 Installeer Homey</p><hr><p>7 Ga terug naar subscription (abonnement)</p><hr><p>8 Verkrijg de Amber Anywhere url</p><hr><br><br>"
+            }
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
@@ -1150,6 +1185,9 @@
               "nl": "Admin Wachtwoord"
             },
             "logo": "../../../assets/icon.svg"
+          },
+          "navigation": {
+            "back": "instructions"
           }
         },
         {

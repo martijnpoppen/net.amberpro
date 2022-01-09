@@ -1,17 +1,17 @@
 {
-    "capabilities": [
-        "onoff",
-        "dim",
-        "action_reboot",
-        "action_update_data",
-        "action_upload_file",
-        "alarm_heat",
-        "measure_temperature.cpu",
-        "measure_temperature.system",
-        "measure_uptime",
-        "measure_uptime_days",
-        "measure_cpu_usage",
-        "measure_ram_usage",
-        "measure_disk_usage"
-      ]
+  "capabilities": [
+    "onoff",
+    "dim",
+    "action_reboot",
+    "action_update_data",
+    "action_upload_file",
+    "alarm_heat",
+    "measure_temperature.cpu",
+    "measure_temperature.system",
+    "measure_uptime",
+    "measure_uptime_days",
+    "measure_cpu_usage",
+    "measure_ram_usage",
+    "measure_disk_usage"
+  ]
 }

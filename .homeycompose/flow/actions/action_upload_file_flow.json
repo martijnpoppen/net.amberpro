@@ -24,6 +24,7 @@
     }
   ],
   "platforms": [
-    "local"
+    "local",
+    "cloud"
   ]
 }

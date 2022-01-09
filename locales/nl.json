@@ -1,6 +1,5 @@
 {
   "pair": {
-    "instructions": "Login met je Amber Cloud account",
     "router_password": "Router wachtwoord (Router functionaliteit)",
     "error": "Er is iets mis gegaan. Controleer je login",
     "error_empty": "Geen Amber gevonden."
