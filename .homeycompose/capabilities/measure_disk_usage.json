@@ -1,0 +1,44 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Disk Usage",
+    "nl": "Schijf gebruik"
+  },
+  "units": {
+    "en": "%",
+    "nl": "%"
+  },
+  "insights": true,
+  "desc": {
+    "en": "Disk Usage in %",
+    "nl": "Schijf gebruik in %"
+  },
+  "chartType": "spline",
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/disc-fill.svg",
+  "$flow": {
+    "triggers": [
+      {
+        "id": "measure_disk_usage_changed",
+        "title": {
+          "en": "Disk Usage has changed",
+          "nl": "Schijf gebruik is veranderd"
+        },
+        "tokens": [
+          {
+            "name": "measure_disk_usage",
+            "title": {
+              "en": "Disk Usage",
+              "nl": "Schijf gebruik"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ]
+      }
+    ]
+  }
+}

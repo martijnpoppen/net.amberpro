@@ -1,0 +1,25 @@
+{
+  "id": "action_update_data_flow",
+  "title": {
+    "en": "Update data",
+    "nl": "Data updaten"
+  },
+  "titleFormatted": {
+    "en": "Update data",
+    "nl": "Data updaten"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "placeholder": {
+        "en": "Select device",
+        "nl": "Selecteer apparaat"
+      },
+      "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_update_data"
+    }
+  ],
+  "platforms": [
+    "local"
+  ]
+}

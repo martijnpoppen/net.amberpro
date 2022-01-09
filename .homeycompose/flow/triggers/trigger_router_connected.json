@@ -1,0 +1,46 @@
+{
+  "id": "trigger_router_connected",
+  "title": {
+    "en": "A device connected to the Router",
+    "nl": "Een apparaat kreeg connectie met de router"
+  },
+  "titleFormatted": {
+    "en": "[[ip]] (A device) connected to the Router",
+    "nl": "[[ip]] (Een apparaat) kreeg connectie met de router"
+  },
+  "tokens": [
+    {
+      "name": "ip",
+      "type": "string",
+      "title": {
+        "en": "IP",
+        "nl": "IP"
+      },
+      "example": "192.168.178.57"
+    }
+  ],
+  "args": [
+    {
+      "name": "ip",
+      "type": "text",
+      "title": {
+        "en": "IP (optional)",
+        "nl": "IP (optioneel)"
+      },
+      "required": false
+    },
+    {
+      "name": "device",
+      "placeholder": {
+        "en": "Select device",
+        "nl": "Selecteer apparaat"
+      },
+      "type": "device",
+      "filter": "driver_id=AmberOne|AmberPlus&capabilities=measure_wan_type"
+    }
+  ],
+  "platforms": [
+    "local",
+    "cloud"
+  ]
+}

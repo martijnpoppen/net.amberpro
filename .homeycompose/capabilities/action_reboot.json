@@ -1,0 +1,10 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Reboot",
+    "nl": "Herstarten"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "button"
+}

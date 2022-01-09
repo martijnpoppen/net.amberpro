@@ -1,0 +1,29 @@
+{
+  "id": "action_upload_file_flow",
+  "title": {
+    "en": "Upload File",
+    "nl": "Bestand uploaden"
+  },
+  "titleFormatted": {
+    "en": "[[droptoken]] Upload File",
+    "nl": "[[droptoken]] Bestand uploaden"
+  },
+  "droptoken": [
+    "image",
+    "string"
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "placeholder": {
+        "en": "Select device",
+        "nl": "Selecteer apparaat"
+      },
+      "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_upload_file"
+    }
+  ],
+  "platforms": [
+    "local"
+  ]
+}

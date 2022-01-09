@@ -1,0 +1,44 @@
+{
+  "type": "number",
+  "title": {
+    "en": "RAM Usage",
+    "nl": "RAM gebruik"
+  },
+  "units": {
+    "en": "%",
+    "nl": "%"
+  },
+  "insights": true,
+  "desc": {
+    "en": "RAM Usage in %",
+    "nl": "RAM gebruik in %"
+  },
+  "chartType": "spline",
+  "decimals": 2,
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/lightning-charge.svg",
+  "$flow": {
+    "triggers": [
+      {
+        "id": "measure_ram_usage_changed",
+        "title": {
+          "en": "RAM Usage has changed",
+          "nl": "RAM gebruik is veranderd"
+        },
+        "tokens": [
+          {
+            "name": "measure_ram_usage",
+            "title": {
+              "en": "RAM Usage",
+              "nl": "RAM gebruik"
+            },
+            "type": "number",
+            "example": 99
+          }
+        ]
+      }
+    ]
+  }
+}

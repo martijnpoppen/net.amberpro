@@ -1,0 +1,46 @@
+{
+  "id": "trigger_router_disconnected",
+  "title": {
+    "en": "A device disconnected from the Router",
+    "nl": "Een apparaat verloor connectie met de router"
+  },
+  "titleFormatted": {
+    "en": "[[ip]] (A device) disconnected from the Router",
+    "nl": "[[ip]] (Een apparaat) verloor connectie met de router"
+  },
+  "tokens": [
+    {
+      "name": "ip",
+      "type": "string",
+      "title": {
+        "en": "IP",
+        "nl": "IP"
+      },
+      "example": "192.168.178.57"
+    }
+  ],
+  "args": [
+    {
+      "name": "ip",
+      "type": "text",
+      "title": {
+        "en": "IP (optional)",
+        "nl": "IP (optioneel)"
+      },
+      "required": false
+    },
+    {
+      "name": "device",
+      "placeholder": {
+        "en": "Select device",
+        "nl": "Selecteer apparaat"
+      },
+      "type": "device",
+      "filter": "driver_id=AmberOne|AmberPlus&capabilities=measure_wan_type"
+    }
+  ],
+  "platforms": [
+    "local",
+    "cloud"
+  ]
+}

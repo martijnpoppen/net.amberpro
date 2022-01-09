@@ -1,0 +1,50 @@
+{
+  "discovery": "amber_discovery",
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "options": {
+        "singular": true
+      },
+      "navigation": {
+        "next": "get_device"
+      }
+    },
+    {
+      "id": "get_device"
+    },
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "usernameLabel": {
+          "en": "Username",
+          "nl": "Gebruikersnaam"
+        },
+        "usernamePlaceholder": {
+          "en": "example: admin",
+          "nl": "bijvoorbeeld: admin"
+        },
+        "usernameValue": {
+          "en": "admin",
+          "nl": "admin"
+        },
+        "passwordLabel": {
+          "en": "Password",
+          "nl": "Wachtwoord"
+        },
+        "passwordPlaceholder": {
+          "en": "Password",
+          "nl": "Wachtwoord"
+        },
+        "logo": "../../../assets/icon.svg"
+      }
+    },
+    {
+      "id": "add_device"
+    }
+  ],
+  "platforms": ["local"],
+  "connectivity": ["lan"]
+}

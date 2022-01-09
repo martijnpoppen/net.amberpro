@@ -1,0 +1,33 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Router Protocol",
+    "nl": "Router Protocol"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "assets/icons/wifi.svg",
+  "$flow": {
+    "triggers": [
+      {
+        "id": "measure_wan_type_changed",
+        "title": {
+          "en": "Router Protocol has changed",
+          "nl": "Router Protocol is veranderd"
+        },
+        "tokens": [
+          {
+            "name": "measure_wan_type",
+            "title": {
+              "en": "Router Protocol",
+              "nl": "Router Protocol"
+            },
+            "type": "text",
+            "example": "BRIDGE"
+          }
+        ]
+      }
+    ]
+  }
+}

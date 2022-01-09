@@ -1,6 +1,6 @@
-const mainDriver = require("../main-driver");
+const localDriver = require('../local-driver');
 
-module.exports = class driver_AmberX extends mainDriver {
+module.exports = class driver_AmberX extends localDriver {
   deviceType() {
     return "Amber X";
   }

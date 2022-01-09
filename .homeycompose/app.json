@@ -1,0 +1,72 @@
+{
+  "id": "net.amberpro",
+  "version": "1.7.1",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local",
+    "cloud"
+  ],
+  "brandColor": "#000000",
+  "name": {
+    "en": "Amber",
+    "nl": "Amber"
+  },
+  "description": {
+    "en": "Not just Storage. A Safe Way to Share",
+    "nl": "Niet alleen opslag. Een slimme manier om te werken."
+  },
+  "tags": {
+    "en": [
+      "NAS",
+      "Storage",
+      "FTP",
+      "Webdav",
+      "Surveillance",
+      "Photo",
+      "Video",
+      "WOL",
+      "Wake on Lan"
+    ]
+  },
+  "category": [
+    "security"
+  ],
+  "images": {
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "author": {
+    "name": "Latticework B.V.",
+    "email": "homey@latticework.eu"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Martijn Poppen",
+        "email": "amber@martijnpoppen.nl"
+      }
+    ],
+    "translators": [
+      {
+        "name": "🇬🇧 Martijn Poppen"
+      },
+      {
+        "name": "🇳🇱 Martijn Poppen"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "martijnpoppen"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://community.athom.com/t/app-amberpro/50486"
+  },
+  "source": "https://github.com/martijnpoppen/net.amberpro",
+  "homeyCommunityTopicId": 50486,
+  "support": "https://community.athom.com/t/app-amberpro/50486"
+}
