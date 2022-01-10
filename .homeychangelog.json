@@ -79,5 +79,8 @@
   },
   "2.0.3": {
     "en": "NEW: add login instructions for cloud"
+  },
+  "2.0.4": {
+    "en": "FIX: code cleanup"
   }
 }

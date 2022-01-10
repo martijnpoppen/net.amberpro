@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "net.amberpro",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -278,6 +278,12 @@
           }
         }
       },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
+        }
+      },
       "settings": [
         {
           "type": "group",
@@ -456,6 +462,12 @@
             "en": "System Temperature",
             "nl": "Systeem Temperatuur"
           }
+        }
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
         }
       },
       "settings": [
@@ -638,6 +650,12 @@
           }
         }
       },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
+        }
+      },
       "settings": [
         {
           "type": "group",
@@ -815,6 +833,12 @@
             "en": "System Temperature",
             "nl": "Systeem Temperatuur"
           }
+        }
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
         }
       },
       "settings": [
@@ -1012,6 +1036,12 @@
             "en": "System Temperature",
             "nl": "Systeem Temperatuur"
           }
+        }
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 30,
+          "usageOff": 1
         }
       },
       "settings": [
