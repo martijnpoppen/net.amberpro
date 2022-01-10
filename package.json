@@ -9,9 +9,6 @@
   "dependencies": {
     "axios": "^0.21.1",
     "basic-ftp": "^4.6.6",
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7",
-    "qs": "^6.10.1",
-    "wake_on_lan": "^1.0.0"
+    "fs": "^0.0.1-security"
   }
 }

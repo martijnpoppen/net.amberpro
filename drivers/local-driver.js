@@ -17,7 +17,7 @@ module.exports = class localDriver extends Homey.Driver {
     }
 
     async onPair(session) {
-        const discoveryStrategy = this.getDiscoveryStrategy();
+        const discoveryStrategy = this.homey.discovery.getStrategy("amber_discovery");
         const discoveryResults = discoveryStrategy.getDiscoveryResults();
         let selectedDevice = null;
 

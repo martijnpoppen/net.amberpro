@@ -273,15 +273,9 @@
         },
         "measure_temperature.system": {
           "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
+            "en": "System Temperature",
+            "nl": "Systeem Temperatuur"
           }
-        }
-      },
-      "energy": {
-        "approximation": {
-          "usageOn": 30,
-          "usageOff": 1
         }
       },
       "settings": [
@@ -380,7 +374,6 @@
         "measure_disk_usage",
         "measure_wan_type"
       ],
-      "discovery": "amber_discovery",
       "pair": [
         {
           "id": "list_devices",
@@ -460,15 +453,9 @@
         },
         "measure_temperature.system": {
           "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
+            "en": "System Temperature",
+            "nl": "Systeem Temperatuur"
           }
-        }
-      },
-      "energy": {
-        "approximation": {
-          "usageOn": 30,
-          "usageOff": 1
         }
       },
       "settings": [
@@ -567,7 +554,6 @@
         "measure_disk_usage",
         "measure_wan_type"
       ],
-      "discovery": "amber_discovery",
       "pair": [
         {
           "id": "list_devices",
@@ -647,15 +633,9 @@
         },
         "measure_temperature.system": {
           "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
+            "en": "System Temperature",
+            "nl": "Systeem Temperatuur"
           }
-        }
-      },
-      "energy": {
-        "approximation": {
-          "usageOn": 30,
-          "usageOff": 1
         }
       },
       "settings": [
@@ -753,7 +733,6 @@
         "measure_ram_usage",
         "measure_disk_usage"
       ],
-      "discovery": "amber_discovery",
       "pair": [
         {
           "id": "list_devices",
@@ -833,15 +812,9 @@
         },
         "measure_temperature.system": {
           "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
+            "en": "System Temperature",
+            "nl": "Systeem Temperatuur"
           }
-        }
-      },
-      "energy": {
-        "approximation": {
-          "usageOn": 30,
-          "usageOff": 1
         }
       },
       "settings": [
@@ -1036,15 +1009,9 @@
         },
         "measure_temperature.system": {
           "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
+            "en": "System Temperature",
+            "nl": "Systeem Temperatuur"
           }
-        }
-      },
-      "energy": {
-        "approximation": {
-          "usageOn": 30,
-          "usageOff": 1
         }
       },
       "settings": [
