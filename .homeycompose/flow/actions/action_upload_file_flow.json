@@ -20,7 +20,7 @@
         "en": "Select device",
         "nl": "Selecteer apparaat"
       },
-      "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_upload_file"
+      "filter": "driver_id=cloud_AmberOne|cloud_AmberPlus|AmberOne|AmberPlus|AmberX&capabilities=action_upload_file"
     }
   ],
   "platforms": [

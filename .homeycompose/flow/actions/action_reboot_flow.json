@@ -16,7 +16,7 @@
         "en": "Select device",
         "nl": "Selecteer apparaat"
       },
-      "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_reboot"
+      "filter": "driver_id=cloud_AmberOne|cloud_AmberPlus|AmberOne|AmberPlus|AmberX&capabilities=action_reboot"
     }
   ],
   "platforms": [

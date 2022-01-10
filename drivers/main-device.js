@@ -85,7 +85,7 @@ module.exports = class mainDevice extends Homey.Device {
                 await this.setIntervals(settings.update_interval);
             }
 
-            if (this.hasCapability('measure_wan_type') && !!settings.router_password) {
+            if (this.hasCapability('measure_wan_type') && !!settings.router_password && settings.router_password !== '') {
                 await this.setFlowtriggers();
                 await this.setRouterCheck();
 
@@ -157,12 +157,7 @@ module.exports = class mainDevice extends Homey.Device {
                 throw new Error(this.homey.__('amber.override_onoff'));
             }
 
-            if (value) {
-                this.homey.app.log(`[Device] ${this.getName()} - onoff - wakeUp`);
-
-                await this._amberClient.wakeUp();
-                throw new Error(this.homey.__('amber.onoff_turn_on'));
-            } else {
+            if (!value) {
                 this.homey.app.log(`[Device] ${this.getName()} - onoff - shutdown`);
 
                 await this._amberClient.shutdown();
@@ -260,7 +255,6 @@ module.exports = class mainDevice extends Homey.Device {
             return Promise.resolve(true);
         } catch (e) {
             this.homey.app.error(e);
-            return Promise.reject(e);
         }
     }
 
@@ -365,7 +359,7 @@ module.exports = class mainDevice extends Homey.Device {
                 throw new Error(`[Device] ${this.getName()} - setRouterCheck`, wanType.error);
             }
 
-            this.setCapabilityValue('measure_wan_type', wanType.connectionType);
+            this.setCapabilityValue('measure_wan_type', wanType.connectionType || 'UNKOWN');
 
             if (wanType.connectionType && wanType.connectionType === 'DHCP') {
                 const clientList = await this._amberClient.getClientList();
