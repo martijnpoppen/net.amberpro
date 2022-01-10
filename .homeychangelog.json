@@ -82,5 +82,8 @@
   },
   "2.0.4": {
     "en": "FIX: code cleanup"
+  },
+  "2.0.5": {
+    "en": "FIX: flowcards for cloud"
   }
 }
