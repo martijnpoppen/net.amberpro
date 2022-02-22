@@ -88,5 +88,11 @@
   },
   "2.0.6": {
     "en": "NEW: app description"
+  },
+  "2.0.7": {
+    "en": "FIX: login issue"
+  },
+  "2.0.8": {
+    "en": "FIX: login issue"
   }
 }
