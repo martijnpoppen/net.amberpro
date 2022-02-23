@@ -97,5 +97,8 @@
   },
   "2.0.9": {
     "en": "FIX: login issue"
+  },
+  "2.0.10": {
+    "en": "FIX: amber ip discovery"
   }
 }
