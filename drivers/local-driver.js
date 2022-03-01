@@ -30,7 +30,7 @@ module.exports = class localDriver extends Homey.Driver {
                     return {
                         name: discoveryResult.txt.hostname,
                         data: {
-                            id: `${this.id}-${txt.macaddr}`
+                            id: `${this.id}-${discoveryResult.txt.macaddr}`
                         },
                         settings: {
                             mac: discoveryResult.txt.macaddr,
