@@ -1,6 +1,6 @@
 const Homey = require('homey');
 const Amber = require('../lib/amber');
-const { encrypt, mapName, sleep } = require('../lib/helpers');
+const { encrypt } = require('../lib/helpers');
 
 module.exports = class localDriver extends Homey.Driver {
     onInit() {
