@@ -1,6 +1,5 @@
 {
   "pair": {
-    "instructions": "Login with your Amber Cloud account",
     "router_password": "Router Password (Enable router functionality)",
     "error": "Something went wrong. Check your login.",
     "error_empty": "No Amber found."

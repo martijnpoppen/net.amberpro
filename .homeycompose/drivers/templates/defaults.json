@@ -1,5 +1,4 @@
 {
-  "discovery": "amber_discovery",
   "pair": [
     {
       "id": "list_devices",

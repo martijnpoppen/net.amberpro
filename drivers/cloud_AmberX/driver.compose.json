@@ -1,7 +1,0 @@
-{
-  "$extends": ["generic", "capabilities", "defaults_cloud"],
-  "name": {
-    "en": "Amber X",
-    "nl": "Amber X"
-  }
-}

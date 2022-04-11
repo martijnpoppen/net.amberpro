@@ -17,6 +17,10 @@ module.exports = class mainDriver extends Homey.Driver {
     }
 
     async onPair(session) {
+        session.setHandler('instructions', async (data) => {
+            return session.showView('login_credentials');
+        });
+
         session.setHandler('login', async (data) => {
             try {
                 this.config = {
