@@ -100,5 +100,8 @@
   },
   "2.0.10": {
     "en": "FIX: amber ip discovery"
+  },
+  "2.1.0": {
+    "en": "NEW: Homey (cloud) integration"
   }
 }
