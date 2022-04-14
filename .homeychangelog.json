@@ -106,5 +106,8 @@
   },
   "2.1.1": {
     "en": "FIX: login instructions"
+  },
+  "2.1.2": {
+    "en": "FIX: cloud login instructions"
   }
 }
