@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "net.amberpro",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -949,8 +949,8 @@
               "nl": "Instelhulp"
             },
             "text": {
-              "en": "<h1>How to setup:</h1><p>1 Go to your Amber webpanel and login</p><hr><p>2 Click Amber Pro</p><hr><p>3 Click subscription</p><hr><p>4 Enable Amber Anywhere</p><hr><p>5 Click on APP store</p><hr><p>6 Install the Homey package</p><hr><p>7 Go back to subscription</p><hr><p>8 Click set-up Amber-Anywhere</p><hr><p>8 Click the checkbox before homey_app</p><hr><p>9 Below public url selected HTTPS</p><hr><p>10 after HTTPS fill in a name for your URL (example: homey)</p><hr><p>11 Write down/Remember your url (example: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>",
-              "nl": "<h1>Instelhulp:</h1><p>1 Ga naar het Amber webpaneel en log in</p><hr><p>2 Klik op Amber Pro</p><hr><p>3 Klik op Subscription (abonnement)</p><hr><p>4 Activeer Amber Anywhere</p><hr><p>5 Klik op APP store</p><hr><p>6 Installeer Homey</p><hr><p>7 Ga terug naar subscription (abonnement)</p><hr><p>8 Klik de checkbox voor homey_app</p><hr><p>9 Onder Public URL: selecteer HTTPS</p><hr><p>10 Rechts van HTTPS vul een naam in voor je url (bijvoorbeeld: homey)</p><hr><p>11 Schrijf of onthou de url (bijvoorbeeld: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>"
+              "en": "<h1>How to setup:</h1><p>1 Go to your Amber webpanel and login (find the webpanel via http://latticenode.local)</p><hr><p>2 Click <strong>Amber Pro<strong></p><hr><p>3 Click <strong>subscription</strong></p><hr><p>4 Enable <strong>Amber Anywhere</strong></p><hr><p>5 Click on <strong>APP store</strong></p><hr><p>6 Install the Homey package</p><hr><p>7 Go back to <strong>subscription</strong></p><hr><p>8 Click <strong>set-up  Amber Anywhere</strong></p><hr><p>9 Click the checkbox before homey_app</p><hr><p>10 Below public url selected <strong>HTTPS</strong></p><hr><p>11 after HTTPS fill in a name for your URL (example: homey)</p><hr><p>12 Copy your url (example: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>",
+              "nl": "<h1>Instelhulp:</h1><p>1 Ga naar het Amber webpaneel en log in (Het webpaneel kan je vinden via (http://latticenode.local)</p><hr><p>2 Klik op <strong>Amber Pro</strong></p><hr><p>3 Klik op <strong>subscription</strong></p><hr><p>4 Activeer <strong>Amber Anywhere</strong></p><hr><p>5 Klik op <strong>APP store</strong></p><hr><p>6 Installeer Homey</p><hr><p>7 Ga terug naar <strong>subscription</strong></p><hr><p>8 Klik <strong>set-up Amber Anywhere</strong></p><hr><p>9 Klik de checkbox voor homey_app</p><hr><p>10 Onder Public URL: selecteer <strong>HTTPS</strong></p><hr><p>11 Rechts van HTTPS vul een naam in voor je url (bijvoorbeeld: homey)</p><hr><p>12 Kopieer de url (bijvoorbeeld: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>"
             }
           }
         },
@@ -1152,8 +1152,8 @@
               "nl": "Instelhulp"
             },
             "text": {
-              "en": "<h1>How to setup:</h1><p>1 Go to your Amber webpanel and login</p><hr><p>2 Click Amber Pro</p><hr><p>3 Click subscription</p><hr><p>4 Enable Amber Anywhere</p><hr><p>5 Click on APP store</p><hr><p>6 Install the Homey package</p><hr><p>7 Go back to subscription</p><hr><p>8 Click set-up Amber-Anywhere</p><hr><p>8 Click the checkbox before homey_app</p><hr><p>9 Below public url selected HTTPS</p><hr><p>10 after HTTPS fill in a name for your URL (example: homey)</p><hr><p>11 Write down/Remember your url (example: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>",
-              "nl": "<h1>Instelhulp:</h1><p>1 Ga naar het Amber webpaneel en log in</p><hr><p>2 Klik op Amber Pro</p><hr><p>3 Klik op Subscription (abonnement)</p><hr><p>4 Activeer Amber Anywhere</p><hr><p>5 Klik op APP store</p><hr><p>6 Installeer Homey</p><hr><p>7 Ga terug naar subscription (abonnement)</p><hr><p>8 Klik de checkbox voor homey_app</p><hr><p>9 Onder Public URL: selecteer HTTPS</p><hr><p>10 Rechts van HTTPS vul een naam in voor je url (bijvoorbeeld: homey)</p><hr><p>11 Schrijf of onthou de url (bijvoorbeeld: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>"
+              "en": "<h1>How to setup:</h1><p>1 Go to your Amber webpanel and login (find the webpanel via http://latticenode.local)</p><hr><p>2 Click <strong>Amber Pro<strong></p><hr><p>3 Click <strong>subscription</strong></p><hr><p>4 Enable <strong>Amber Anywhere</strong></p><hr><p>5 Click on <strong>APP store</strong></p><hr><p>6 Install the Homey package</p><hr><p>7 Go back to <strong>subscription</strong></p><hr><p>8 Click <strong>set-up  Amber Anywhere</strong></p><hr><p>9 Click the checkbox before homey_app</p><hr><p>10 Below public url selected <strong>HTTPS</strong></p><hr><p>11 after HTTPS fill in a name for your URL (example: homey)</p><hr><p>12 Copy your url (example: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>",
+              "nl": "<h1>Instelhulp:</h1><p>1 Ga naar het Amber webpaneel en log in (Het webpaneel kan je vinden via (http://latticenode.local)</p><hr><p>2 Klik op <strong>Amber Pro</strong></p><hr><p>3 Klik op <strong>subscription</strong></p><hr><p>4 Activeer <strong>Amber Anywhere</strong></p><hr><p>5 Klik op <strong>APP store</strong></p><hr><p>6 Installeer Homey</p><hr><p>7 Ga terug naar <strong>subscription</strong></p><hr><p>8 Klik <strong>set-up Amber Anywhere</strong></p><hr><p>9 Klik de checkbox voor homey_app</p><hr><p>10 Onder Public URL: selecteer <strong>HTTPS</strong></p><hr><p>11 Rechts van HTTPS vul een naam in voor je url (bijvoorbeeld: homey)</p><hr><p>12 Kopieer de url (bijvoorbeeld: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>"
             }
           }
         },

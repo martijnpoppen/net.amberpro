@@ -103,5 +103,8 @@
   },
   "2.1.0": {
     "en": "NEW: Homey (cloud) integration"
+  },
+  "2.1.1": {
+    "en": "FIX: login instructions"
   }
 }
