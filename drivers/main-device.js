@@ -71,6 +71,9 @@ module.exports = class mainDevice extends Homey.Device {
 
             this.setAvailable();
 
+
+            await sleep(4000);
+
             await this.checkOnOffState();
             await this.setCapabilityValues();
             await this.setIntervalsAndFlows(settings);
