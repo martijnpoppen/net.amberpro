@@ -181,7 +181,7 @@ module.exports = class mainDevice extends Homey.Device {
 
     async onCapability_DIM(value) {
         try {
-            await this._amberClient.setBrightness(value);
+            await this._amberClient.setBrightness(parseInt(value * 100));
 
             return Promise.resolve(true);
         } catch (e) {
