@@ -16,10 +16,11 @@
         "en": "Select device",
         "nl": "Selecteer apparaat"
       },
-      "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_update_data"
+      "filter": "driver_id=cloud_AmberOne|cloud_AmberPlus|AmberOne|AmberPlus|AmberX&capabilities=action_update_data"
     }
   ],
   "platforms": [
-    "local"
+    "local",
+    "cloud"
   ]
 }

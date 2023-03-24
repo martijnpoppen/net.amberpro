@@ -70,5 +70,44 @@
   },
   "2.0.0": {
     "en": "NEW: Homey integration (no bridge needed) - NEW: improved paring for Homey Pro"
+  },
+  "2.0.1": {
+    "en": "FIX: remove AmberX from cloud"
+  },
+  "2.0.2": {
+    "en": "FIX: logging"
+  },
+  "2.0.3": {
+    "en": "NEW: add login instructions for cloud"
+  },
+  "2.0.4": {
+    "en": "FIX: code cleanup"
+  },
+  "2.0.5": {
+    "en": "FIX: flowcards for cloud"
+  },
+  "2.0.6": {
+    "en": "NEW: app description"
+  },
+  "2.0.7": {
+    "en": "FIX: login issue"
+  },
+  "2.0.8": {
+    "en": "FIX: login issue"
+  },
+  "2.0.9": {
+    "en": "FIX: login issue"
+  },
+  "2.0.10": {
+    "en": "FIX: amber ip discovery"
+  },
+  "2.1.0": {
+    "en": "NEW: Homey (cloud) integration"
+  },
+  "2.1.1": {
+    "en": "FIX: login instructions"
+  },
+  "2.1.2": {
+    "en": "FIX: cloud login instructions"
   }
 }

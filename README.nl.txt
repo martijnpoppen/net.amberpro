@@ -6,21 +6,22 @@ Ontvang een melding wanneer een waarde is gewijzigd.
 Installatie:
 - Installeer deze app op je Homey.
 - Ga naar apparaat toevoegen
-- Login met Amber Cloud account
-- Apparaat wordt toegevoegd
-- Indien Amber One/Plus vul 'Amber Admin' wachtwoord in in apparaat instellingen
+- Vul je wachtwoord in
 - Gegevens worden opgehaald.
 - Controleer status of creëer flows.
 
 Huidige functies:
-- Zet aan / uit. (Vereist Wake-On-Lan)
+- Herstart / Zet uit.
 - CPU % weergeven
 - Schijf % weergeven
 - Temperatuur weergeven
 - Temperatuur alarm
 - Toon online tijd
 - Ontvang een melding wanneer een waarde is gewijzigd.
-- Flows
+- Upload bestanden naar Amber
+- Amber One & Amber Plus: router functies
+    -- IP verbonden
+    -- IP niet langer verbonden
 
 Meer info op de community pagina:
 - Link in onderaan App Store pagina

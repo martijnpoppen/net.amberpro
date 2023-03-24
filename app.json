@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "net.amberpro",
-  "version": "2.0.0",
+  "version": "2.1.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -61,6 +61,9 @@
     "donate": {
       "paypal": {
         "username": "martijnpoppen"
+      },
+      "bunq": {
+        "username": "martijnpoppen"
       }
     }
   },
@@ -110,7 +113,7 @@
               "nl": "Selecteer apparaat"
             },
             "type": "device",
-            "filter": "driver_id=AmberOne|AmberPlus&capabilities=measure_wan_type"
+            "filter": "driver_id=cloud_AmberOne|cloud_AmberPlus|AmberOne|AmberPlus&capabilities=measure_wan_type"
           }
         ],
         "platforms": [
@@ -156,7 +159,7 @@
               "nl": "Selecteer apparaat"
             },
             "type": "device",
-            "filter": "driver_id=AmberOne|AmberPlus&capabilities=measure_wan_type"
+            "filter": "driver_id=cloud_AmberOne|cloud_AmberPlus|AmberOne|AmberPlus&capabilities=measure_wan_type"
           }
         ],
         "platforms": [
@@ -184,7 +187,7 @@
               "en": "Select device",
               "nl": "Selecteer apparaat"
             },
-            "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_reboot"
+            "filter": "driver_id=cloud_AmberOne|cloud_AmberPlus|AmberOne|AmberPlus|AmberX&capabilities=action_reboot"
           }
         ],
         "platforms": [
@@ -210,11 +213,12 @@
               "en": "Select device",
               "nl": "Selecteer apparaat"
             },
-            "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_update_data"
+            "filter": "driver_id=cloud_AmberOne|cloud_AmberPlus|AmberOne|AmberPlus|AmberX&capabilities=action_update_data"
           }
         ],
         "platforms": [
-          "local"
+          "local",
+          "cloud"
         ]
       },
       {
@@ -239,11 +243,12 @@
               "en": "Select device",
               "nl": "Selecteer apparaat"
             },
-            "filter": "driver_id=AmberOne|AmberPlus|AmberX&capabilities=action_upload_file"
+            "filter": "driver_id=cloud_AmberOne|cloud_AmberPlus|AmberOne|AmberPlus|AmberX&capabilities=action_upload_file"
           }
         ],
         "platforms": [
-          "local"
+          "local",
+          "cloud"
         ]
       }
     ]
@@ -271,8 +276,8 @@
         },
         "measure_temperature.system": {
           "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
+            "en": "System Temperature",
+            "nl": "Systeem Temperatuur"
           }
         }
       },
@@ -378,7 +383,6 @@
         "measure_disk_usage",
         "measure_wan_type"
       ],
-      "discovery": "amber_discovery",
       "pair": [
         {
           "id": "list_devices",
@@ -458,8 +462,8 @@
         },
         "measure_temperature.system": {
           "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
+            "en": "System Temperature",
+            "nl": "Systeem Temperatuur"
           }
         }
       },
@@ -565,7 +569,6 @@
         "measure_disk_usage",
         "measure_wan_type"
       ],
-      "discovery": "amber_discovery",
       "pair": [
         {
           "id": "list_devices",
@@ -645,8 +648,8 @@
         },
         "measure_temperature.system": {
           "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
+            "en": "System Temperature",
+            "nl": "Systeem Temperatuur"
           }
         }
       },
@@ -751,7 +754,6 @@
         "measure_ram_usage",
         "measure_disk_usage"
       ],
-      "discovery": "amber_discovery",
       "pair": [
         {
           "id": "list_devices",
@@ -831,8 +833,8 @@
         },
         "measure_temperature.system": {
           "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
+            "en": "System Temperature",
+            "nl": "Systeem Temperatuur"
           }
         }
       },
@@ -940,6 +942,22 @@
       ],
       "pair": [
         {
+          "id": "instructions",
+          "navigation": {
+            "next": "login_credentials"
+          },
+          "options": {
+            "title": {
+              "en": "Instructions",
+              "nl": "Instelhulp"
+            },
+            "text": {
+              "en": "<h1>How to setup:</h1><p>1 Go to your Amber webpanel and login (find the webpanel via http://latticenode.local)</p><hr><p>2 Click <strong>Amber Pro</strong></p><hr><p>3 Click <strong>subscription</strong></p><hr><p>4 Enable <strong>Amber Anywhere</strong></p><hr><p>5 Click on <strong>APP store</strong></p><hr><p>6 Install the Homey package</p><hr><p>7 Go back to <strong>subscription</strong></p><hr><p>8 Click <strong>set-up  Amber Anywhere</strong></p><hr><p>9 Click the checkbox before homey_app</p><hr><p>10 Below public url selected <strong>HTTPS</strong></p><hr><p>11 after HTTPS fill in a name for your URL (example: homey)</p><hr><p>12 Copy your url (example: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>",
+              "nl": "<h1>Instelhulp:</h1><p>1 Ga naar het Amber webpaneel en log in (Het webpaneel kan je vinden via (http://latticenode.local)</p><hr><p>2 Klik op <strong>Amber Pro</strong></p><hr><p>3 Klik op <strong>subscription</strong></p><hr><p>4 Activeer <strong>Amber Anywhere</strong></p><hr><p>5 Klik op <strong>APP store</strong></p><hr><p>6 Installeer Homey</p><hr><p>7 Ga terug naar <strong>subscription</strong></p><hr><p>8 Klik <strong>set-up Amber Anywhere</strong></p><hr><p>9 Klik de checkbox voor homey_app</p><hr><p>10 Onder Public URL: selecteer <strong>HTTPS</strong></p><hr><p>11 Rechts van HTTPS vul een naam in voor je url (bijvoorbeeld: homey)</p><hr><p>12 Kopieer de url (bijvoorbeeld: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>"
+            }
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
@@ -964,6 +982,9 @@
               "nl": "Admin Wachtwoord"
             },
             "logo": "../../../assets/icon.svg"
+          },
+          "navigation": {
+            "back": "instructions"
           }
         },
         {
@@ -1015,8 +1036,8 @@
         },
         "measure_temperature.system": {
           "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
+            "en": "System Temperature",
+            "nl": "Systeem Temperatuur"
           }
         }
       },
@@ -1124,6 +1145,22 @@
       ],
       "pair": [
         {
+          "id": "instructions",
+          "navigation": {
+            "next": "login_credentials"
+          },
+          "options": {
+            "title": {
+              "en": "Instructions",
+              "nl": "Instelhulp"
+            },
+            "text": {
+              "en": "<h1>How to setup:</h1><p>1 Go to your Amber webpanel and login (find the webpanel via http://latticenode.local)</p><hr><p>2 Click <strong>Amber Pro</strong></p><hr><p>3 Click <strong>subscription</strong></p><hr><p>4 Enable <strong>Amber Anywhere</strong></p><hr><p>5 Click on <strong>APP store</strong></p><hr><p>6 Install the Homey package</p><hr><p>7 Go back to <strong>subscription</strong></p><hr><p>8 Click <strong>set-up  Amber Anywhere</strong></p><hr><p>9 Click the checkbox before homey_app</p><hr><p>10 Below public url selected <strong>HTTPS</strong></p><hr><p>11 after HTTPS fill in a name for your URL (example: homey)</p><hr><p>12 Copy your url (example: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>",
+              "nl": "<h1>Instelhulp:</h1><p>1 Ga naar het Amber webpaneel en log in (Het webpaneel kan je vinden via (http://latticenode.local)</p><hr><p>2 Klik op <strong>Amber Pro</strong></p><hr><p>3 Klik op <strong>subscription</strong></p><hr><p>4 Activeer <strong>Amber Anywhere</strong></p><hr><p>5 Klik op <strong>APP store</strong></p><hr><p>6 Installeer Homey</p><hr><p>7 Ga terug naar <strong>subscription</strong></p><hr><p>8 Klik <strong>set-up Amber Anywhere</strong></p><hr><p>9 Klik de checkbox voor homey_app</p><hr><p>10 Onder Public URL: selecteer <strong>HTTPS</strong></p><hr><p>11 Rechts van HTTPS vul een naam in voor je url (bijvoorbeeld: homey)</p><hr><p>12 Kopieer de url (bijvoorbeeld: https://homey-a001.eu.onamber.cloud)</p><hr><br><br>"
+            }
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
@@ -1148,6 +1185,9 @@
               "nl": "Admin Wachtwoord"
             },
             "logo": "../../../assets/icon.svg"
+          },
+          "navigation": {
+            "back": "instructions"
           }
         },
         {
@@ -1176,189 +1216,6 @@
         "nl": "Amber Plus"
       },
       "id": "cloud_AmberPlus"
-    },
-    {
-      "class": "homealarm",
-      "icon": "/drivers/cloud_AmberX/assets/icon.svg",
-      "images": {
-        "large": "/drivers/cloud_AmberX/assets/images/large.png",
-        "small": "/drivers/cloud_AmberX/assets/images/small.png"
-      },
-      "capabilitiesOptions": {
-        "dim": {
-          "title": {
-            "nl": "LED Dim",
-            "en": "LED Dim"
-          }
-        },
-        "measure_temperature.cpu": {
-          "title": {
-            "en": "CPU Temperature",
-            "nl": "CPU Temperatuur"
-          }
-        },
-        "measure_temperature.system": {
-          "title": {
-            "en": "Systeem Temperature",
-            "nl": "System Temperatuur"
-          }
-        }
-      },
-      "energy": {
-        "approximation": {
-          "usageOn": 30,
-          "usageOff": 1
-        }
-      },
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "General settings",
-            "nl": "Algemene instellingen"
-          },
-          "children": [
-            {
-              "id": "override_onoff",
-              "type": "checkbox",
-              "label": {
-                "en": "Always on",
-                "nl": "Altijd aan"
-              },
-              "value": true
-            },
-            {
-              "id": "update_interval",
-              "type": "number",
-              "label": {
-                "en": "Update interval",
-                "nl": "Update interval"
-              },
-              "min": 10,
-              "max": 3600,
-              "units": {
-                "en": "seconds",
-                "nl": "seconden"
-              },
-              "value": 120
-            },
-            {
-              "id": "enable_interval",
-              "type": "checkbox",
-              "label": {
-                "en": "Enable automatic data",
-                "nl": "Automatische gegevens ophalen"
-              },
-              "value": true
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Login settings",
-            "nl": "Login instellingen"
-          },
-          "children": [
-            {
-              "id": "username",
-              "type": "text",
-              "label": {
-                "en": "Login",
-                "nl": "Login"
-              },
-              "value": ""
-            },
-            {
-              "id": "password",
-              "type": "password",
-              "label": {
-                "en": "Password",
-                "nl": "Wachtwoord"
-              },
-              "value": ""
-            },
-            {
-              "id": "router_password",
-              "type": "password",
-              "label": {
-                "en": "Router Password",
-                "nl": "Router Wachtwoord"
-              },
-              "value": ""
-            }
-          ]
-        }
-      ],
-      "capabilities": [
-        "onoff",
-        "dim",
-        "action_reboot",
-        "action_update_data",
-        "action_upload_file",
-        "alarm_heat",
-        "measure_temperature.cpu",
-        "measure_temperature.system",
-        "measure_uptime",
-        "measure_uptime_days",
-        "measure_cpu_usage",
-        "measure_ram_usage",
-        "measure_disk_usage"
-      ],
-      "pair": [
-        {
-          "id": "login_credentials",
-          "template": "login_credentials",
-          "options": {
-            "usernameLabel": {
-              "en": "Amber anywhere url",
-              "nl": "Amber anywhere url"
-            },
-            "usernamePlaceholder": {
-              "en": "https://homey-a123.eu.onambercloud.com",
-              "nl": "https://homey-a123.eu.onambercloud.com"
-            },
-            "usernameValue": {
-              "en": "admin",
-              "nl": "admin"
-            },
-            "passwordLabel": {
-              "en": "Admin Password",
-              "nl": "Admin Wachtwoord"
-            },
-            "passwordPlaceholder": {
-              "en": "Admin Password",
-              "nl": "Admin Wachtwoord"
-            },
-            "logo": "../../../assets/icon.svg"
-          }
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "options": {
-            "singular": true
-          },
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "platforms": [
-        "cloud"
-      ],
-      "connectivity": [
-        "cloud"
-      ],
-      "name": {
-        "en": "Amber X",
-        "nl": "Amber X"
-      },
-      "id": "cloud_AmberX"
     }
   ],
   "capabilities": {

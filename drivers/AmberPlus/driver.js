@@ -2,7 +2,7 @@ const localDriver = require('../local-driver');
 
 module.exports = class driver_AmberPlus extends localDriver {
     deviceType() {
-        return 'Amber';
+        return 'AM1212-2';
     }
 
     sso() {

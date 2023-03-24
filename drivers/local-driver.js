@@ -1,6 +1,6 @@
 const Homey = require('homey');
 const Amber = require('../lib/amber');
-const { encrypt, mapName, sleep } = require('../lib/helpers');
+const { encrypt } = require('../lib/helpers');
 
 module.exports = class localDriver extends Homey.Driver {
     onInit() {
@@ -17,21 +17,25 @@ module.exports = class localDriver extends Homey.Driver {
     }
 
     async onPair(session) {
-        const discoveryStrategy = this.getDiscoveryStrategy();
+        const discoveryStrategy = this.homey.discovery.getStrategy("amber_discovery");
         const discoveryResults = discoveryStrategy.getDiscoveryResults();
+        const deviceModel = this.deviceType();
         let selectedDevice = null;
+
+        this.homey.app.log(`[Driver] ${this.id} - searching for ${deviceModel}`);
 
         session.setHandler('list_devices', async () => {
             try {
-                const devices = Object.values(discoveryResults).map((discoveryResult) => {
+                const devices = Object.values(discoveryResults).filter(d => d.txt.model.includes(deviceModel)).map((discoveryResult) => {
                     return {
                         name: discoveryResult.txt.hostname,
                         data: {
-                            id: `${discoveryResult.host}`
+                            id: `${this.id}-${discoveryResult.txt.macaddr}`
                         },
                         settings: {
                             mac: discoveryResult.txt.macaddr,
-                            ip: `${mapName(discoveryResult.txt.hostname)}.local`,
+                            ip: discoveryResult.txt.ip,
+                            model: discoveryResult.txt.model,
                             sso: this.sso()
                         }
                     };
@@ -78,7 +82,7 @@ module.exports = class localDriver extends Homey.Driver {
                 selectedDevice.settings = {...this.config, password: encrypt(this.config.password)};
                 return selectedDevice
             } catch (error) {
-                console.log(error);
+                this.homey.app.log(`[Driver] ${this.id} - error`, error);
                 throw new Error(this.homey.__('pair.error'));
             }
         });
