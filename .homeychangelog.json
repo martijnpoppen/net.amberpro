@@ -109,5 +109,11 @@
   },
   "2.1.2": {
     "en": "FIX: cloud login instructions"
+  },
+  "2.1.3": {
+    "en": "FIX: led ring control"
+  },
+  "2.1.4": {
+    "en": "FIX: led ring control"
   }
 }
