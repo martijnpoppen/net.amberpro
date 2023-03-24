@@ -1,6 +1,6 @@
 {
   "id": "net.amberpro",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -58,7 +58,7 @@
   },
   "contributing": {
     "donate": {
-"paypal": {
+      "paypal": {
         "username": "martijnpoppen"
       },
       "bunq": {
